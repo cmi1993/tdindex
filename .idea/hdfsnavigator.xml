@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="HadoopNavigator.Project.Settings">
+    <connections>
+      <fsconnection id="685bd52d-79d7-4c8b-bacd-1d2c34276d01">
+        <database>
+          <name value="school cluster" />
+          <description value="school cluster" />
+          <active value="true" />
+          <os-authentication value="false" />
+          <database-type value="HDFS" />
+          <database-version value="9999.0" />
+          <user value="" />
+          <password value="" />
+          <mapreduce-host value="192.168.69.204" />
+          <mapreduce-port value="8021" />
+          <hdfs-host value="192.168.69.204" />
+          <hdfs-port value="8020" />
+        </database>
+      </fsconnection>
+    </connections>
+    <general-settings>
+      <regional-settings>
+        <locale value="en-US" />
+      </regional-settings>
+      <browser-settings>
+        <browserdisplaymode value="Multiple tabs tree" />
+      </browser-settings>
+    </general-settings>
+  </component>
+</project>
