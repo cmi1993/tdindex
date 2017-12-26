@@ -1,7 +1,6 @@
 package cn.edu.scnu.dtindex.entrance;
 
 import cn.edu.scnu.dtindex.dataproc.Sampler;
-import cn.edu.scnu.dtindex.dataproc._tmpSamplerSort;
 
 import java.io.IOException;
 
@@ -13,7 +12,7 @@ public class Main {
 
         //2.排序
         System.out.println("排序中......................");
-        _tmpSamplerSort.main(args);
+
 
         
 

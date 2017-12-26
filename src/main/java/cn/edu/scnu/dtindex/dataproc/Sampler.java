@@ -41,8 +41,8 @@ public class Sampler {
 
         @Override
         protected void cleanup(Context context) throws IOException, InterruptedException {
-            CONSTANTS.setRecord_nums(RecordCount);
-            CONSTANTS.persistenceData();
+//            CONSTANTS.setRecord_nums(RecordCount);
+//            CONSTANTS.persistenceData();
         }
     }
 
