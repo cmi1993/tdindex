@@ -78,6 +78,6 @@ public class Sampler {
 
         // 向yarn集群提交这个job
         boolean res = job.waitForCompletion(true);
-       // System.exit(res ? 0 : 1);
+        System.exit(res ? 0 : 1);
     }
 }

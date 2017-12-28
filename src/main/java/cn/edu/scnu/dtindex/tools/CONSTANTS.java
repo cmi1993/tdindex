@@ -6,18 +6,20 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
     private static double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
-    private static double apha = 0.2;//索引所需空间的膨胀系数
+    private static double apha = 0.1;//索引所需空间的膨胀系数
     private  double numOfPartition;//分区数量
-    private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
+    //private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
+	private int numOfXDimention;
+	private int numOfYDimention;
     private static final String constants_persistence_path = "/home/think/Desktop/data/contants.dat";//常量数据持久化路径
     private  long record_nums;//总记录数
     private static String dataFilePath = "/home/think/Desktop/data/data.txt";//数据文件
     private static String dataFileDir = "/home/think/Desktop/data";//数据路径
     private static String samplerFilePath = "/home/think/Desktop/data/sample/part-r-00000";//采样样文件路径
-    private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp/";//x排序路径
-    private static String YsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/YSortTmp/";//y排序路径
-    private  long[] xPatitionsData = new long[numOfEachdimention* 2];//保存x分界点
-    private  long[][] yPatitionsData = new long[numOfEachdimention][numOfEachdimention*2];//保存y分界点
+    private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp";//x排序路径
+    private static String YsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/YSortTmp";//y排序路径
+    private  long[] xPatitionsData = new long[numOfXDimention+1];//保存x分界点
+    private  long[][] yPatitionsData = new long[numOfXDimention][numOfYDimention+1];//保存y分界点
     private  Double percentage = Double.parseDouble("10") / 100.00;//采样率
 
 
@@ -66,8 +68,9 @@ public class CONSTANTS implements Serializable {
         System.out.println("|HADOOP_BLOCK_SIZE    		|hadoop磁盘块大小		|" + HADOOP_BLOCK_SIZE);
         System.out.println("|apha                 		|索引所需空间的膨胀系数	|" + apha);
         System.out.println("|numOfPartition       		|分区数量				|" + numOfPartition);
-        System.out.println("|numOfEachdimention   		|每一个维度的切分数	|" + numOfEachdimention);
-        System.out.println("|constants_persistence_path |常量数据持久化路径    |" + constants_persistence_path);
+		System.out.println("|numOfXDimention   		    |X维度的切分数	    |" + numOfXDimention);
+		System.out.println("|numOfYDimention   		    |Y维度的切分数	    |" + numOfYDimention);
+		System.out.println("|constants_persistence_path |常量数据持久化路径    |" + constants_persistence_path);
         System.out.println("|record_nums          		|总记录数				|" + record_nums);
         System.out.println("|dataFilePath       		|数据文件				|" + dataFilePath);
         System.out.println("|dataFileDir         		|数据路径				|" + dataFileDir);
@@ -96,11 +99,16 @@ public class CONSTANTS implements Serializable {
 
     }
 
+
+
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         CONSTANTS cos = CONSTANTS.readPersistenceData();
         cos.showConstantsInfo();
     }
+
+
 
 
 	public static double getHadoopBlockSize() {
@@ -127,12 +135,20 @@ public class CONSTANTS implements Serializable {
 		this.numOfPartition = numOfPartition;
 	}
 
-	public int getNumOfEachdimention() {
-		return numOfEachdimention;
+	public int getNumOfXDimention() {
+		return numOfXDimention;
 	}
 
-	public void setNumOfEachdimention(int numOfEachdimention) {
-		this.numOfEachdimention = numOfEachdimention;
+	public void setNumOfXDimention(int numOfXDimention) {
+		this.numOfXDimention = numOfXDimention;
+	}
+
+	public int getNumOfYDimention() {
+		return numOfYDimention;
+	}
+
+	public void setNumOfYDimention(int numOfYDimention) {
+		this.numOfYDimention = numOfYDimention;
 	}
 
 	public static String getConstants_persistence_path() {

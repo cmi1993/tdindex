@@ -35,19 +35,31 @@ public class SamplerSort {
 		double numOfPartition = length * (1 + cos.getApha()) / cos.getHadoopBlockSize();//分区数量
 		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
 		cos.setNumOfPartition(numOfPartition);
-		cos.setNumOfEachdimention((int) numOfEachdimention);
-		long perXpartNum = cos.getRecord_nums() / cos.getNumOfEachdimention();//x维度每部分的切割数量
 
-		long[] xparts = new long[cos.getNumOfEachdimention() * 2];//保存x分界点
+		if(numOfEachdimention*numOfEachdimention<numOfPartition){//如果需要拉伸分区
+			cos.setApha(0);//拉伸分区就不需要进行膨胀系数的考虑
+			numOfPartition = length * (1 + cos.getApha()) / cos.getHadoopBlockSize();//分区数量
+			numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
+			cos.setNumOfPartition(((int)numOfEachdimention+1)*((int)numOfEachdimention));
+			cos.setNumOfXDimention((int)numOfEachdimention+1);
+			cos.setNumOfYDimention((int)numOfEachdimention);
+			
+		}else {
+			cos.setNumOfXDimention((int)numOfEachdimention);
+			cos.setNumOfYDimention((int)numOfEachdimention);
+		}
+		long perXpartNum = cos.getRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
+
+		long[] xparts = new long[cos.getNumOfXDimention() +1];//保存x分界点
 		//生成x排序临时文件分区路径
 		xClassifiedPath = new ArrayList<String>();
-		for (int i = 0; i < cos.getNumOfEachdimention(); i++) {
+		for (int i = 0; i < cos.getNumOfXDimention(); i++) {
 			xClassifiedPath.add(cos.getXsortedDataDir() + "/x_part_" + i);
 		}
 		//生成所有分区路径
 		yClassifiedPath = new ArrayList<String>();
-		for (int i = 0; i < cos.getNumOfEachdimention(); i++) {
-			for (int j = 0; j < cos.getNumOfEachdimention(); j++) {
+		for (int i = 0; i < cos.getNumOfXDimention(); i++) {
+			for (int j = 0; j < cos.getNumOfYDimention(); j++) {
 				yClassifiedPath.add(cos.getYsortedDataDir() + "/Sort_part_" + i + "_" + j + "");
 			}
 		}
@@ -60,27 +72,27 @@ public class SamplerSort {
 				xparts[xparts.length - 1] = tuplesList.get(tuplesList.size() - 1).getVt().getStart();
 
 			stringBuilder.append(tuplesList.get(i).toString()).append("\n");
-			if (i != 0 && i % (perXpartNum) == 0) {
-				if (k<xparts.length-2) {
-					xparts[k++] = tuplesList.get(i).getVt().getStart();//上一个分区的结束
-					xparts[k++] = tuplesList.get(i + 1).getVt().getStart();//下一个分区的开始
+			if (i != 0 && i % (perXpartNum ) ==(perXpartNum-1 )) {
+				if (k<xparts.length-1) {
+					long prior = tuplesList.get(i).getVt().getStart();//上一个分区的结束
+					long next = tuplesList.get(i + 1).getVt().getStart();//下一个分区的开始
+					xparts[k++] = MidValue(prior,next);
 				}
 				IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(j++), 0);
 				stringBuilder = new StringBuilder();
 			}
 		}
 
-		IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfEachdimention() - 1), 1);
+		IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfXDimention() - 1), 1);
 		cos.setxPatitionsData(xparts);
 	}
 
 	public static void sortY(String path) throws IOException {
 		File filedir = new File(path);
 		File[] files = filedir.listFiles();
-		int x_part_fileCount = 0;
-		long[][] yparts = new long[cos.getNumOfEachdimention()][cos.getNumOfEachdimention() * 2];//保存y分界点
+		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() +1];//保存y分界点
 		for (File file : files) {
-			//System.out.println(file.getPath());
+			int xpartNum = Integer.parseInt( file.getPath().substring(file.getPath().length()-1,file.getPath().length()));
 			String strs = IOTools.toReadWithSpecialSplitSignal(file.getPath());
 			String[] records = strs.split("#");
 			List<Tuple> tupleList = new ArrayList<Tuple>();
@@ -91,12 +103,12 @@ public class SamplerSort {
 				tupleList.add(t);
 				record_count++;
 			}
-			long perYpartCount = record_count / cos.getNumOfEachdimention();//y排序每部分的数量
+			long perYpartCount = record_count / cos.getNumOfYDimention();//y排序每部分的数量
 			Collections.sort(tupleList, new Comparator<Tuple>() {
 				@Override
 				public int compare(Tuple o1, Tuple o2) {
 					if (o1.getVt().getEnd() > o2.getVt().getEnd()) return 1;
-					else if (o1.getVt().getEnd() > o2.getVt().getEnd()) return -1;
+					else if (o1.getVt().getEnd() < o2.getVt().getEnd()) return -1;
 					else return 0;
 
 				}
@@ -106,24 +118,27 @@ public class SamplerSort {
 			int k=1;//用于记录写入x分区分界点数组的索引
 
 			for (int i = 0; i < tupleList.size(); i++) {
-				if (i==0) yparts[x_part_fileCount][0]=tupleList.get(0).getVt().getEnd();
-				if (i==tupleList.size()-1)yparts[x_part_fileCount][cos.getNumOfEachdimention() * 2-1]=tupleList.get(tupleList.size()-1).getVt().getEnd();
+				if (i==0) yparts[xpartNum][0]=tupleList.get(0).getVt().getEnd();
+				if (i==tupleList.size()-1)yparts[xpartNum][cos.getNumOfYDimention()]=tupleList.get(tupleList.size()-1).getVt().getEnd();
 				stringBuilder.append(tupleList.get(i).toString()).append("\n");
-				if (i != 0 && i % (perYpartCount) == 0) {
-					if (k<yparts[x_part_fileCount].length-2) {
-						yparts[x_part_fileCount][k++] = tupleList.get(i).getVt().getEnd();
-						yparts[x_part_fileCount][k++] = tupleList.get(i + 1).getVt().getEnd();
+				if (i != 0 && i % (perYpartCount) == (perYpartCount-1)) {
+					if (k<yparts[xpartNum].length-1) {
+						long prior = tupleList.get(i).getVt().getEnd();
+						long next = tupleList.get(i + 1).getVt().getEnd();
+						yparts[xpartNum][k++] = MidValue(prior,next);
 					}
-					IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(x_part_fileCount * cos.getNumOfEachdimention() + j), 0);
+					IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
 					stringBuilder = new StringBuilder();
 					j++;
 				}
 			}
 
-			IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(x_part_fileCount * cos.getNumOfEachdimention() + cos.getNumOfEachdimention() - 1), 1);
-			x_part_fileCount++;
+			IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + cos.getNumOfYDimention() - 1), 1);
 		}
 		cos.setyPatitionsData(yparts);
+	}
+	private static long MidValue(long num1, long num2) {
+		return (num1 + num2) / 2;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -131,12 +146,14 @@ public class SamplerSort {
 		String pathToRead = CONSTANTS.getSamplerFilePath();
 		System.out.println("x排序...");
 		sortX(pathToRead);
+
 		System.out.println("x排序成功...");
 
 		pathToRead = cos.getXsortedDataDir();
 		System.out.println("y排序...");
 		sortY(pathToRead);
 		System.out.println("y排序成功...");
+
 		cos.persistenceData(cos);
 		cos.showConstantsInfo();
 	}

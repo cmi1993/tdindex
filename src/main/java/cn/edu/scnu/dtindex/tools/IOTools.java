@@ -16,6 +16,7 @@ public class IOTools {
         if (flag == 1) {
             File file = new File(path);// 指定要写入的文件
             if (!file.exists()) {// 如果文件不存在则创建
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             // 获取该文件的缓冲输出流
