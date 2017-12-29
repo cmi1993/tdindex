@@ -44,7 +44,7 @@ public class ClassifiedDataIntoSlice {
 	static class ClassifiedReducer extends Reducer<Tuple, NullWritable, Text, NullWritable> {
 		@Override
 		protected void reduce(Tuple key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
-			context.write(new Text(key.toString() + "\n"), NullWritable.get());
+			context.write(new Text(key.toString()), NullWritable.get());
 		}
 	}
 
@@ -55,21 +55,26 @@ public class ClassifiedDataIntoSlice {
 		@Override
 		public int getPartition(Tuple tuple, NullWritable nullWritable, int i) {
 			int xpartOrder = SeekXPatition(tuple.getVt().getStart());
-			if (xpartOrder == -1) {System.out.println("查找x分区出错:");System.exit(1);}
+			if (xpartOrder == -1) {
+				System.out.println("查找x分区出错:");
+				System.exit(1);
+			}
 			int ypartOrder = SeekYPatition(xpartOrder, tuple.getVt().getEnd());
-			if (ypartOrder == -1) {System.out.println("查找y分区出错:"+tuple.toString());System.exit(1);}
+			if (ypartOrder == -1) {
+				System.out.println("查找y分区出错:" + tuple.toString());
+				System.exit(1);
+			}
 			return xpartOrder * cos.getNumOfYDimention() + ypartOrder;
 		}
 
 
-
 		private int SeekXPatition(long start) {
 			if (start <= xparts[1]) return 0;
-			else if (start > xparts[xparts.length-2])
-				return xparts.length-2;
+			else if (start > xparts[xparts.length - 2])
+				return xparts.length - 2;
 			else {
-				for (int i = 1; i < xparts.length - 2; i ++) {
-					if (start > xparts[i] && start <= xparts[i+ 1])
+				for (int i = 1; i < xparts.length - 2; i++) {
+					if (start > xparts[i] && start <= xparts[i + 1])
 						return i;
 				}
 			}
@@ -77,12 +82,12 @@ public class ClassifiedDataIntoSlice {
 		}
 
 		private int SeekYPatition(int xpartOrder, long end) {
-			if (end <=yparts[xpartOrder][1]) return 0;
+			if (end <= yparts[xpartOrder][1]) return 0;
 			else if (end > yparts[xpartOrder][yparts[xpartOrder].length - 2])
-				return yparts[xpartOrder].length -2;
+				return yparts[xpartOrder].length - 2;
 			else {
-				for (int i = 1; i <= yparts[xpartOrder].length - 2; i ++) {
-					if (end > yparts[xpartOrder][i]&& end <=yparts[xpartOrder][i +1])
+				for (int i = 1; i <= yparts[xpartOrder].length - 2; i++) {
+					if (end > yparts[xpartOrder][i] && end <= yparts[xpartOrder][i + 1])
 						return i;
 				}
 			}
@@ -108,8 +113,8 @@ public class ClassifiedDataIntoSlice {
 // 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Tuple.class);
 		job.setMapOutputValueClass(NullWritable.class);
-		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/data.txt");
-		Path outPath = new Path("/home/think/Desktop/data/classifiedData");
+		FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
+		Path outPath = new Path(CONSTANTS.getClassifiedFilePath());
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);

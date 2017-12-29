@@ -9,20 +9,23 @@ public class CONSTANTS implements Serializable {
     private static double apha = 0.1;//索引所需空间的膨胀系数
     private  double numOfPartition;//分区数量
     //private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
-	private int numOfXDimention;
-	private int numOfYDimention;
+	private int numOfXDimention;//切分后，x轴方向的分区数
+	private int numOfYDimention;//切分后，y轴方向的分区数
     private static final String constants_persistence_path = "/home/think/Desktop/data/contants.dat";//常量数据持久化路径
     private  long record_nums;//总记录数
     private static String dataFilePath = "/home/think/Desktop/data/data.txt";//数据文件
     private static String dataFileDir = "/home/think/Desktop/data";//数据路径
-    private static String samplerFilePath = "/home/think/Desktop/data/sample/part-r-00000";//采样样文件路径
+	private static String samplerFileDir = "/home/think/Desktop/data/sample";//采样后样本存放路径
+    private static String samplerFilePath = "/home/think/Desktop/data/sample/sampler.txt";//采样样文件路径
+	private static String classifiedFilePath = "/home/think/Desktop/data/classifiedData";//数据切片存放路径
     private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp";//x排序路径
     private static String YsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/YSortTmp";//y排序路径
     private  long[] xPatitionsData = new long[numOfXDimention+1];//保存x分界点
     private  long[][] yPatitionsData = new long[numOfXDimention][numOfYDimention+1];//保存y分界点
     private  Double percentage = Double.parseDouble("10") / 100.00;//采样率
+	private static String DiskFilePath = "/home/think/Desktop/data/DiskSliceFile";//磁盘块序列化路径
 
-
+	//-----------------------------------单例模式--------------------------------------------
 	private static class CONSTANTSHolder {
 		private static final CONSTANTS INSTANCE = new CONSTANTS();
 	}
@@ -31,7 +34,13 @@ public class CONSTANTS implements Serializable {
 	public static final CONSTANTS getInstance() {
 		return CONSTANTSHolder.INSTANCE;
 	}
+	//-----------------------------------单例模式--------------------------------------------
 
+	/**
+	 * 对象模型序列化到磁盘
+	 * @param object
+	 * @throws IOException
+	 */
 	public static void persistenceData(CONSTANTS object) throws IOException {
         File file = new File(constants_persistence_path);
         if (!file.exists()) {
@@ -48,6 +57,12 @@ public class CONSTANTS implements Serializable {
         fos.close();
     }
 
+	/**
+	 * 反序列化对象并读取数据
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
     public static CONSTANTS readPersistenceData() throws IOException, ClassNotFoundException {
         File file = new File(constants_persistence_path);
         if (!file.exists()) {
@@ -63,7 +78,10 @@ public class CONSTANTS implements Serializable {
 
     }
 
-    public void showConstantsInfo() {
+	/**
+	 * 打印字段信息
+	 */
+	public void showConstantsInfo() {
         System.out.println("------------------------------------------【常量信息】------------------------------------------");
         System.out.println("|HADOOP_BLOCK_SIZE    		|hadoop磁盘块大小		|" + HADOOP_BLOCK_SIZE);
         System.out.println("|apha                 		|索引所需空间的膨胀系数	|" + apha);
@@ -75,6 +93,7 @@ public class CONSTANTS implements Serializable {
         System.out.println("|dataFilePath       		|数据文件				|" + dataFilePath);
         System.out.println("|dataFileDir         		|数据路径				|" + dataFileDir);
         System.out.println("|samplerFilePath            |采样样文件路径		|" + samplerFilePath);
+		System.out.println("|samplerFileDir             |采样样文件路径		|" + samplerFileDir);
         System.out.println("|XsortedDataDir         	|x排序路径			|" + XsortedDataDir);
         System.out.println("|YsortedDataDir             |y排序路径		    |" + YsortedDataDir);
         System.out.println("|percentage                 |采样率		        |" + percentage);
@@ -110,6 +129,35 @@ public class CONSTANTS implements Serializable {
 
 
 
+
+
+
+
+    //-----------------------------------getter and setter----------------------------------------------------
+
+	public static String getClassifiedFilePath() {
+		return classifiedFilePath;
+	}
+
+	public static String getDiskFilePath() {
+		return DiskFilePath;
+	}
+
+	public static void setDiskFilePath(String diskFilePath) {
+		DiskFilePath = diskFilePath;
+	}
+
+	public static void setClassifiedFilePath(String classifiedFilePath) {
+		CONSTANTS.classifiedFilePath = classifiedFilePath;
+	}
+
+	public static String getSamplerFileDir() {
+		return samplerFileDir;
+	}
+
+	public static void setSamplerFileDir(String samplerFileDir) {
+		CONSTANTS.samplerFileDir = samplerFileDir;
+	}
 
 	public static double getHadoopBlockSize() {
 		return HADOOP_BLOCK_SIZE;

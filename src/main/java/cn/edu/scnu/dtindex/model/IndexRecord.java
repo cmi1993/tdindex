@@ -12,7 +12,14 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
     private ValidTime minNode;
     private Long lob_offset;
 
-    @Override
+	public IndexRecord(String lobid, ValidTime maxNode, ValidTime minNode, Long lob_offset) {
+		this.lobid = lobid;
+		this.maxNode = maxNode;
+		this.minNode = minNode;
+		this.lob_offset = lob_offset;
+	}
+
+	@Override
     public int compareTo(IndexRecord o) {//索引记录的排序
         return this.maxNode.compareTo(o.maxNode);
     }

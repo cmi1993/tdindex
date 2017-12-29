@@ -7,38 +7,66 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class DiskSliceFile implements WritableComparable<DiskSliceFile> {
-    private Lob data;
-    private IndexFile index;
-    private boolean isIndexSliceFile;
-    @Override
-    public int compareTo(DiskSliceFile o) {
-        return 0;
-    }
+	private Lob data;
+	private IndexFile index;
+	private boolean isIndexSliceFile;
 
-    @Override
-    public void write(DataOutput out) throws IOException {
-        data.write(out);
-        index.write(out);
-        out.writeBoolean(isIndexSliceFile);
-    }
+	public DiskSliceFile() {
+	}
 
-    @Override
-    public void readFields(DataInput in) throws IOException {
-        Lob lobtmp = new Lob();
-        lobtmp.readFields(in);
-        this.data = lobtmp;
-        IndexFile indexTmp = new IndexFile();
-        indexTmp.readFields(in);
-        this.index = indexTmp;
-        this.isIndexSliceFile = in.readBoolean();
-    }
+	/**
+	 * 磁盘切片的
+	 *
+	 * @param data
+	 */
+	public DiskSliceFile(Lob data) {
+		this.data = data;
+		this.isIndexSliceFile = false;
+	}
 
-    @Override
-    public String toString() {
-        return "DiskSliceFile{" +
-                "data=" + data +
-                ", index=" + index +
-                ", isIndexSliceFile=" + isIndexSliceFile +
-                '}';
-    }
+	public DiskSliceFile(IndexFile index) {
+		this.index = index;
+		this.isIndexSliceFile = true;
+	}
+
+	@Override
+	public int compareTo(DiskSliceFile o) {
+		return 0;
+	}
+
+	@Override
+	public void write(DataOutput out) throws IOException {
+		out.writeBoolean(isIndexSliceFile);
+		if (isIndexSliceFile) {
+			index.write(out);
+		} else {
+			data.write(out);
+		}
+
+	}
+
+	@Override
+	public void readFields(DataInput in) throws IOException {
+		this.isIndexSliceFile = in.readBoolean();
+		if (isIndexSliceFile) {
+			IndexFile indexTmp = new IndexFile();
+			indexTmp.readFields(in);
+			this.index = indexTmp;
+		} else {
+			Lob lobtmp = new Lob();
+			lobtmp.readFields(in);
+			this.data = lobtmp;
+		}
+
+
+	}
+
+	@Override
+	public String toString() {
+		return "DiskSliceFile{" +
+				"data=" + data +
+				", index=" + index +
+				", isIndexSliceFile=" + isIndexSliceFile +
+				'}';
+	}
 }

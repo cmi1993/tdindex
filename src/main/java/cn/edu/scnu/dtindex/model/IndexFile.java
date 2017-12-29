@@ -14,7 +14,16 @@ public class IndexFile implements WritableComparable<IndexFile> {
     private MapWritable indexMap ;//<Long,IndexRecord> lobid,IndexRecord
     private Long indexOffset;//索引起始偏移量
 
-    @Override
+
+	public IndexFile() {
+	}
+
+	public IndexFile(MapWritable indexMap, Long indexOffset) {
+		this.indexMap = indexMap;
+		this.indexOffset = indexOffset;
+	}
+
+	@Override
     public int compareTo(IndexFile o) {//indexFile不需要排序
         return 0;
     }

@@ -39,14 +39,38 @@ public class Sampler {
             }
         }
 
+    }
+    static class SamplerOutPutFormat extends FileOutputFormat<NullWritable,Text>{
+
         @Override
-        protected void cleanup(Context context) throws IOException, InterruptedException {
-//            CONSTANTS.setRecord_nums(RecordCount);
-//            CONSTANTS.persistenceData();
+        public RecordWriter<NullWritable, Text> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
+            FileSystem fs =FileSystem.get(context.getConfiguration());
+            Path sampleOutPath = new Path(CONSTANTS.getSamplerFileDir()+"/sampler.txt");
+            FSDataOutputStream samplerOut = fs.create(sampleOutPath);
+            return new MyRecordWriter(samplerOut);
+        }
+    }
+    static class MyRecordWriter extends RecordWriter<NullWritable,Text>{
+        FSDataOutputStream samplerOut = null;
+
+        public MyRecordWriter(FSDataOutputStream samplerOut) {
+            this.samplerOut = samplerOut;
+        }
+
+
+        @Override
+        public void write(NullWritable key, Text value) throws IOException, InterruptedException {
+            samplerOut.write((value.toString()+"\n").getBytes());
+        }
+
+        @Override
+        public void close(TaskAttemptContext context) throws IOException, InterruptedException {
+            if (samplerOut!=null)
+                samplerOut.close();
         }
     }
 
-    static class SamplePatitioner extends Partitioner<NullWritable,Text>{
+   static class SamplePatitioner extends Partitioner<NullWritable,Text>{
 
         @Override
         public int getPartition(NullWritable nullWritable, Text text, int i) {
@@ -65,11 +89,14 @@ public class Sampler {
         job.setMapperClass(SRSMapper.class);
         job.setNumReduceTasks(1);
         job.setPartitionerClass(SamplePatitioner.class);
+
+
         // 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
         job.setMapOutputKeyClass(NullWritable.class);
         job.setMapOutputValueClass(Text.class);
-        FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/data.txt");
-        Path outPath = new Path("/home/think/Desktop/data/sample");
+        job.setOutputFormatClass(SamplerOutPutFormat.class);
+        FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
+        Path outPath = new Path(CONSTANTS.getSamplerFileDir());
         FileSystem fs = FileSystem.get(conf);
         if (fs.exists(outPath)) {
             fs.delete(outPath, true);

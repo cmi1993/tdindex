@@ -169,4 +169,44 @@ public class Lob implements WritableComparable<Lob> {
         IOUtils.closeStream(writer);
         System.out.println("successfully");
     }
+
+	public String getLobid() {
+		return lobid;
+	}
+
+	public void setLobid(String lobid) {
+		this.lobid = lobid;
+	}
+
+	public List<Tuple> getLoblist() {
+		return loblist;
+	}
+
+	public void setLoblist(List<Tuple> loblist) {
+		this.loblist = loblist;
+	}
+
+	public ValidTime getMaxNode() {
+		return maxNode;
+	}
+
+	public void setMaxNode(ValidTime maxNode) {
+		this.maxNode = maxNode;
+	}
+
+	public ValidTime getMinNode() {
+		return minNode;
+	}
+
+	public void setMinNode(ValidTime minNode) {
+		this.minNode = minNode;
+	}
+
+	public int getNumOfTuple() {
+		return numOfTuple;
+	}
+
+	public void setNumOfTuple(int numOfTuple) {
+		this.numOfTuple = numOfTuple;
+	}
 }
