@@ -1,3 +1,4 @@
+
 package cn.edu.scnu.dtindex.dataproc;
 
 
@@ -14,10 +15,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -151,8 +149,8 @@ public class BuildIndex {
 				result.add(new Lob(tempSubList));
 			}
 			System.out.println("[3]构建用于序列化存储的磁盘块-------------------------------------------");
-			InputSplit inputSplit=(InputSplit)context.getInputSplit();
-			String filename=((FileSplit)inputSplit).getPath().getName();
+			InputSplit inputSplit = (InputSplit) context.getInputSplit();
+			String filename = ((FileSplit) inputSplit).getPath().getName();
 			Text Diskkey = new Text();
 			DiskSliceFile DiskValue = new DiskSliceFile();
 			Configuration conf = new Configuration();
@@ -160,7 +158,7 @@ public class BuildIndex {
 
 			SequenceFile.Writer writer =
 					SequenceFile.createWriter(conf,
-							SequenceFile.Writer.file(new Path(CONSTANTS.getDiskFilePath() + "/disk_"+filename+".seq")),
+							SequenceFile.Writer.file(new Path(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + ".seq")),
 							SequenceFile.Writer.keyClass(Diskkey.getClass()),
 							SequenceFile.Writer.valueClass(DiskValue.getClass()),
 							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
@@ -176,9 +174,25 @@ public class BuildIndex {
 			System.out.println("[3.2]准备序列化索引--------------------");
 			long indexBegin = writer.getLength();
 			IndexFile idx = new IndexFile(indexMap, indexBegin);
+			writer.append(new Text("index"), new DiskSliceFile(idx));
 			System.out.println("[3.3]开始序列化数据--------------------");
 			IOUtils.closeStream(writer);
 			System.out.println("[3.4]序列化数据成功--------------------");
+			File file = new File(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + ".seq");
+			if (file.exists()) {
+				file.renameTo(new File(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + "_" + indexBegin + ".seq"));
+			} else {
+				System.exit(1);
+			}
+			writer =
+					SequenceFile.createWriter(conf,
+							SequenceFile.Writer.file(new Path(CONSTANTS.getDiskFilePath() + "/index/index_" + filename + ".seq")),
+							SequenceFile.Writer.keyClass(Diskkey.getClass()),
+							SequenceFile.Writer.valueClass(DiskValue.getClass()),
+							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
+			writer.append(new Text("index"), new DiskSliceFile(idx));
+			IOUtils.closeStream(writer);
+			System.out.println("[3.5]序列化索引成功--------------------");
 
 		}
 	}
@@ -198,7 +212,8 @@ public class BuildIndex {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(BytesWritable.class);
 		job.setMapperClass(BuildIndexMapper.class);
-		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/small");
+		//FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/classifiedData");
+		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/small.txt");
 		Path outPath = new Path("/home/think/Desktop/data/index");
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

@@ -117,7 +117,7 @@ public class ClassifiedDataIntoSlice {
 
 		@Override
 		public void write(Text key, NullWritable value) throws IOException, InterruptedException {
-			outputStream.writeUTF(key.toString());
+			outputStream.write((key.toString()+"\n").getBytes());
 		}
 
 		@Override
@@ -146,6 +146,7 @@ public class ClassifiedDataIntoSlice {
 		job.setMapOutputKeyClass(Tuple.class);
 		job.setMapOutputValueClass(NullWritable.class);
 		FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
+		//FileInputFormat.setInputPaths(job,"/home/think/Desktop/data/small.txt");
 		Path outPath = new Path(CONSTANTS.getClassifiedFilePath());
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
