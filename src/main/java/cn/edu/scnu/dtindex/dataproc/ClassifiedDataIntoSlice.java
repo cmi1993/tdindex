@@ -3,15 +3,13 @@ package cn.edu.scnu.dtindex.dataproc;
 import cn.edu.scnu.dtindex.model.Tuple;
 import cn.edu.scnu.dtindex.tools.CONSTANTS;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Partitioner;
-import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -44,6 +42,7 @@ public class ClassifiedDataIntoSlice {
 	static class ClassifiedReducer extends Reducer<Tuple, NullWritable, Text, NullWritable> {
 		@Override
 		protected void reduce(Tuple key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
+			int partition = context.getConfiguration().getInt("mapred.task.partition", -1);//获取分区号
 			context.write(new Text(key.toString()), NullWritable.get());
 		}
 	}
@@ -96,6 +95,39 @@ public class ClassifiedDataIntoSlice {
 
 	}
 
+
+	static class ClassifiedOutputFormat extends FileOutputFormat<Text,NullWritable>{
+		@Override
+		public RecordWriter<Text, NullWritable> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
+			FileSystem fs =  FileSystem.get(context.getConfiguration());
+			int partition = context.getConfiguration().getInt("mapred.task.partition",-1);
+			String spath = "/home/think/Desktop/data/classifiedData/partitioner_"+partition;
+			Path path = new Path(spath);
+			FSDataOutputStream fsout = fs.create(path);
+			return new ClassifedRecordWriter(fsout);
+		}
+	}
+
+	static class ClassifedRecordWriter extends RecordWriter<Text,NullWritable>{
+		FSDataOutputStream outputStream = null;
+
+		public ClassifedRecordWriter(FSDataOutputStream outputStream) {
+			this.outputStream = outputStream;
+		}
+
+		@Override
+		public void write(Text key, NullWritable value) throws IOException, InterruptedException {
+			outputStream.writeUTF(key.toString());
+		}
+
+		@Override
+		public void close(TaskAttemptContext context) throws IOException, InterruptedException {
+			if (outputStream!=null)
+				outputStream.close();
+		}
+	}
+
+
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		//numOfReducer = cos.getNumOfEachdimention()*cos.getNumOfEachdimention();
 		Configuration conf = new Configuration();
@@ -107,7 +139,7 @@ public class ClassifiedDataIntoSlice {
 		job.setJarByClass(ClassifiedDataIntoSlice.class);
 		job.setMapperClass(ClassifiedMapper.class);
 		job.setReducerClass(ClassifiedReducer.class);
-
+		job.setOutputFormatClass(ClassifiedOutputFormat.class);
 		job.setNumReduceTasks(cos.getNumOfXDimention() * cos.getNumOfYDimention());
 		job.setPartitionerClass(DataPatitioner.class);
 // 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
