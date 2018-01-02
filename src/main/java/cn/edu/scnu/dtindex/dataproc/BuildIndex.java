@@ -154,8 +154,7 @@ public class BuildIndex {
 			Text Diskkey = new Text();
 			DiskSliceFile DiskValue = new DiskSliceFile();
 			Configuration conf = new Configuration();
-			MapWritable indexMap = new MapWritable();
-
+			List<IndexRecord> indexRecordList = new ArrayList<IndexRecord>();
 			SequenceFile.Writer writer =
 					SequenceFile.createWriter(conf,
 							SequenceFile.Writer.file(new Path(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + ".seq")),
@@ -168,25 +167,25 @@ public class BuildIndex {
 				DiskValue = new DiskSliceFile(lobdata);
 				long lobOffset = writer.getLength();
 				IndexRecord lobIndex = new IndexRecord(lobdata.getLobid(), lobdata.getMaxNode(), lobdata.getMinNode(), lobOffset);
-				indexMap.put(Diskkey, lobIndex);
+				indexRecordList.add(lobIndex);
 				writer.append(Diskkey, DiskValue);
 			}
 			System.out.println("[3.2]准备序列化索引--------------------");
 			long indexBegin = writer.getLength();
-			IndexFile idx = new IndexFile(indexMap, indexBegin);
+			IndexFile idx = new IndexFile(indexRecordList, indexBegin);
 			writer.append(new Text("index"), new DiskSliceFile(idx));
 			System.out.println("[3.3]开始序列化数据--------------------");
 			IOUtils.closeStream(writer);
 			System.out.println("[3.4]序列化数据成功--------------------");
-			File file = new File(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + ".seq");
+			File file = new File(CONSTANTS.getDiskSliceFileDir() + "/disk_" + filename + ".seq");
 			if (file.exists()) {
-				file.renameTo(new File(CONSTANTS.getDiskFilePath() + "/disk/disk_" + filename + "_" + indexBegin + ".seq"));
+				file.renameTo(new File(CONSTANTS.getDiskSliceFileDir() + "/disk_" + filename + "_" + indexBegin + ".seq"));
 			} else {
 				System.exit(1);
 			}
 			writer =
 					SequenceFile.createWriter(conf,
-							SequenceFile.Writer.file(new Path(CONSTANTS.getDiskFilePath() + "/index/index_" + filename + ".seq")),
+							SequenceFile.Writer.file(new Path(CONSTANTS.getIndexFileDir() + "/index_" + filename + ".seq")),
 							SequenceFile.Writer.keyClass(Diskkey.getClass()),
 							SequenceFile.Writer.valueClass(DiskValue.getClass()),
 							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
@@ -212,9 +211,9 @@ public class BuildIndex {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(BytesWritable.class);
 		job.setMapperClass(BuildIndexMapper.class);
-		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/classifiedData");
-		//FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/small.txt");
-		Path outPath = new Path("/home/think/Desktop/data/index");
+		//FileInputFormat.setInputPaths(job,CONSTANTS.getClassifiedFilePath());
+		FileInputFormat.setInputPaths(job,"/home/think/Desktop/data/small.txt");
+		Path outPath = new Path(CONSTANTS.getDiskFilePath()+"/building_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);

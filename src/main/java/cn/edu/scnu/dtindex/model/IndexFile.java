@@ -6,21 +6,24 @@ import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class IndexFile implements WritableComparable<IndexFile> {
-
-    private MapWritable indexMap ;//<Long,IndexRecord> lobid,IndexRecord
+	private List<IndexRecord> records;
+	private int recordSize;
     private Long indexOffset;//索引起始偏移量
 
 
 	public IndexFile() {
 	}
 
-	public IndexFile(MapWritable indexMap, Long indexOffset) {
-		this.indexMap = indexMap;
+	public IndexFile(List<IndexRecord> records, Long indexOffset) {
+		this.records = records;
 		this.indexOffset = indexOffset;
+		this.recordSize = records.size();
 	}
 
 	@Override
@@ -31,30 +34,38 @@ public class IndexFile implements WritableComparable<IndexFile> {
 
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-        indexMap.write(dataOutput);
-        dataOutput.writeLong(indexOffset);
+
+		dataOutput.writeLong(indexOffset);
+		dataOutput.writeInt(recordSize);
+		for (IndexRecord record : records) {
+		    record.write(dataOutput);
+		}
 
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-       MapWritable map = new MapWritable();
-       map.readFields(dataInput);
-       indexMap=map;
        this.indexOffset = dataInput.readLong();
+       this.recordSize = dataInput.readInt();
+       List<IndexRecord> list = new ArrayList<IndexRecord>(recordSize);
+		for (int i = 0; i < this.recordSize; i++) {
+			IndexRecord record = new IndexRecord();
+			record.readFields(dataInput);
+			list.add(record);
+		}
+		this.records = list;
+
     }
 
     @Override
     public String toString() {
         StringBuilder sbuilder = new StringBuilder();
-        Set<Map.Entry<Writable, Writable>> entrySet = indexMap.entrySet();
-        sbuilder.append("--------------index info-------------\n");
+        sbuilder.append("--------------index info start-------------\n");
         sbuilder.append("indexOffset:"+indexOffset).append("\n");
-        for (Map.Entry<Writable, Writable> entry :
-                entrySet) {
-            sbuilder.append("{lobid:"+entry.getKey()+":"+entry.getValue()+"}\n");
-
-        }
+		for (IndexRecord idxR :records ) {
+		    sbuilder.append(idxR.toString()).append("\n");
+		}
+		sbuilder.append("--------------index info end  -------------\n");
         return sbuilder.toString();
     }
 }

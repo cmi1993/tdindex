@@ -12,6 +12,10 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
     private ValidTime minNode;
     private Long lob_offset;
 
+
+	public IndexRecord() {
+	}
+
 	public IndexRecord(String lobid, ValidTime maxNode, ValidTime minNode, Long lob_offset) {
 		this.lobid = lobid;
 		this.maxNode = maxNode;
