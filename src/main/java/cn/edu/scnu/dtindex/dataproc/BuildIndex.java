@@ -168,7 +168,7 @@ public class BuildIndex {
 				DiskValue = new DiskSliceFile(lobdata);
 				long lobOffset = writer.getLength();
 				IndexRecord lobIndex = new IndexRecord(lobdata.getLobid(), lobdata.getMaxNode(), lobdata.getMinNode(), lobOffset);
-				indexMap.put(Diskkey, DiskValue);
+				indexMap.put(Diskkey, lobIndex);
 				writer.append(Diskkey, DiskValue);
 			}
 			System.out.println("[3.2]准备序列化索引--------------------");
@@ -212,8 +212,8 @@ public class BuildIndex {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(BytesWritable.class);
 		job.setMapperClass(BuildIndexMapper.class);
-		//FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/classifiedData");
-		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/small.txt");
+		FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/classifiedData");
+		//FileInputFormat.setInputPaths(job, "/home/think/Desktop/data/small.txt");
 		Path outPath = new Path("/home/think/Desktop/data/index");
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

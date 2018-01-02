@@ -36,7 +36,7 @@ public class SamplerSort {
 		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
 		cos.setNumOfPartition(numOfPartition);
 
-		if(numOfEachdimention*numOfEachdimention<numOfPartition){//如果需要拉伸分区
+		/*if(numOfEachdimention*numOfEachdimention<numOfPartition){//如果需要拉伸分区
 			cos.setApha(0);//拉伸分区就不需要进行膨胀系数的考虑
 			numOfPartition = length * (1 + cos.getApha()) / cos.getHadoopBlockSize();//分区数量
 			numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
@@ -47,10 +47,14 @@ public class SamplerSort {
 		}else {
 			cos.setNumOfXDimention((int)numOfEachdimention);
 			cos.setNumOfYDimention((int)numOfEachdimention);
-		}
+		}*/
+		//不拉伸分区实验----------------------------------------
+		cos.setNumOfXDimention((int) numOfEachdimention);
+		cos.setNumOfYDimention((int) numOfEachdimention);
+		//不拉伸分区实验----------------------------------------
 		long perXpartNum = cos.getRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
 
-		long[] xparts = new long[cos.getNumOfXDimention() +1];//保存x分界点
+		long[] xparts = new long[cos.getNumOfXDimention() + 1];//保存x分界点
 		//生成x排序临时文件分区路径
 		xClassifiedPath = new ArrayList<String>();
 		for (int i = 0; i < cos.getNumOfXDimention(); i++) {
@@ -72,11 +76,11 @@ public class SamplerSort {
 				xparts[xparts.length - 1] = tuplesList.get(tuplesList.size() - 1).getVt().getStart();
 
 			stringBuilder.append(tuplesList.get(i).toString()).append("\n");
-			if (i != 0 && i % (perXpartNum ) ==(perXpartNum-1 )) {
-				if (k<xparts.length-1) {
+			if (i != 0 && i % (perXpartNum) == (perXpartNum - 1)) {
+				if (k < xparts.length - 1) {
 					long prior = tuplesList.get(i).getVt().getStart();//上一个分区的结束
 					long next = tuplesList.get(i + 1).getVt().getStart();//下一个分区的开始
-					xparts[k++] = MidValue(prior,next);
+					xparts[k++] = MidValue(prior, next);
 				}
 				IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(j++), 0);
 				stringBuilder = new StringBuilder();
@@ -90,9 +94,9 @@ public class SamplerSort {
 	public static void sortY(String path) throws IOException {
 		File filedir = new File(path);
 		File[] files = filedir.listFiles();
-		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() +1];//保存y分界点
+		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() + 1];//保存y分界点
 		for (File file : files) {
-			int xpartNum = Integer.parseInt( file.getPath().substring(file.getPath().length()-1,file.getPath().length()));
+			int xpartNum = Integer.parseInt(file.getPath().substring(file.getPath().length() - 1, file.getPath().length()));
 			String strs = IOTools.toReadWithSpecialSplitSignal(file.getPath());
 			String[] records = strs.split("#");
 			List<Tuple> tupleList = new ArrayList<Tuple>();
@@ -115,17 +119,18 @@ public class SamplerSort {
 			});
 			StringBuilder stringBuilder = new StringBuilder();
 			int j = 0;//用于获取y分区写出路径的索引
-			int k=1;//用于记录写入x分区分界点数组的索引
+			int k = 1;//用于记录写入x分区分界点数组的索引
 
 			for (int i = 0; i < tupleList.size(); i++) {
-				if (i==0) yparts[xpartNum][0]=tupleList.get(0).getVt().getEnd();
-				if (i==tupleList.size()-1)yparts[xpartNum][cos.getNumOfYDimention()]=tupleList.get(tupleList.size()-1).getVt().getEnd();
+				if (i == 0) yparts[xpartNum][0] = tupleList.get(0).getVt().getEnd();
+				if (i == tupleList.size() - 1)
+					yparts[xpartNum][cos.getNumOfYDimention()] = tupleList.get(tupleList.size() - 1).getVt().getEnd();
 				stringBuilder.append(tupleList.get(i).toString()).append("\n");
-				if (i != 0 && i % (perYpartCount) == (perYpartCount-1)) {
-					if (k<yparts[xpartNum].length-1) {
+				if (i != 0 && i % (perYpartCount) == (perYpartCount - 1)) {
+					if (k < yparts[xpartNum].length - 1) {
 						long prior = tupleList.get(i).getVt().getEnd();
 						long next = tupleList.get(i + 1).getVt().getEnd();
-						yparts[xpartNum][k++] = MidValue(prior,next);
+						yparts[xpartNum][k++] = MidValue(prior, next);
 					}
 					IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
 					stringBuilder = new StringBuilder();
@@ -137,6 +142,7 @@ public class SamplerSort {
 		}
 		cos.setyPatitionsData(yparts);
 	}
+
 	private static long MidValue(long num1, long num2) {
 		return (num1 + num2) / 2;
 	}
