@@ -5,6 +5,8 @@ import java.io.*;
 
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String clusterAdd ="hdfs://192.168.69.204:8020";
+	private static String dataScalaDir = "1000w";
 	private static double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private static double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
@@ -13,10 +15,10 @@ public class CONSTANTS implements Serializable {
 	private int numOfYDimention;//切分后，y轴方向的分区数
 	private static final String constants_persistence_path = "/home/think/Desktop/data/contants.dat";//常量数据持久化路径
 	private long record_nums;//总记录数
-	private static String dataFilePath = "/home/think/Desktop/data/data.txt";//数据文件
-	private static String dataFileDir = "/home/think/Desktop/data";//数据路径
-	private static String samplerFileDir = "hdfs://192.168.69.204:8020/timeData/1000w/sample";//采样后样本存放路径
-	private static String samplerFilePath = "/home/think/Desktop/data/sample/sampler.txt";//采样样文件路径
+	private static String dataFileDir = clusterAdd+"/"+dataScalaDir;//数据路径
+	private static String dataFilePath = dataFileDir+"/data.txt";//数据文件
+	private static String samplerFileDir = clusterAdd+"/timeData/"+dataScalaDir+"/sampleData";//采样后样本存放路径
+	private static String samplerFilePath = samplerFileDir+"/sampler.txt";//采样样文件路径
 	private static String classifiedFilePath = "/home/think/Desktop/data/classifiedData";//数据切片存放路径
 	private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp";//x排序路径
 	private static String YsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/YSortTmp";//y排序路径
@@ -149,6 +151,11 @@ public class CONSTANTS implements Serializable {
 
 
 	//-----------------------------------getter and setter----------------------------------------------------
+
+
+	public static String getClusterAdd() {
+		return clusterAdd;
+	}
 
 	public static String getQueryStart() {
 		return queryStart;
