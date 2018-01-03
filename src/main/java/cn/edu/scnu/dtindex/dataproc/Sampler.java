@@ -45,7 +45,7 @@ public class Sampler {
         @Override
         public RecordWriter<NullWritable, Text> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
             FileSystem fs =FileSystem.get(context.getConfiguration());
-            Path sampleOutPath = new Path(CONSTANTS.getSamplerFileDir()+"/sampler.txt");
+            Path sampleOutPath = new Path("hdfs://192.168.69.204:8020/timeData/1000w/sampleData/sampler.txt");
             FSDataOutputStream samplerOut = fs.create(sampleOutPath);
             return new MyRecordWriter(samplerOut);
         }
@@ -79,32 +79,63 @@ public class Sampler {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        Configuration conf = new Configuration();
-        System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
-        conf.set("mapreduce.framework.name", "local");
-        Job job = Job.getInstance(conf, "sampler_local");
+		Configuration conf = new Configuration();
+		conf.set("fs.default.name", "hdfs://192.168.69.204:8020");
+		conf.set("mapreduce.framework.name","yarn");
+
+		Job job = Job.getInstance(conf, "wordcount_cluster_runung");
+		job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		job.setJarByClass(Sampler.class);
+		job.setMapperClass(SRSMapper.class);
+		job.setNumReduceTasks(1);
+		job.setPartitionerClass(SamplePatitioner.class);
+
+		job.setMapOutputKeyClass(NullWritable.class);
+		job.setMapOutputValueClass(Text.class);
+		job.setOutputFormatClass(SamplerOutPutFormat.class);
+		FileInputFormat.setInputPaths(job,"hdfs://192.168.69.204:8020/timeData/1000w/data.txt");
+		Path outPath = new Path("hdfs://192.168.69.204:8020/timeData/1000w/sampleData");
+		FileSystem fs = FileSystem.get(conf);
+		if (fs.exists(outPath)) {
+			fs.delete(outPath, true);
+		}
+		FileOutputFormat.setOutputPath(job, outPath);
+
+		// 向yarn集群提交这个job
+		boolean res = job.waitForCompletion(true);
+		System.exit(res ? 0 : 1);
+
+	}
+
+	private static void local() throws IOException, ClassNotFoundException, InterruptedException {
+		Configuration conf = new Configuration();
+		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
+		conf.set("mapreduce.framework.name", "local");
+		Job job = Job.getInstance(conf, "sampler_local");
 
 
-        job.setJarByClass(Sampler.class);
-        job.setMapperClass(SRSMapper.class);
-        job.setNumReduceTasks(1);
-        job.setPartitionerClass(SamplePatitioner.class);
+		job.setJarByClass(Sampler.class);
+		job.setMapperClass(SRSMapper.class);
+		job.setNumReduceTasks(1);
+		job.setPartitionerClass(SamplePatitioner.class);
 
 
-        // 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
-        job.setMapOutputKeyClass(NullWritable.class);
-        job.setMapOutputValueClass(Text.class);
-        job.setOutputFormatClass(SamplerOutPutFormat.class);
-        FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
-        Path outPath = new Path(CONSTANTS.getSamplerFileDir());
-        FileSystem fs = FileSystem.get(conf);
-        if (fs.exists(outPath)) {
-            fs.delete(outPath, true);
-        }
-        FileOutputFormat.setOutputPath(job, outPath);
+		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
+		job.setMapOutputKeyClass(NullWritable.class);
+		job.setMapOutputValueClass(Text.class);
+		job.setOutputFormatClass(SamplerOutPutFormat.class);
+		FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
+		Path outPath = new Path(CONSTANTS.getSamplerFileDir());
+		FileSystem fs = FileSystem.get(conf);
+		if (fs.exists(outPath)) {
+			fs.delete(outPath, true);
+		}
+		FileOutputFormat.setOutputPath(job, outPath);
 
-        // 向yarn集群提交这个job
-        boolean res = job.waitForCompletion(true);
-        System.exit(res ? 0 : 1);
-    }
+		// 向yarn集群提交这个job
+		boolean res = job.waitForCompletion(true);
+		System.exit(res ? 0 : 1);
+	}
+
+
 }

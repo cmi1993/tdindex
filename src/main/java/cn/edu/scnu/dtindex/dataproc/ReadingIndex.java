@@ -73,14 +73,20 @@ public class ReadingIndex {
 			DiskSliceFile DiskValue = new DiskSliceFile();
 			Configuration conf = new Configuration();
 			SequenceFile.Reader reader = null;
+			ValidTime query = new ValidTime(CONSTANTS.getQueryStart(),CONSTANTS.getQueryEnd());
 			reader = new SequenceFile.Reader(context.getConfiguration(), SequenceFile.Reader.file(partitionDataPath));
 
 
 			for (IndexRecord value : values) {
 				Long lob_offset = value.getLob_offset();
-				reader.seek(lob_return 0; offset);
+				reader.seek(lob_offset);
 				boolean next = reader.next(Diskkey, DiskValue);
-
+				List<Tuple> tuples = DiskValue.getData().BinarySearchInLob(query);
+				StringBuilder stringBuilder = new StringBuilder();
+				for (Tuple t : tuples) {
+				    stringBuilder.append(t.toString()).append("\n");
+				}
+				context.write(new Text(stringBuilder.toString()),NullWritable.get());
 
 			}
 		}
@@ -104,10 +110,11 @@ public class ReadingIndex {
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(NullWritable.class);
+		//-----------------------------------------------------------------------
 		job.setReducerClass(ReadingIndexReducer.class);
 		job.setPartitionerClass(ReadingIndexPatitioner.class);
 		job.setMapperClass(ReadingIndexMapper.class);
-		SequenceFileInputFormat.addInputPath(job, new Path(CONSTANTS.getIndexFileDir() + "/index_small.txt.seq"));
+		SequenceFileInputFormat.addInputPath(job, new Path(CONSTANTS.getIndexFileDir() + "/"));
 		Path outPath = new Path("/home/think/Desktop/data/queryInfo/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

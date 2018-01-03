@@ -300,14 +300,11 @@ public class DataGenerate {
 
     }
     public static void main(String[] args) throws IOException {
-        /*for (int i = 0; i < 100; i++) {
-            Generate10w("/home/think/Desktop/data/data.txt");
+        for (int i = 0; i < 100; i++) {
+            Generate10w("/root/data/data.txt");
             System.out.println((i+1)*10+"w");
-        }*/
+        }
 
-		Generate10w("/home/think/Desktop/data/sdata0.txt");
-		Generate10w("/home/think/Desktop/data/sdata1.txt");
-		Generate10w("/home/think/Desktop/data/sdata2.txt");
 	}
 }
 

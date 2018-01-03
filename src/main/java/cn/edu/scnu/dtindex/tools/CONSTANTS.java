@@ -15,7 +15,7 @@ public class CONSTANTS implements Serializable {
 	private long record_nums;//总记录数
 	private static String dataFilePath = "/home/think/Desktop/data/data.txt";//数据文件
 	private static String dataFileDir = "/home/think/Desktop/data";//数据路径
-	private static String samplerFileDir = "/home/think/Desktop/data/sample";//采样后样本存放路径
+	private static String samplerFileDir = "hdfs://192.168.69.204:8020/timeData/1000w/sample";//采样后样本存放路径
 	private static String samplerFilePath = "/home/think/Desktop/data/sample/sampler.txt";//采样样文件路径
 	private static String classifiedFilePath = "/home/think/Desktop/data/classifiedData";//数据切片存放路径
 	private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp";//x排序路径

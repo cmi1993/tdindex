@@ -24,14 +24,14 @@ public class WordCountRunner {
 		//cluster_runung();//集群模式
 	}
 
-	/*private static void cluster_runung() throws Exception {
+	private static void cluster_runung() throws Exception {
 		Configuration conf = new Configuration();
 		conf.set("fs.default.name", "hdfs://master:8020");
 	    conf.set("mapreduce.framework.name","yarn"); 
-		*//**
-		 * 需指定文件系统，否则
-		 * hadoop程序抛出异常：java.lang.IllegalArgumentException: Wrong FS: hdfs:/ expected file:///
-		 *//*
+		//*//**//**//**//**//**//**//**//**
+		 //* 需指定文件系统，否则
+		 //* hadoop程序抛出异常：java.lang.IllegalArgumentException: Wrong FS: hdfs:/ expected file:///
+		 //*//**//**//**//**//**//**//**//*/
 		Job job = Job.getInstance(conf, "wordcount_cluster_runung");
 		job.setJar("/Users/think/Documents/hadoop_study_tmp/dtindex.jar");
 		job.setJarByClass(WordCountRunner.class);
@@ -56,7 +56,7 @@ public class WordCountRunner {
 		boolean res = job.waitForCompletion(true);
 		System.exit(res ? 0 : 1);
 		
-	}*/
+	}
 
 	private static void local_runing() throws Exception {
 		Configuration conf = new Configuration();
