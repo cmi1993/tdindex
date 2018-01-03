@@ -51,6 +51,8 @@ public class SamplerSort {
 		//不拉伸分区实验----------------------------------------
 		cos.setNumOfXDimention((int) numOfEachdimention);
 		cos.setNumOfYDimention((int) numOfEachdimention);
+
+		cos.setNumOfPartition(cos.getNumOfYDimention()*cos.getNumOfXDimention());
 		//不拉伸分区实验----------------------------------------
 		long perXpartNum = cos.getRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
 

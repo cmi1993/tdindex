@@ -11,6 +11,7 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
     private ValidTime maxNode;
     private ValidTime minNode;
     private Long lob_offset;
+    private String diskFileName;//仅仅在查询时候用来保持路径名称的传递，不需要序列化
 
 
 	public IndexRecord() {
@@ -57,4 +58,45 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
                 ", lob_offset=" + lob_offset +
                 '}';
     }
+
+
+	public String getDiskFileName() {
+		return diskFileName;
+	}
+
+	public void setDiskFileName(String diskFileName) {
+		this.diskFileName = diskFileName;
+	}
+
+	public String getLobid() {
+		return lobid;
+	}
+
+	public void setLobid(String lobid) {
+		this.lobid = lobid;
+	}
+
+	public ValidTime getMaxNode() {
+		return maxNode;
+	}
+
+	public void setMaxNode(ValidTime maxNode) {
+		this.maxNode = maxNode;
+	}
+
+	public ValidTime getMinNode() {
+		return minNode;
+	}
+
+	public void setMinNode(ValidTime minNode) {
+		this.minNode = minNode;
+	}
+
+	public Long getLob_offset() {
+		return lob_offset;
+	}
+
+	public void setLob_offset(Long lob_offset) {
+		this.lob_offset = lob_offset;
+	}
 }

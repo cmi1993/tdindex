@@ -6,7 +6,7 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
-	private static double apha = 0.1;//索引所需空间的膨胀系数
+	private static double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
 	//private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
 	private int numOfXDimention;//切分后，x轴方向的分区数
@@ -26,6 +26,9 @@ public class CONSTANTS implements Serializable {
 	private static String DiskFilePath = "/home/think/Desktop/data/DiskSliceFile";//磁盘块序列化路径
 	private static String indexFileDir = CONSTANTS.getDiskFilePath() + "/index";//索引文件存放路径，查询时候会首先加载索引
 	private static String diskSliceFileDir = CONSTANTS.getDiskFilePath() + "/disk";//索引文件存放路径，查询时候会首先加载索引
+	private static String queryStart;
+	private static String queryEnd;
+
 
 	//-----------------------------------单例模式--------------------------------------------
 	private static class CONSTANTSHolder {
@@ -106,6 +109,8 @@ public class CONSTANTS implements Serializable {
 		System.out.println("|DiskFilePath               |磁盘块序列化路径	    |" + DiskFilePath);
 		System.out.println("|indexFileDir               |索引块序列化路径	    |" + indexFileDir);
 		System.out.println("|diskSliceFileDir           |磁盘切片序列化路径    |" + diskSliceFileDir);
+		System.out.println("|queryStart                 |查询窗口的开始时间    |" + queryStart);
+		System.out.println("|queryEnd                   |查询窗口的结束时间    |" + queryEnd);
 		System.out.println("----------------------------------------------------------------------------------------------");
 		System.out.print("|x分区采样点\t|");
 		for (long x : xPatitionsData) {
@@ -144,6 +149,22 @@ public class CONSTANTS implements Serializable {
 
 
 	//-----------------------------------getter and setter----------------------------------------------------
+
+	public static String getQueryStart() {
+		return queryStart;
+	}
+
+	public static void setQueryStart(String queryStart) {
+		CONSTANTS.queryStart = queryStart;
+	}
+
+	public static String getQueryEnd() {
+		return queryEnd;
+	}
+
+	public static void setQueryEnd(String queryEnd) {
+		CONSTANTS.queryEnd = queryEnd;
+	}
 
 	public static String getIndexFileDir() {
 		return indexFileDir;

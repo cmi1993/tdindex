@@ -68,4 +68,28 @@ public class IndexFile implements WritableComparable<IndexFile> {
 		sbuilder.append("--------------index info end  -------------\n");
         return sbuilder.toString();
     }
+
+	public List<IndexRecord> getRecords() {
+		return records;
+	}
+
+	public void setRecords(List<IndexRecord> records) {
+		this.records = records;
+	}
+
+	public int getRecordSize() {
+		return recordSize;
+	}
+
+	public void setRecordSize(int recordSize) {
+		this.recordSize = recordSize;
+	}
+
+	public Long getIndexOffset() {
+		return indexOffset;
+	}
+
+	public void setIndexOffset(Long indexOffset) {
+		this.indexOffset = indexOffset;
+	}
 }

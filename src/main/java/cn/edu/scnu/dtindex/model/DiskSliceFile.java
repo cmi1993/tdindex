@@ -69,4 +69,28 @@ public class DiskSliceFile implements WritableComparable<DiskSliceFile> {
 				", isIndexSliceFile=" + isIndexSliceFile +
 				'}';
 	}
+
+	public Lob getData() {
+		return data;
+	}
+
+	public void setData(Lob data) {
+		this.data = data;
+	}
+
+	public IndexFile getIndex() {
+		return index;
+	}
+
+	public void setIndex(IndexFile index) {
+		this.index = index;
+	}
+
+	public boolean isIndexSliceFile() {
+		return isIndexSliceFile;
+	}
+
+	public void setIndexSliceFile(boolean indexSliceFile) {
+		isIndexSliceFile = indexSliceFile;
+	}
 }

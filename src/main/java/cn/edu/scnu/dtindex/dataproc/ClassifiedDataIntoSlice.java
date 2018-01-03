@@ -42,7 +42,6 @@ public class ClassifiedDataIntoSlice {
 	static class ClassifiedReducer extends Reducer<Tuple, NullWritable, Text, NullWritable> {
 		@Override
 		protected void reduce(Tuple key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
-			int partition = context.getConfiguration().getInt("mapred.task.partition", -1);//获取分区号
 			context.write(new Text(key.toString()), NullWritable.get());
 		}
 	}
