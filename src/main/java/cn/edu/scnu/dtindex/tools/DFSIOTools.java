@@ -2,6 +2,7 @@ package cn.edu.scnu.dtindex.tools;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.FileSystem;
 
@@ -10,9 +11,10 @@ import java.net.URI;
 
 public class DFSIOTools {
 	public static void main(String[] args) throws IOException {
-		//toWrite(new Configuration(),"123","/test/11111123.txt");
-
-		System.out.println(toRead(new Configuration(), "hdfs://192.168.69.204:8020/test/1.txt"));
+		toWrite(new Configuration(),"12345","/test/2.txt",0);
+		toWrite(new Configuration(),"line4,in,the,line4","/test/2.txt",1);
+		System.out.println("success");
+		//System.out.println(toRead(new Configuration(), "hdfs://192.168.69.204:8020/test/1.txt"));
 	}
 
 	/**
@@ -22,9 +24,15 @@ public class DFSIOTools {
 	 * @param path--写出的路径
 	 * @throws IOException
 	 */
-	public static void toWrite(Configuration conf, String str, String path) throws IOException {
-		HDFSTool tool = new HDFSTool(conf);
-		tool.createFile(path, str);
+	public static void toWrite(Configuration conf, String str, String path,int flag) throws IOException {
+		if (flag==0) {
+			HDFSTool tool = new HDFSTool(conf);
+			tool.createFile(path, str);
+		}else {
+			HDFSTool tool =new HDFSTool(conf);
+			tool.append(path,str);
+
+		}
 
 	}
 
@@ -63,6 +71,7 @@ public class DFSIOTools {
 		return buffer.toString();
 
 	}
+
 
 	public static String toReadWithSpecialSplitSignal(Configuration conf , String path) throws IOException {
 		StringBuffer buffer = new StringBuffer();

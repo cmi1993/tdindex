@@ -57,8 +57,17 @@ public class HDFSTool {
 	public static void main(String[] args) throws IOException {
 		JobConf conf = config();
 		HDFSTool hdfs = new HDFSTool(conf);
-		System.out.println(hdfs.isExits("/timeData/1000w/data.txt"));
-		System.out.println(hdfs.isExits("/timeData/1000w/data1.txt"));
+		long fileLength = hdfs.getFileLength("/timeData/1000w/data.txt");
+		System.out.println(fileLength/1024/1024);
+		hdfs.ls("/timeData/1000w/SampleSort/XSortTmp/");
+		FileStatus[] fileStatuses = hdfs.listFiles("/timeData/1000w/SampleSort/XSortTmp/");
+		for (FileStatus file : fileStatuses) {
+			System.out.println(file.getPath());
+			int xpartNum = Integer.parseInt(file.getPath().toString().substring(file.getPath().toString().length() - 1, file.getPath().toString().length()));
+			System.out.println(xpartNum);
+		}
+//		System.out.println(hdfs.isExits("/timeData/1000w/data1.txt"));
+//		System.out.println(hdfs.isExits("/timeData/1000w/data.txt"));
 		//hdfs.ls("/");
 		// hdfs.mkdirs("/new");
 		// 可以同时建多级目录
@@ -107,6 +116,14 @@ public class HDFSTool {
 		fs.close();
 	}
 
+	public long getFileLength(String filePath) throws IOException {
+		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+		long length = fs.getFileStatus(new Path(filePath)).getLen();
+		return length;
+	}
+
+
+
 	public void ls(String folder) throws IOException {
 		Path path = new Path(folder);
 		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
@@ -118,6 +135,14 @@ public class HDFSTool {
 		}
 		System.out.println("==========================================================");
 		fs.close();
+	}
+
+	public FileStatus[] listFiles(String folder) throws IOException {
+		Path path = new Path(folder);
+		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+		FileStatus[] list = fs.listStatus(path);
+		fs.close();
+		return list;
 	}
 
 	public void createFile(String file, String content) throws IOException {
@@ -180,6 +205,22 @@ public class HDFSTool {
 		for (int i = 0; i < bloLocations.length; i++) {
 			System.out.println("block_" + i + "_location:" + bloLocations[i].getHosts()[0]);
 		}
+		fs.close();
+	}
+
+
+	public void append(String filePath,String content) throws IOException {
+		Path targetFile = new Path(filePath);
+		conf.setBoolean("dfs.support.append", true);
+
+		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+		FSDataOutputStream out = fs.append(targetFile);
+
+		int readLen = content.toString().getBytes().length;
+
+		out.write(content.toString().getBytes(), out.size(), readLen);
+
+		out.close();
 		fs.close();
 	}
 

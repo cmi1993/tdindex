@@ -15,7 +15,7 @@ public class CONSTANTS implements Serializable {
 	private int numOfYDimention;//切分后，y轴方向的分区数
 	private static final String constants_persistence_path = "/home/think/Desktop/data/contants.dat";//常量数据持久化路径
 	private long record_nums;//总记录数
-	private static String dataFileDir = clusterAdd+"/"+dataScalaDir;//数据路径
+	private static String dataFileDir = clusterAdd+"/timeData/"+dataScalaDir;//数据路径
 	private static String dataFilePath = dataFileDir+"/data.txt";//数据文件
 	private static String samplerFileDir = clusterAdd+"/timeData/"+dataScalaDir+"/sampleData";//采样后样本存放路径
 	private static String samplerFilePath = samplerFileDir+"/sampler.txt";//采样样文件路径

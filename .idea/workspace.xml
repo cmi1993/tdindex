@@ -7,16 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c94d32f-4f73-438e-a401-e84b99e5a0a9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" afterPath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS$CONSTANTSHolder.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS$CONSTANTSHolder.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS.class" />
-      <change beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" />
-      <change beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,16 +26,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WordCountRunner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="33" column="44" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Sampler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,43 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataGenerate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="310" column="0" lean-forward="false" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadingIndex.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CONSTANTS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="71" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="71" />
+            <state relative-caret-position="163">
+              <caret line="22" column="59" lean-forward="false" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
               <folding>
                 <element signature="class#CONSTANTSHolder#0;class#CONSTANTS#0" expanded="false" />
                 <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
@@ -102,36 +54,41 @@
                 <element signature="method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
                 <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
                 <element signature="method#main#0;class#CONSTANTS#0" expanded="false" />
-                <element signature="e#6374#6375#0" expanded="true" />
-                <element signature="e#6398#6399#0" expanded="true" />
+                <element signature="e#6383#6384#0" expanded="true" />
+                <element signature="e#6407#6408#0" expanded="true" />
                 <element signature="method#setClassifiedFilePath#0;class#CONSTANTS#0" expanded="false" />
-                <element signature="e#7298#7299#0" expanded="true" />
-                <element signature="e#7326#7327#0" expanded="true" />
-                <element signature="e#8873#8874#0" expanded="true" />
-                <element signature="e#8902#8903#0" expanded="true" />
+                <element signature="e#7307#7308#0" expanded="true" />
+                <element signature="e#7335#7336#0" expanded="true" />
+                <element signature="e#8539#8540#0" expanded="true" />
+                <element signature="e#8565#8566#0" expanded="true" />
+                <element signature="e#8882#8883#0" expanded="true" />
+                <element signature="e#8911#8912#0" expanded="true" />
+                <element signature="e#9072#9073#0" expanded="true" />
+                <element signature="e#9100#9101#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SamplerSort.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SamplerSort.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2860">
-              <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state relative-caret-position="419">
+              <caret line="161" column="0" lean-forward="false" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="27" />
               <folding>
-                <element signature="e#5965#5966#0" expanded="true" />
-                <element signature="e#5996#5997#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#6429#6430#0" expanded="true" />
+                <element signature="e#6460#6461#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DFSIOTools.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DFSIOTools.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1800">
-              <caret line="90" column="21" lean-forward="false" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+            <state relative-caret-position="1311">
+              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,23 +99,13 @@
       <file leaf-file-name="HDFSTool.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2770">
-              <caret line="40" column="54" lean-forward="false" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+            <state relative-caret-position="279">
+              <caret line="65" column="14" lean-forward="false" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1258#1259#0" expanded="true" />
                 <element signature="e#1281#1282#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IOUtils.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/IOUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3224">
-              <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -171,6 +118,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>DFSIOTools</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -203,10 +155,10 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
       </list>
     </option>
   </component>
@@ -613,7 +565,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.DFSIOTools">
+  <component name="RunManager" selected="Application.SamplerSort">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -799,9 +751,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.DFSIOTools" />
+        <item index="0" class="java.lang.String" itemvalue="Application.SamplerSort" />
         <item index="1" class="java.lang.String" itemvalue="Application.HDFSTool" />
-        <item index="2" class="java.lang.String" itemvalue="Application.SamplerSort" />
+        <item index="2" class="java.lang.String" itemvalue="Application.DFSIOTools" />
         <item index="3" class="java.lang.String" itemvalue="Application.Sampler" />
         <item index="4" class="java.lang.String" itemvalue="Application.ReadingIndex" />
       </list>
@@ -864,12 +816,12 @@
       <workItem from="1514906680002" duration="532000" />
       <workItem from="1514947974619" duration="8098000" />
       <workItem from="1514960733392" duration="1774000" />
-      <workItem from="1514962542342" duration="9386000" />
+      <workItem from="1514962542342" duration="13945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202204000" />
+    <option name="totallyTimeSpent" value="206763000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,6 +834,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-46" width="1440" height="946" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -893,18 +846,18 @@
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15997131" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="97" y="1031" width="1303" height="602" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="21" y="1102" width="1303" height="358" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17001435" sideWeight="0.48029557" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17001435" sideWeight="0.48029557" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15423243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14885195" sideWeight="0.51970446" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="414" y="452" width="876" height="527" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="442" y="373" width="876" height="527" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -927,17 +880,17 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15423243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="255" y="162" width="876" height="527" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="442" y="373" width="876" height="527" />
       <window_info id="Hadoop FileSystem" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858273" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35144928" sideWeight="0.35602096" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35144928" sideWeight="0.35602096" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="67" y="542" width="1303" height="602" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="137" y="501" width="1303" height="356" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17001435" sideWeight="0.48029557" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39259258" sideWeight="0.4973822" order="3" side_tool="false" content_ui="tabs" />
@@ -979,21 +932,21 @@
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java</url>
-          <line>153</line>
-          <properties />
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java</url>
-          <line>45</line>
+          <line>53</line>
           <properties />
           <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DataToLongPaser.java</url>
           <line>26</line>
-          <properties class="cn.edu.scnu.dtindex.tools.DataToLongPaser">
+          <properties class="cn.edu.scnu.dtindex.tools.DataToLongPaser" method="main">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="31" />
@@ -1002,39 +955,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="80" />
+      <option name="time" value="82" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/ValidTime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="79" column="16" lean-forward="false" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#2269#2270#0" expanded="true" />
-            <element signature="e#2321#2322#0" expanded="true" />
-            <element signature="e#2890#2891#0" expanded="true" />
-            <element signature="e#2922#2923#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/_tmpSamplerSort.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/Tuple.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1674">
@@ -1369,7 +1294,7 @@
         <state relative-caret-position="20">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1398,6 +1323,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/IOTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="95" column="0" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="95" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/IOUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3224">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1411,60 +1352,150 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/IOTools.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/DataOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="95" column="0" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="394">
+          <caret line="103" column="29" lean-forward="false" selection-start-line="103" selection-start-column="29" selection-end-line="103" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java">
+    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-hdfs/2.5.1/hadoop-hdfs-2.5.1.jar!/org/apache/hadoop/hdfs/DFSOutputStream.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2860">
-          <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state relative-caret-position="251">
+          <caret line="138" column="0" lean-forward="false" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
           <folding>
-            <element signature="e#5965#5966#0" expanded="true" />
-            <element signature="e#5996#5997#0" expanded="true" />
+            <marker date="1513769592598" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1513769592598" expanded="false" signature="146:3814" ph="..." />
+            <marker date="1513769592598" expanded="true" signature="5251:5994" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="6048:6223" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="6301:6808" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="6957:8738" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="8936:9366" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="9655:10404" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="10670:10828" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="11001:11515" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="11722:11874" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="11938:12377" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="12417:12946" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="13012:13646" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="13758:16553" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="16559:16577" ph="/**...*/" />
+            <marker date="1513769592598" expanded="true" signature="16636:16666" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="16712:16784" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="16829:16888" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="16960:17010" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="17105:20408" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="20414:20432" ph="/**...*/" />
+            <marker date="1513769592598" expanded="true" signature="20520:20577" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="20655:20987" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="21041:21312" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="21380:22528" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="22567:22578" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="22600:22606" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="22657:22938" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="23004:23415" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="23473:24561" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="24632:26145" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="26220:26231" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="26264:26270" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="26354:26553" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="26608:26619" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="26638:26644" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="26670:26681" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="26709:26715" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="26777:26788" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="26825:26831" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="26902:27243" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="27296:27307" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="27339:27345" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="27397:27408" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="27427:27433" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="27473:73735" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="28473:29775" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="28799:28952" ph="onRemoval(notification) → {" />
+            <marker date="1513769592598" expanded="false" signature="29081:29100" ph="}" />
+            <marker date="1513769592598" expanded="false" signature="29108:29254" ph="load(key) → { " />
+            <marker date="1513769592598" expanded="false" signature="29265:29297" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="29892:32668" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="30218:30371" ph="onRemoval(notification) → {" />
+            <marker date="1513769592598" expanded="false" signature="30500:30519" ph="}" />
+            <marker date="1513769592598" expanded="false" signature="30527:30673" ph="load(key) → { " />
+            <marker date="1513769592598" expanded="false" signature="30684:30716" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="32719:32734" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="32790:32800" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="32878:32963" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="33024:33039" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="33072:33082" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="33125:33431" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="33465:33898" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="33926:41451" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="41490:41789" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="41825:42084" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="42124:42462" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="42499:43485" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="43535:43550" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="43572:43582" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="43642:43731" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="43790:43928" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="43978:44417" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="44485:46684" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="46718:46733" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="46756:46766" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="46848:47976" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="48049:49264" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="49397:51123" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="51203:57479" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="57553:59472" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="59578:66208" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="66321:68130" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="68164:68179" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="68197:68207" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="68242:68257" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="68275:68285" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="68338:68353" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="68377:68387" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="68442:68532" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="68589:73729" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="68815:68834" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="68857:68871" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="68903:73598" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="73625:73719" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="73762:78088" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="74156:74449" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="74517:75078" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="75137:75406" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="75469:75749" ph="{...}" />
+            <marker date="1513769592598" expanded="true" signature="75813:77607" ph="{...}" />
+            <marker date="1513769592598" expanded="false" signature="77646:77661" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="77731:77741" ph=" }" />
+            <marker date="1513769592598" expanded="false" signature="77786:77801" ph=" { " />
+            <marker date="1513769592598" expanded="false" signature="77826:77836" ph=" }" />
+            <marker date="1513769592598" expanded="true" signature="77871:78082" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/IOUtils.java">
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/fs/FSOutputSummer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3224">
-          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        <state relative-caret-position="331">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/fs/FSDataOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="71" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="71" />
-          <folding>
-            <element signature="class#CONSTANTSHolder#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="method#main#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="e#6374#6375#0" expanded="true" />
-            <element signature="e#6398#6399#0" expanded="true" />
-            <element signature="method#setClassifiedFilePath#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="e#7298#7299#0" expanded="true" />
-            <element signature="e#7326#7327#0" expanded="true" />
-            <element signature="e#8873#8874#0" expanded="true" />
-            <element signature="e#8902#8903#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="271">
+          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2770">
-          <caret line="40" column="54" lean-forward="false" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+        <state relative-caret-position="279">
+          <caret line="65" column="14" lean-forward="false" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1258#1259#0" expanded="true" />
@@ -1475,10 +1506,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="90" column="21" lean-forward="false" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+        <state relative-caret-position="1311">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="22" column="59" lean-forward="false" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
+          <folding>
+            <element signature="class#CONSTANTSHolder#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="method#main#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="e#6383#6384#0" expanded="true" />
+            <element signature="e#6407#6408#0" expanded="true" />
+            <element signature="method#setClassifiedFilePath#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="e#7307#7308#0" expanded="true" />
+            <element signature="e#7335#7336#0" expanded="true" />
+            <element signature="e#8539#8540#0" expanded="true" />
+            <element signature="e#8565#8566#0" expanded="true" />
+            <element signature="e#8882#8883#0" expanded="true" />
+            <element signature="e#8911#8912#0" expanded="true" />
+            <element signature="e#9072#9073#0" expanded="true" />
+            <element signature="e#9100#9101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="161" column="0" lean-forward="false" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6429#6430#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
           </folding>
         </state>
       </provider>

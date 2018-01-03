@@ -2,7 +2,11 @@ package cn.edu.scnu.dtindex.dataproc;
 
 import cn.edu.scnu.dtindex.model.Tuple;
 import cn.edu.scnu.dtindex.tools.CONSTANTS;
+import cn.edu.scnu.dtindex.tools.DFSIOTools;
+import cn.edu.scnu.dtindex.tools.HDFSTool;
 import cn.edu.scnu.dtindex.tools.IOTools;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +21,7 @@ public class SamplerSort {
 	static List<String> yClassifiedPath;
 
 	public static void sortX(String Rpath) throws IOException {
-		String str = IOTools.toReadWithSpecialSplitSignal(Rpath);
+		String str = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(),Rpath);
 		String[] records = str.split("#");
 		List<Tuple> tuplesList = new ArrayList<Tuple>();
 		long record_count = 0;
@@ -30,8 +34,8 @@ public class SamplerSort {
 		Collections.sort(tuplesList);
 		//3.计算分区数量
 		cos.setRecord_nums(record_count);
-		File file = new File(CONSTANTS.getDataFilePath());
-		long length = (file.length() / 1024 / 1024);
+		HDFSTool hdfs = new HDFSTool(new Configuration());
+		long length = hdfs.getFileLength(CONSTANTS.getDataFilePath())/1024/1024;
 		double numOfPartition = length * (1 + cos.getApha()) / cos.getHadoopBlockSize();//分区数量
 		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
 		cos.setNumOfPartition(numOfPartition);
@@ -84,22 +88,23 @@ public class SamplerSort {
 					long next = tuplesList.get(i + 1).getVt().getStart();//下一个分区的开始
 					xparts[k++] = MidValue(prior, next);
 				}
-				IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(j++), 0);
+				DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), xClassifiedPath.get(j++), 0);
 				stringBuilder = new StringBuilder();
 			}
 		}
 
-		IOTools.toWrite(stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfXDimention() - 1), 1);
+		DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfXDimention() - 1), 1);
 		cos.setxPatitionsData(xparts);
 	}
 
 	public static void sortY(String path) throws IOException {
-		File filedir = new File(path);
-		File[] files = filedir.listFiles();
+		HDFSTool hdfsTool = new HDFSTool(new Configuration());
+		FileStatus[] fileStatuses = hdfsTool.listFiles(CONSTANTS.getXsortedDataDir());
+
 		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() + 1];//保存y分界点
-		for (File file : files) {
-			int xpartNum = Integer.parseInt(file.getPath().substring(file.getPath().length() - 1, file.getPath().length()));
-			String strs = IOTools.toReadWithSpecialSplitSignal(file.getPath());
+		for (FileStatus file : fileStatuses) {
+			int xpartNum = Integer.parseInt(file.getPath().toString().substring(file.getPath().toString().length() - 1, file.getPath().toString().length()));
+			String strs = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(),file.getPath().toString());
 			String[] records = strs.split("#");
 			List<Tuple> tupleList = new ArrayList<Tuple>();
 			long record_count = 0;
@@ -134,13 +139,13 @@ public class SamplerSort {
 						long next = tupleList.get(i + 1).getVt().getEnd();
 						yparts[xpartNum][k++] = MidValue(prior, next);
 					}
-					IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
+					DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
 					stringBuilder = new StringBuilder();
 					j++;
 				}
 			}
 
-			IOTools.toWrite(stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + cos.getNumOfYDimention() - 1), 1);
+			DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + cos.getNumOfYDimention() - 1), 1);
 		}
 		cos.setyPatitionsData(yparts);
 	}
