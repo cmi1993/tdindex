@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c94d32f-4f73-438e-a401-e84b99e5a0a9" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/root@master" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" afterPath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" />
@@ -37,6 +38,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/dataproc/Sampler.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/dataproc/Sampler.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/dataproc/SamplerSort.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/dataproc/SamplerSort.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/entrance/Main.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/entrance/Main.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS$CONSTANTSHolder.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS$CONSTANTSHolder.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/CONSTANTS.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/HDFSTool.class" afterPath="$PROJECT_DIR$/target/classes/cn/edu/scnu/dtindex/tools/HDFSTool.class" />
       <change beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" />
@@ -231,7 +233,7 @@
       <file leaf-file-name="ClassifiedDataIntoSlice.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
+            <state relative-caret-position="951">
               <caret line="145" column="51" lean-forward="false" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
               <folding />
             </state>
@@ -968,12 +970,12 @@
       <workItem from="1514906680002" duration="532000" />
       <workItem from="1514947974619" duration="8098000" />
       <workItem from="1514960733392" duration="1774000" />
-      <workItem from="1514962542342" duration="32230000" />
+      <workItem from="1514962542342" duration="32363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225048000" />
+    <option name="totallyTimeSpent" value="225181000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -997,7 +999,7 @@
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15997131" sideWeight="0.5041032" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15997131" sideWeight="0.49589685" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="68" y="75" width="1303" height="704" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.52298135" sideWeight="0.48092744" order="7" side_tool="true" content_ui="tabs" x="68" y="75" width="1303" height="704" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1818,7 +1820,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
+        <state relative-caret-position="951">
           <caret line="145" column="51" lean-forward="false" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
           <folding />
         </state>
