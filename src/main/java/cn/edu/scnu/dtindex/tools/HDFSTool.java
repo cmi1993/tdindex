@@ -2,6 +2,9 @@ package cn.edu.scnu.dtindex.tools;
 
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.URI;
 
 import org.apache.hadoop.conf.Configuration;
@@ -36,9 +39,14 @@ import org.apache.hadoop.mapred.JobConf;
  * @author Skye
  */
 public class HDFSTool {
+	static CONSTANTS cos;
+
+	static {
+			cos = CONSTANTS.getInstance();
+	}
 
 	// HDFS访问地址
-	private static final String HDFS = CONSTANTS.getClusterAdd();
+	private static final String HDFS = cos.getClusterAdd();
 	// hdfs路径
 	private String hdfsPath;
 	// Hadoop系统配置
@@ -54,10 +62,18 @@ public class HDFSTool {
 	}
 
 	// 启动函数
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		JobConf conf = config();
 		HDFSTool hdfs = new HDFSTool(conf);
-		long fileLength = hdfs.getFileLength("/timeData/1000w/data.txt");
+		Object o = hdfs.objectFromHdfs(HDFS + "/timeData/contants.dat");
+		CONSTANTS cos = (CONSTANTS) o;
+		cos.showConstantsInfo();
+
+		/*CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
+		constants.setQueryEnd("chen_meng_jia");
+		hdfs.objectStreamToHdfs(constants,HDFS+"/timeData/constants.dat");*/
+		System.out.println("success");
+		/*long fileLength = hdfs.getFileLength("/timeData/1000w/data.txt");
 		System.out.println(fileLength/1024/1024);
 		hdfs.ls("/timeData/1000w/SampleSort/XSortTmp/");
 		FileStatus[] fileStatuses = hdfs.listFiles("/timeData/1000w/SampleSort/XSortTmp/");
@@ -65,7 +81,7 @@ public class HDFSTool {
 			System.out.println(file.getPath());
 			int xpartNum = Integer.parseInt(file.getPath().toString().substring(file.getPath().toString().length() - 1, file.getPath().toString().length()));
 			System.out.println(xpartNum);
-		}
+		}*/
 //		System.out.println(hdfs.isExits("/timeData/1000w/data1.txt"));
 //		System.out.println(hdfs.isExits("/timeData/1000w/data.txt"));
 		//hdfs.ls("/");
@@ -121,7 +137,6 @@ public class HDFSTool {
 		long length = fs.getFileStatus(new Path(filePath)).getLen();
 		return length;
 	}
-
 
 
 	public void ls(String folder) throws IOException {
@@ -209,7 +224,7 @@ public class HDFSTool {
 	}
 
 
-	public void append(String filePath,String content) throws IOException {
+	public void append(String filePath, String content) throws IOException {
 		Path targetFile = new Path(filePath);
 		conf.setBoolean("dfs.support.append", true);
 
@@ -222,6 +237,30 @@ public class HDFSTool {
 
 		out.close();
 		fs.close();
+	}
+
+	public Object objectFromHdfs(String filePath) throws IOException, ClassNotFoundException {
+		Path path = new Path(filePath);
+		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+		FSDataInputStream fis = fs.open(path);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Object cos = ois.readObject();
+		ois.close();
+		fis.close();
+		fs.close();
+		return cos;
+	}
+
+	public void objectStreamToHdfs(Object object, String filePath) throws IOException {
+		Path path = new Path(filePath);
+		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+		FSDataOutputStream ops = fs.create(path, true);
+		ObjectOutputStream oos = new ObjectOutputStream(ops);
+		oos.writeObject(object);
+		oos.close();
+		ops.close();
+		fs.close();
+
 	}
 
 	public void cat(String remoteFile) throws IOException {

@@ -35,8 +35,8 @@ public class SamplerSort {
 		//3.计算分区数量
 		cos.setRecord_nums(record_count);
 		HDFSTool hdfs = new HDFSTool(new Configuration());
-		long length = hdfs.getFileLength(CONSTANTS.getDataFilePath())/1024/1024;
-		double numOfPartition = length * (1 + cos.getApha()) / cos.getHadoopBlockSize();//分区数量
+		long length = hdfs.getFileLength(cos.getDataFilePath())/1024/1024;
+		double numOfPartition = length * (1 + cos.getApha()) / cos.getHADOOP_BLOCK_SIZE();//分区数量
 		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
 		cos.setNumOfPartition(numOfPartition);
 
@@ -99,7 +99,7 @@ public class SamplerSort {
 
 	public static void sortY(String path) throws IOException {
 		HDFSTool hdfsTool = new HDFSTool(new Configuration());
-		FileStatus[] fileStatuses = hdfsTool.listFiles(CONSTANTS.getXsortedDataDir());
+		FileStatus[] fileStatuses = hdfsTool.listFiles(cos.getXsortedDataDir());
 
 		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() + 1];//保存y分界点
 		for (FileStatus file : fileStatuses) {
@@ -156,7 +156,7 @@ public class SamplerSort {
 
 	public static void main(String[] args) throws IOException {
 		cos = CONSTANTS.getInstance();
-		String pathToRead = CONSTANTS.getSamplerFilePath();
+		String pathToRead = cos.getSamplerFilePath();
 		System.out.println("x排序...");
 		sortX(pathToRead);
 

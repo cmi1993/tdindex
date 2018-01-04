@@ -24,7 +24,7 @@ public class ReadingIndex {
 
 	static {
 		try {
-			cos = CONSTANTS.readPersistenceData();
+			 cos = CONSTANTS.getInstance().readPersistenceData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class ReadingIndex {
 			String[] splits = filename.split("_");
 			int patitionId = Integer.parseInt(splits[2]);
 
-			ValidTime queryWindow = new ValidTime(CONSTANTS.getQueryStart(), CONSTANTS.getQueryEnd());
+			ValidTime queryWindow = new ValidTime(cos.getQueryStart(), cos.getQueryEnd());
 			IndexFile index = value.getIndex();
 			List<IndexRecord> records = index.getRecords();
 			for (IndexRecord indexRecord : records) {
@@ -73,7 +73,7 @@ public class ReadingIndex {
 			DiskSliceFile DiskValue = new DiskSliceFile();
 			Configuration conf = new Configuration();
 			SequenceFile.Reader reader = null;
-			ValidTime query = new ValidTime(CONSTANTS.getQueryStart(),CONSTANTS.getQueryEnd());
+			ValidTime query = new ValidTime(cos.getQueryStart(),cos.getQueryEnd());
 			reader = new SequenceFile.Reader(context.getConfiguration(), SequenceFile.Reader.file(partitionDataPath));
 
 
@@ -114,7 +114,7 @@ public class ReadingIndex {
 		job.setReducerClass(ReadingIndexReducer.class);
 		job.setPartitionerClass(ReadingIndexPatitioner.class);
 		job.setMapperClass(ReadingIndexMapper.class);
-		SequenceFileInputFormat.addInputPath(job, new Path(CONSTANTS.getIndexFileDir() + "/"));
+		SequenceFileInputFormat.addInputPath(job, new Path(cos.getIndexFileDir() + "/"));
 		Path outPath = new Path("/home/think/Desktop/data/queryInfo/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

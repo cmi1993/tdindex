@@ -18,9 +18,10 @@ import java.io.IOException;
 public class ClassifiedDataIntoSlice {
 	static CONSTANTS cos;
 
+
 	static {
 		try {
-			cos = CONSTANTS.readPersistenceData();
+			 cos = CONSTANTS.getInstance().readPersistenceData();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -28,12 +29,14 @@ public class ClassifiedDataIntoSlice {
 		}
 	}
 
+
 	static class ClassifiedMapper extends Mapper<LongWritable, Text, Tuple, NullWritable> {
 		@Override
 		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 			String line = value.toString();
 			String[] splits = line.split(",");
 			Tuple t = new Tuple(splits[0], splits[1], splits[2], splits[3], splits[4], splits[5]);
+			System.out.println(t.toString());
 			context.write(t, NullWritable.get());
 
 		}
@@ -47,11 +50,11 @@ public class ClassifiedDataIntoSlice {
 	}
 
 	static class DataPatitioner extends Partitioner<Tuple, NullWritable> {
-		static long[] xparts = cos.getxPatitionsData();
-		static long[][] yparts = cos.getyPatitionsData();
+
 
 		@Override
 		public int getPartition(Tuple tuple, NullWritable nullWritable, int i) {
+			System.out.println(tuple.toString());
 			int xpartOrder = SeekXPatition(tuple.getVt().getStart());
 			if (xpartOrder == -1) {
 				System.out.println("查找x分区出错:");
@@ -67,12 +70,12 @@ public class ClassifiedDataIntoSlice {
 
 
 		private int SeekXPatition(long start) {
-			if (start <= xparts[1]) return 0;
-			else if (start > xparts[xparts.length - 2])
-				return xparts.length - 2;
+			if (start <= cos.getxPatitionsData()[1]) return 0;
+			else if (start > cos.getxPatitionsData()[cos.getxPatitionsData().length - 2])
+				return cos.getxPatitionsData().length - 2;
 			else {
-				for (int i = 1; i < xparts.length - 2; i++) {
-					if (start > xparts[i] && start <= xparts[i + 1])
+				for (int i = 1; i < cos.getxPatitionsData().length - 2; i++) {
+					if (start > cos.getxPatitionsData()[i] && start <= cos.getxPatitionsData()[i + 1])
 						return i;
 				}
 			}
@@ -80,12 +83,12 @@ public class ClassifiedDataIntoSlice {
 		}
 
 		private int SeekYPatition(int xpartOrder, long end) {
-			if (end <= yparts[xpartOrder][1]) return 0;
-			else if (end > yparts[xpartOrder][yparts[xpartOrder].length - 2])
-				return yparts[xpartOrder].length - 2;
+			if (end <= cos.getyPatitionsData()[xpartOrder][1]) return 0;
+			else if (end > cos.getyPatitionsData()[xpartOrder][cos.getyPatitionsData()[xpartOrder].length - 2])
+				return cos.getyPatitionsData()[xpartOrder].length - 2;
 			else {
-				for (int i = 1; i <= yparts[xpartOrder].length - 2; i++) {
-					if (end > yparts[xpartOrder][i] && end <= yparts[xpartOrder][i + 1])
+				for (int i = 1; i <= cos.getyPatitionsData()[xpartOrder].length - 2; i++) {
+					if (end > cos.getyPatitionsData()[xpartOrder][i] && end <= cos.getyPatitionsData()[xpartOrder][i + 1])
 						return i;
 				}
 			}
@@ -95,19 +98,19 @@ public class ClassifiedDataIntoSlice {
 	}
 
 
-	static class ClassifiedOutputFormat extends FileOutputFormat<Text,NullWritable>{
+	static class ClassifiedOutputFormat extends FileOutputFormat<Text, NullWritable> {
 		@Override
 		public RecordWriter<Text, NullWritable> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
-			FileSystem fs =  FileSystem.get(context.getConfiguration());
-			int partition = context.getConfiguration().getInt("mapred.task.partition",-1);
-			String spath = "/home/think/Desktop/data/classifiedData/partitioner_"+partition;
+			FileSystem fs = FileSystem.get(context.getConfiguration());
+			int partition = context.getConfiguration().getInt("mapred.task.partition", -1);
+			String spath = cos.getClassifiedFilePath() + "/partitioner_" + partition;
 			Path path = new Path(spath);
 			FSDataOutputStream fsout = fs.create(path);
 			return new ClassifedRecordWriter(fsout);
 		}
 	}
 
-	static class ClassifedRecordWriter extends RecordWriter<Text,NullWritable>{
+	static class ClassifedRecordWriter extends RecordWriter<Text, NullWritable> {
 		FSDataOutputStream outputStream = null;
 
 		public ClassifedRecordWriter(FSDataOutputStream outputStream) {
@@ -116,37 +119,46 @@ public class ClassifiedDataIntoSlice {
 
 		@Override
 		public void write(Text key, NullWritable value) throws IOException, InterruptedException {
-			outputStream.write((key.toString()+"\n").getBytes());
+			outputStream.write((key.toString() + "\n").getBytes());
 		}
 
 		@Override
 		public void close(TaskAttemptContext context) throws IOException, InterruptedException {
-			if (outputStream!=null)
+			if (outputStream != null)
 				outputStream.close();
 		}
 	}
 
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		//numOfReducer = cos.getNumOfEachdimention()*cos.getNumOfEachdimention();
 		Configuration conf = new Configuration();
-		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
-		conf.set("mapreduce.framework.name", "local");
-		Job job = Job.getInstance(conf, "classified_local");
-
+		conf.set("fs.default", "hdfs://192.168.69.204:8020/");
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("yarn.resourcemanager.hostname", "root");
+		conf.setBoolean("fs.hdfs.impl.disable.cache", true);
+		System.setProperty("HADOOP_USER_NAME", "root");
+		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		Job job = Job.getInstance(conf, "classified_cluster_runung");
+		//job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		//job.setJar("/root/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 
 		job.setJarByClass(ClassifiedDataIntoSlice.class);
 		job.setMapperClass(ClassifiedMapper.class);
-		job.setReducerClass(ClassifiedReducer.class);
+
 		job.setOutputFormatClass(ClassifiedOutputFormat.class);
-		job.setNumReduceTasks(cos.getNumOfXDimention() * cos.getNumOfYDimention());
+		int reducerNum = cos.getNumOfXDimention() * cos.getNumOfYDimention();
+		job.setNumReduceTasks(reducerNum);
+		job.setReducerClass(ClassifiedReducer.class);
 		job.setPartitionerClass(DataPatitioner.class);
-// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
+
 		job.setMapOutputKeyClass(Tuple.class);
 		job.setMapOutputValueClass(NullWritable.class);
-		FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(NullWritable.class);
+		System.out.println(cos.getDataFilePath());
+		FileInputFormat.setInputPaths(job, cos.getDataFilePath());
 		//FileInputFormat.setInputPaths(job,"/home/think/Desktop/data/small.txt");
-		Path outPath = new Path(CONSTANTS.getClassifiedFilePath());
+		Path outPath = new Path(cos.getClassifiedFilePath());
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);

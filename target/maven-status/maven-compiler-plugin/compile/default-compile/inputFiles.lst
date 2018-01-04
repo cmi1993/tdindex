@@ -2,6 +2,7 @@
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/IndexRecord.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/Tuple.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/UUIDGenerator.java
@@ -14,6 +15,7 @@
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/Lob.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/DiskSliceFile.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountReducer.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/ScopeInfo.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java

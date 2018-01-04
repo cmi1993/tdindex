@@ -1,35 +1,37 @@
 package cn.edu.scnu.dtindex.tools;
 
 
+import org.apache.hadoop.conf.Configuration;
+
 import java.io.*;
 
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final String clusterAdd ="hdfs://192.168.69.204:8020";
-	private static String dataScalaDir = "1000w";
-	private static double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
-	private static double apha = 0.0;//索引所需空间的膨胀系数
+	private final String clusterAdd = "hdfs://192.168.69.204:8020";
+	private String dataScalaDir = "1000w";
+	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
+	private double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
 	//private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
 	private int numOfXDimention;//切分后，x轴方向的分区数
 	private int numOfYDimention;//切分后，y轴方向的分区数
-	private static final String constants_persistence_path = "/home/think/Desktop/data/contants.dat";//常量数据持久化路径
+	private final String constants_persistence_path = clusterAdd+"/timeData/contants.dat";//常量数据持久化路径
 	private long record_nums;//总记录数
-	private static String dataFileDir = clusterAdd+"/timeData/"+dataScalaDir;//数据路径
-	private static String dataFilePath = dataFileDir+"/data.txt";//数据文件
-	private static String samplerFileDir = clusterAdd+"/timeData/"+dataScalaDir+"/sampleData";//采样后样本存放路径
-	private static String samplerFilePath = samplerFileDir+"/sampler.txt";//采样样文件路径
-	private static String classifiedFilePath = "/home/think/Desktop/data/classifiedData";//数据切片存放路径
-	private static String XsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/XSortTmp";//x排序路径
-	private static String YsortedDataDir = CONSTANTS.getDataFileDir() + "/SampleSort/YSortTmp";//y排序路径
+	private String dataFileDir = clusterAdd + "/timeData/" + dataScalaDir;//数据路径
+	private String dataFilePath = dataFileDir + "/data.txt";//数据文件
+	private String samplerFileDir = clusterAdd + "/timeData/" + dataScalaDir + "/sampleData";//采样后样本存放路径
+	private String samplerFilePath = samplerFileDir + "/sampler.txt";//采样样文件路径
+	private String classifiedFilePath = dataFileDir + "/classifiedData";//数据切片存放路径
+	private String XsortedDataDir = dataFileDir + "/SampleSort/XSortTmp";//x排序路径
+	private String YsortedDataDir = dataFileDir + "/SampleSort/YSortTmp";//y排序路径
 	private long[] xPatitionsData = new long[numOfXDimention + 1];//保存x分界点
 	private long[][] yPatitionsData = new long[numOfXDimention][numOfYDimention + 1];//保存y分界点
 	private Double percentage = Double.parseDouble("10") / 100.00;//采样率
-	private static String DiskFilePath = "/home/think/Desktop/data/DiskSliceFile";//磁盘块序列化路径
-	private static String indexFileDir = CONSTANTS.getDiskFilePath() + "/index";//索引文件存放路径，查询时候会首先加载索引
-	private static String diskSliceFileDir = CONSTANTS.getDiskFilePath() + "/disk";//索引文件存放路径，查询时候会首先加载索引
-	private static String queryStart;
-	private static String queryEnd;
+	private String DiskFilePath = "/home/think/Desktop/data/DiskSliceFile";//磁盘块序列化路径
+	private String indexFileDir = DiskFilePath + "/index";//索引文件存放路径，查询时候会首先加载索引
+	private String diskSliceFileDir = DiskFilePath + "/disk";//索引文件存放路径，查询时候会首先加载索引
+	private String queryStart;
+	private String queryEnd;
 
 
 	//-----------------------------------单例模式--------------------------------------------
@@ -52,19 +54,8 @@ public class CONSTANTS implements Serializable {
 	 * @throws IOException
 	 */
 	public static void persistenceData(CONSTANTS object) throws IOException {
-		File file = new File(constants_persistence_path);
-		if (!file.exists()) {
-			file.createNewFile();
-		} else {
-			file.delete();
-			file.createNewFile();
-		}
-		FileOutputStream fos = new FileOutputStream(file);
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(object);
-		oos.flush();
-		oos.close();
-		fos.close();
+		HDFSTool hdfsTool = new HDFSTool(new Configuration());
+		hdfsTool.objectStreamToHdfs(object,CONSTANTS.getInstance().constants_persistence_path);
 	}
 
 	/**
@@ -74,17 +65,10 @@ public class CONSTANTS implements Serializable {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static CONSTANTS readPersistenceData() throws IOException, ClassNotFoundException {
-		File file = new File(constants_persistence_path);
-		if (!file.exists()) {
-			System.out.println("持久化文件不存在");
-			file.createNewFile();
-		}
-		FileInputStream fis = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		CONSTANTS cos = (CONSTANTS) ois.readObject();
-		ois.close();
-		fis.close();
+	public  CONSTANTS readPersistenceData() throws IOException, ClassNotFoundException {
+		HDFSTool hdfs = new HDFSTool(new Configuration());
+		Object o = hdfs.objectFromHdfs(clusterAdd + "/timeData/contants.dat");
+		CONSTANTS cos = (CONSTANTS) o;
 		return cos;
 
 	}
@@ -135,90 +119,53 @@ public class CONSTANTS implements Serializable {
 	}
 
 
-	public static String getDiskSliceFileDir() {
+	public  String getDiskSliceFileDir() {
 		return diskSliceFileDir;
 	}
 
-	public static void setDiskSliceFileDir(String diskSliceFileDir) {
-		CONSTANTS.diskSliceFileDir = diskSliceFileDir;
+	public  void setDiskSliceFileDir(String diskSliceFileDir) {
+
+		this.diskSliceFileDir = diskSliceFileDir;
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-		CONSTANTS cos = CONSTANTS.readPersistenceData();
-		cos.showConstantsInfo();
+		CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
+		constants.setQueryStart("123");
+		persistenceData(constants);
+		/*CONSTANTS cos = CONSTANTS.getInstance().readPersistenceData();
+		cos.showConstantsInfo();*/
 	}
 
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
 
-	public static String getClusterAdd() {
+	public String getClusterAdd() {
 		return clusterAdd;
 	}
 
-	public static String getQueryStart() {
-		return queryStart;
+	public String getDataScalaDir() {
+		return dataScalaDir;
 	}
 
-	public static void setQueryStart(String queryStart) {
-		CONSTANTS.queryStart = queryStart;
+	public void setDataScalaDir(String dataScalaDir) {
+		this.dataScalaDir = dataScalaDir;
 	}
 
-	public static String getQueryEnd() {
-		return queryEnd;
-	}
-
-	public static void setQueryEnd(String queryEnd) {
-		CONSTANTS.queryEnd = queryEnd;
-	}
-
-	public static String getIndexFileDir() {
-		return indexFileDir;
-	}
-
-	public static void setIndexFileDir(String indexFileDir) {
-		CONSTANTS.indexFileDir = indexFileDir;
-	}
-
-	public static String getClassifiedFilePath() {
-		return classifiedFilePath;
-	}
-
-	public static String getDiskFilePath() {
-		return DiskFilePath;
-	}
-
-	public static void setDiskFilePath(String diskFilePath) {
-		DiskFilePath = diskFilePath;
-	}
-
-	public static void setClassifiedFilePath(String classifiedFilePath) {
-		CONSTANTS.classifiedFilePath = classifiedFilePath;
-	}
-
-	public static String getSamplerFileDir() {
-		return samplerFileDir;
-	}
-
-	public static void setSamplerFileDir(String samplerFileDir) {
-		CONSTANTS.samplerFileDir = samplerFileDir;
-	}
-
-	public static double getHadoopBlockSize() {
+	public double getHADOOP_BLOCK_SIZE() {
 		return HADOOP_BLOCK_SIZE;
 	}
 
-	public static void setHadoopBlockSize(double hadoopBlockSize) {
-		HADOOP_BLOCK_SIZE = hadoopBlockSize;
+	public void setHADOOP_BLOCK_SIZE(double HADOOP_BLOCK_SIZE) {
+		this.HADOOP_BLOCK_SIZE = HADOOP_BLOCK_SIZE;
 	}
 
-	public static double getApha() {
+	public double getApha() {
 		return apha;
 	}
 
-	public static void setApha(double apha) {
-		CONSTANTS.apha = apha;
+	public void setApha(double apha) {
+		this.apha = apha;
 	}
 
 	public double getNumOfPartition() {
@@ -245,7 +192,7 @@ public class CONSTANTS implements Serializable {
 		this.numOfYDimention = numOfYDimention;
 	}
 
-	public static String getConstants_persistence_path() {
+	public String getConstants_persistence_path() {
 		return constants_persistence_path;
 	}
 
@@ -257,43 +204,59 @@ public class CONSTANTS implements Serializable {
 		this.record_nums = record_nums;
 	}
 
-	public static String getDataFilePath() {
-		return dataFilePath;
-	}
-
-	public static void setDataFilePath(String dataFilePath) {
-		CONSTANTS.dataFilePath = dataFilePath;
-	}
-
-	public static String getDataFileDir() {
+	public String getDataFileDir() {
 		return dataFileDir;
 	}
 
-	public static void setDataFileDir(String dataFileDir) {
-		CONSTANTS.dataFileDir = dataFileDir;
+	public void setDataFileDir(String dataFileDir) {
+		this.dataFileDir = dataFileDir;
 	}
 
-	public static String getSamplerFilePath() {
+	public String getDataFilePath() {
+		return dataFilePath;
+	}
+
+	public void setDataFilePath(String dataFilePath) {
+		this.dataFilePath = dataFilePath;
+	}
+
+	public String getSamplerFileDir() {
+		return samplerFileDir;
+	}
+
+	public void setSamplerFileDir(String samplerFileDir) {
+		this.samplerFileDir = samplerFileDir;
+	}
+
+	public String getSamplerFilePath() {
 		return samplerFilePath;
 	}
 
-	public static void setSamplerFilePath(String samplerFilePath) {
-		CONSTANTS.samplerFilePath = samplerFilePath;
+	public void setSamplerFilePath(String samplerFilePath) {
+		this.samplerFilePath = samplerFilePath;
 	}
 
-	public static String getXsortedDataDir() {
+	public String getClassifiedFilePath() {
+		return classifiedFilePath;
+	}
+
+	public void setClassifiedFilePath(String classifiedFilePath) {
+		this.classifiedFilePath = classifiedFilePath;
+	}
+
+	public String getXsortedDataDir() {
 		return XsortedDataDir;
 	}
 
-	public static void setXsortedDataDir(String xsortedDataDir) {
+	public void setXsortedDataDir(String xsortedDataDir) {
 		XsortedDataDir = xsortedDataDir;
 	}
 
-	public static String getYsortedDataDir() {
+	public String getYsortedDataDir() {
 		return YsortedDataDir;
 	}
 
-	public static void setYsortedDataDir(String ysortedDataDir) {
+	public void setYsortedDataDir(String ysortedDataDir) {
 		YsortedDataDir = ysortedDataDir;
 	}
 
@@ -319,5 +282,37 @@ public class CONSTANTS implements Serializable {
 
 	public void setPercentage(Double percentage) {
 		this.percentage = percentage;
+	}
+
+	public String getDiskFilePath() {
+		return DiskFilePath;
+	}
+
+	public void setDiskFilePath(String diskFilePath) {
+		DiskFilePath = diskFilePath;
+	}
+
+	public String getIndexFileDir() {
+		return indexFileDir;
+	}
+
+	public void setIndexFileDir(String indexFileDir) {
+		this.indexFileDir = indexFileDir;
+	}
+
+	public String getQueryStart() {
+		return queryStart;
+	}
+
+	public void setQueryStart(String queryStart) {
+		this.queryStart = queryStart;
+	}
+
+	public String getQueryEnd() {
+		return queryEnd;
+	}
+
+	public void setQueryEnd(String queryEnd) {
+		this.queryEnd = queryEnd;
 	}
 }

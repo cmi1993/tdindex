@@ -20,6 +20,18 @@ import java.io.Reader;
 import java.util.Random;
 
 public class Sampler {
+	static CONSTANTS cos;
+
+	static {
+		try {
+			cos = CONSTANTS.getInstance().readPersistenceData();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
     private static long RecordCount;
     static class SRSMapper extends Mapper<Object,Text,NullWritable,Text>{
         private Random rands = new Random();
@@ -83,7 +95,7 @@ public class Sampler {
 		conf.set("fs.default.name", "hdfs://192.168.69.204:8020");
 		conf.set("mapreduce.framework.name","yarn");
 
-		Job job = Job.getInstance(conf, "wordcount_cluster_runung");
+		Job job = Job.getInstance(conf, "sampler_cluster_runung");
 		job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		job.setJarByClass(Sampler.class);
 		job.setMapperClass(SRSMapper.class);
@@ -124,8 +136,8 @@ public class Sampler {
 		job.setMapOutputKeyClass(NullWritable.class);
 		job.setMapOutputValueClass(Text.class);
 		job.setOutputFormatClass(SamplerOutPutFormat.class);
-		FileInputFormat.setInputPaths(job, CONSTANTS.getDataFilePath());
-		Path outPath = new Path(CONSTANTS.getSamplerFileDir());
+		FileInputFormat.setInputPaths(job, cos.getDataFilePath());
+		Path outPath = new Path(cos.getSamplerFileDir());
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);
