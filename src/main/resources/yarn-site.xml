@@ -46,9 +46,10 @@
     <name>yarn.resourcemanager.admin.client.thread-count</name>
     <value>4</value>
   </property>
+    <!--修改1024&ndash;&gt;4096-->
   <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
-    <value>1024</value>
+    <value>4096</value>
   </property>
   <property>
     <name>yarn.scheduler.increment-allocation-mb</name>

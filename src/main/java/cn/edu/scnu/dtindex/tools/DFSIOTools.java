@@ -11,9 +11,14 @@ import java.net.URI;
 
 public class DFSIOTools {
 	public static void main(String[] args) throws IOException {
-		toWrite(new Configuration(),"12345","/test/2.txt",0);
+		/*toWrite(new Configuration(),"12345","/test/2.txt",0);
 		toWrite(new Configuration(),"line4,in,the,line4","/test/2.txt",1);
 		System.out.println("success");
+		*/
+
+		String s = toReadWithCharReturn(new Configuration(), "hdfs://master:8020/timeData/1000w/classifiedData/small.txt");
+		String[] split = s.split("\n");
+		System.out.println();
 		//System.out.println(toRead(new Configuration(), "hdfs://192.168.69.204:8020/test/1.txt"));
 	}
 
@@ -55,6 +60,35 @@ public class DFSIOTools {
 			bufferedReader = new BufferedReader(new InputStreamReader(fsr));
 			while ((lineTxt = bufferedReader.readLine()) != null) {
 				buffer.append(lineTxt).append(" ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return buffer.toString();
+
+	}
+
+	public static String toReadWithCharReturn(Configuration conf, String path) throws IOException {
+
+		StringBuffer buffer = new StringBuffer();
+		FSDataInputStream fsr = null;
+		BufferedReader bufferedReader = null;
+		String lineTxt = null;
+		try {
+			FileSystem fs = FileSystem.get(URI.create(path), conf);
+			fsr = fs.open(new Path(path));
+			bufferedReader = new BufferedReader(new InputStreamReader(fsr));
+			while ((lineTxt = bufferedReader.readLine()) != null) {
+				buffer.append(lineTxt).append("\n");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

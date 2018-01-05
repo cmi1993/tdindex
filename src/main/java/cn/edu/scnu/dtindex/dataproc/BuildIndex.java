@@ -4,6 +4,10 @@ package cn.edu.scnu.dtindex.dataproc;
 
 import cn.edu.scnu.dtindex.model.*;
 import cn.edu.scnu.dtindex.tools.CONSTANTS;
+import cn.edu.scnu.dtindex.tools.DFSIOTools;
+import cn.edu.scnu.dtindex.tools.HDFSTool;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -21,6 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BuildIndex {
+	private static Log log = LogFactory.getLog(BuildIndex.class);
 	static CONSTANTS cos;
 
 	static {
@@ -66,20 +71,21 @@ public class BuildIndex {
 		@Override
 		public boolean nextKeyValue() throws IOException, InterruptedException {
 			if (!processed) {
-				int len = (int) fileSplit.getLength();
+				int len = (int)fileSplit.getLength();
 				Path file = fileSplit.getPath();
 				FileSystem fs = file.getFileSystem(jobContext.getConfiguration());
 				FSDataInputStream in = fs.open(file);
-				BufferedReader br = new BufferedReader(new InputStreamReader(in, "utf-8"));
-				StringBuilder str = new StringBuilder();
-				String line = "";
-				while ((line = br.readLine()) != null) {
-					str.append(line).append("\n");
+				BufferedReader br = new BufferedReader(new InputStreamReader(in,"utf-8"));
+				String line="";
+				StringBuilder total = new StringBuilder(len);
+				while((line= br.readLine())!= null){
+					total.append(line).append("\n");
 				}
 				br.close();
 				in.close();
 				fs.close();
-				currentValue = new Text(str.toString());
+				//String total = DFSIOTools.toReadWithCharReturn(jobContext.getConfiguration(), fileSplit.getPath().getName());
+				currentValue = new Text(total.toString());
 				processed = true;
 				return true;
 
@@ -108,13 +114,14 @@ public class BuildIndex {
 
 		@Override
 		public void close() throws IOException {
-
 		}
 	}
 
 	static class BuildIndexMapper extends Mapper<Text, Text, Text, BytesWritable> {
+
 		@Override
 		protected void map(Text key, Text value, Context context) throws IOException, InterruptedException {
+			log.info("[1]读取单一分区的有序数据-----------------------------------------------");
 			System.out.println("[1]读取单一分区的有序数据-----------------------------------------------");
 			String[] records = value.toString().split("\n");
 			List<Tuple> tupleList = new ArrayList<Tuple>();
@@ -124,6 +131,7 @@ public class BuildIndex {
 				tupleList.add(t);
 			}
 			List<Lob> LobList = new ArrayList<Lob>();
+			System.out.println("记录的个数："+tupleList.size());
 			System.out.println("[2]进行线序划分算法构建内存中的索引--------------------------------------");
 			int length = tupleList.size();
 			List<Lob> result = new ArrayList<Lob>();
@@ -131,6 +139,7 @@ public class BuildIndex {
 
 			Tuple temp = null;
 			Tuple finder = null;
+			System.out.println("hello");
 			for (int i = 0; i < length; ) {//i表示已经划分完的节点数
 				temp = tupleList.get(0);
 				i++;
@@ -158,6 +167,7 @@ public class BuildIndex {
 						break;
 				}
 				result.add(new Lob(tempSubList));
+				System.out.println(result.size());
 			}
 			System.out.println("[3]构建用于序列化存储的磁盘块-------------------------------------------");
 			InputSplit inputSplit = (InputSplit) context.getInputSplit();
@@ -188,12 +198,13 @@ public class BuildIndex {
 			System.out.println("[3.3]开始序列化数据--------------------");
 			IOUtils.closeStream(writer);
 			System.out.println("[3.4]序列化数据成功--------------------");
-			File file = new File(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq");
-			if (file.exists()) {
-				file.renameTo(new File(cos.getDiskSliceFileDir() + "/disk_" + filename + "_" + indexBegin + ".seq"));
-			} else {
-				System.exit(1);
+			//TODO:文件操作api没有改成分布式
+			HDFSTool tools = new HDFSTool(context.getConfiguration());
+			if (tools.isExits(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq")){
+				tools.renameFile(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq",
+						cos.getDiskSliceFileDir() + "/disk_" + filename + "_" + indexBegin + ".seq");
 			}
+
 			writer =
 					SequenceFile.createWriter(conf,
 							SequenceFile.Writer.file(new Path(cos.getIndexFileDir() + "/index_" + filename + ".seq")),
@@ -209,9 +220,19 @@ public class BuildIndex {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
-		conf.set("mapreduce.framework.name", "local");
-		Job job = Job.getInstance(conf, "buildIndex_local");
+		conf.set("fs.default", "hdfs://192.168.69.204:8020");
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("yarn.scheduler.minimum-allocation-mb","40960");
+		conf.set("yarn.scheduler.maximum-allocation-mb","81920");
+		conf.set("yarn.nodemanager.resource.memory-mb","81920");
+		conf.set("mapreduce.map.memory.mb","40960");
+		conf.set("mapreduce.reduce.memory.mb","40960");
+		//conf.set("yarn.resourcemanager.hostname", "root");
+		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
+		System.setProperty("HADOOP_USER_NAME", "root");
+		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
+
 
 
 		job.setJarByClass(BuildIndex.class);
@@ -223,7 +244,7 @@ public class BuildIndex {
 		job.setOutputValueClass(BytesWritable.class);
 		job.setMapperClass(BuildIndexMapper.class);
 		//FileInputFormat.setInputPaths(job,CONSTANTS.getClassifiedFilePath());
-		FileInputFormat.setInputPaths(job,"/home/think/Desktop/data/small.txt");
+		FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
 		Path outPath = new Path(cos.getDiskFilePath()+"/building_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

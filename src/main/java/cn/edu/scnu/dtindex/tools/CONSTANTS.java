@@ -17,7 +17,9 @@ public class CONSTANTS implements Serializable {
 	private int numOfYDimention;//切分后，y轴方向的分区数
 	private final String constants_persistence_path = clusterAdd+"/timeData/contants.dat";//常量数据持久化路径
 	private long record_nums;//总记录数
+	//-----------------------------------------------------------------------------------------
 	private String dataFileDir = clusterAdd + "/timeData/" + dataScalaDir;//数据路径
+	//-----------------------------------------------------------------------------------------
 	private String dataFilePath = dataFileDir + "/data.txt";//数据文件
 	private String samplerFileDir = clusterAdd + "/timeData/" + dataScalaDir + "/sampleData";//采样后样本存放路径
 	private String samplerFilePath = samplerFileDir + "/sampler.txt";//采样样文件路径
@@ -27,7 +29,7 @@ public class CONSTANTS implements Serializable {
 	private long[] xPatitionsData = new long[numOfXDimention + 1];//保存x分界点
 	private long[][] yPatitionsData = new long[numOfXDimention][numOfYDimention + 1];//保存y分界点
 	private Double percentage = Double.parseDouble("10") / 100.00;//采样率
-	private String DiskFilePath = "/home/think/Desktop/data/DiskSliceFile";//磁盘块序列化路径
+	private String DiskFilePath = dataFileDir+"/DiskSliceFile";//磁盘块序列化路径
 	private String indexFileDir = DiskFilePath + "/index";//索引文件存放路径，查询时候会首先加载索引
 	private String diskSliceFileDir = DiskFilePath + "/disk";//索引文件存放路径，查询时候会首先加载索引
 	private String queryStart;
