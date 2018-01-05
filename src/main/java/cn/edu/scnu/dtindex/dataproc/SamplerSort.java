@@ -155,6 +155,7 @@ public class SamplerSort {
 	}
 
 	public static void main(String[] args) throws IOException {
+
 		cos = CONSTANTS.getInstance();
 		String pathToRead = cos.getSamplerFilePath();
 		System.out.println("x排序...");

@@ -30,7 +30,8 @@ public class BuildIndex {
 
 	static {
 		try {
-			 cos = CONSTANTS.getInstance().readPersistenceData();
+			 cos = CONSTANTS.readPersistenceData();
+			 cos.showConstantsInfo();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -199,15 +200,16 @@ public class BuildIndex {
 			IOUtils.closeStream(writer);
 			System.out.println("[3.4]序列化数据成功--------------------");
 			//TODO:文件操作api没有改成分布式
-			HDFSTool tools = new HDFSTool(context.getConfiguration());
+			/*HDFSTool tools = new HDFSTool(context.getConfiguration());
 			if (tools.isExits(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq")){
 				tools.renameFile(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq",
 						cos.getDiskSliceFileDir() + "/disk_" + filename + "_" + indexBegin + ".seq");
-			}
+				tools.rmr(cos.getDiskSliceFileDir() + "/disk_" + filename + ".seq");
+			}*/
 
 			writer =
 					SequenceFile.createWriter(conf,
-							SequenceFile.Writer.file(new Path(cos.getIndexFileDir() + "/index_" + filename + ".seq")),
+							SequenceFile.Writer.file(new Path(cos.getIndexFileDir() + "/index_" + filename +"_"+indexBegin +".seq")),
 							SequenceFile.Writer.keyClass(Diskkey.getClass()),
 							SequenceFile.Writer.valueClass(DiskValue.getClass()),
 							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
@@ -222,11 +224,12 @@ public class BuildIndex {
 		Configuration conf = new Configuration();
 		conf.set("fs.default", "hdfs://192.168.69.204:8020");
 		conf.set("mapreduce.framework.name", "yarn");
-		conf.set("yarn.scheduler.minimum-allocation-mb","40960");
-		conf.set("yarn.scheduler.maximum-allocation-mb","81920");
-		conf.set("yarn.nodemanager.resource.memory-mb","81920");
-		conf.set("mapreduce.map.memory.mb","40960");
-		conf.set("mapreduce.reduce.memory.mb","40960");
+		conf.set("yarn.scheduler.minimum-allocation-mb","4096");
+		conf.set("yarn.scheduler.maximum-allocation-mb","8192");
+		conf.set("yarn.nodemanager.resource.memory-mb","200000");
+		conf.set("mapreduce.map.memory.mb","4096");
+		conf.set("mapreduce.reduce.memory.mb","4096");
+		conf.set("yarn.node-manager.resource.vcore","20");
 		//conf.set("yarn.resourcemanager.hostname", "root");
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");

@@ -21,7 +21,7 @@ public class ClassifiedDataIntoSlice {
 
 	static {
 		try {
-			 cos = CONSTANTS.getInstance().readPersistenceData();
+			 cos = CONSTANTS.readPersistenceData();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

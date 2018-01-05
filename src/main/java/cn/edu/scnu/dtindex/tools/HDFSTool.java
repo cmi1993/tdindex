@@ -42,7 +42,9 @@ public class HDFSTool {
 	static CONSTANTS cos;
 
 	static {
-			cos = CONSTANTS.getInstance();
+
+		System.setProperty("HADOOP_USER_NAME", "root");
+		cos = CONSTANTS.getInstance();
 	}
 
 	// HDFS访问地址
@@ -65,13 +67,14 @@ public class HDFSTool {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		JobConf conf = config();
 		HDFSTool hdfs = new HDFSTool(conf);
-		Object o = hdfs.objectFromHdfs(HDFS + "/timeData/contants.dat");
+		/*Object o = hdfs.objectFromHdfs(HDFS + "/timeData/contants.dat");
 		CONSTANTS cos = (CONSTANTS) o;
-		cos.showConstantsInfo();
+		cos.showConstantsInfo();*/
 
-		/*CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
-		constants.setQueryEnd("chen_meng_jia");
-		hdfs.objectStreamToHdfs(constants,HDFS+"/timeData/constants.dat");*/
+		//CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
+		//constants.setQueryEnd("chen_meng_jia");
+		CONSTANTS cos = CONSTANTS.getInstance();
+		hdfs.objectStreamToHdfs(cos,HDFS+"/timeData/constants.dat");
 		System.out.println("success");
 		/*long fileLength = hdfs.getFileLength("/timeData/1000w/data.txt");
 		System.out.println(fileLength/1024/1024);
@@ -252,6 +255,8 @@ public class HDFSTool {
 	}
 
 	public void objectStreamToHdfs(Object object, String filePath) throws IOException {
+
+		System.setProperty("HADOOP_USER_NAME", "root");
 		Path path = new Path(filePath);
 		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
 		FSDataOutputStream ops = fs.create(path, true);

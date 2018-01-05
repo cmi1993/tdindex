@@ -7,15 +7,15 @@ import java.io.*;
 
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private final String clusterAdd = "hdfs://192.168.69.204:8020";
-	private String dataScalaDir = "1000w";
+	private static final String clusterAdd = "hdfs://192.168.69.204:8020";
+	private static String dataScalaDir = "1000w";
 	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
 	//private  int numOfEachdimention;//每一个维度的切分数=根号（分区数量）再取整
 	private int numOfXDimention;//切分后，x轴方向的分区数
 	private int numOfYDimention;//切分后，y轴方向的分区数
-	private final String constants_persistence_path = clusterAdd+"/timeData/contants.dat";//常量数据持久化路径
+	private final String constants_persistence_path = clusterAdd+"/timeData/"+dataScalaDir+"/contants.dat";//常量数据持久化路径
 	private long record_nums;//总记录数
 	//-----------------------------------------------------------------------------------------
 	private String dataFileDir = clusterAdd + "/timeData/" + dataScalaDir;//数据路径
@@ -67,9 +67,9 @@ public class CONSTANTS implements Serializable {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public  CONSTANTS readPersistenceData() throws IOException, ClassNotFoundException {
+	public static CONSTANTS readPersistenceData() throws IOException, ClassNotFoundException {
 		HDFSTool hdfs = new HDFSTool(new Configuration());
-		Object o = hdfs.objectFromHdfs(clusterAdd + "/timeData/contants.dat");
+		Object o = hdfs.objectFromHdfs(clusterAdd + "/timeData/"+dataScalaDir+"/contants.dat");
 		CONSTANTS cos = (CONSTANTS) o;
 		return cos;
 
