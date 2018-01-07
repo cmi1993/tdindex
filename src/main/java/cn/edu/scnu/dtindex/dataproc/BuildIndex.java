@@ -168,7 +168,6 @@ public class BuildIndex {
 						break;
 				}
 				result.add(new Lob(tempSubList));
-				System.out.println(result.size());
 			}
 			System.out.println("[3]构建用于序列化存储的磁盘块-------------------------------------------");
 			InputSplit inputSplit = (InputSplit) context.getInputSplit();
@@ -224,12 +223,13 @@ public class BuildIndex {
 		Configuration conf = new Configuration();
 		conf.set("fs.default", "hdfs://192.168.69.204:8020");
 		conf.set("mapreduce.framework.name", "yarn");
-		conf.set("yarn.scheduler.minimum-allocation-mb","4096");
+		conf.set("yarn.scheduler.minimum-allocation-mb","2048");
 		conf.set("yarn.scheduler.maximum-allocation-mb","8192");
 		conf.set("yarn.nodemanager.resource.memory-mb","200000");
-		conf.set("mapreduce.map.memory.mb","4096");
-		conf.set("mapreduce.reduce.memory.mb","4096");
-		conf.set("yarn.node-manager.resource.vcore","20");
+		conf.set("mapreduce.map.memory.mb","2048");
+		//conf.set("mapreduce.reduce.memory.mb","4096");
+		conf.set("mapreduce.map.cpu.vcore","30");
+		//conf.set("yarn.node-manager.resource.vcore","20");
 		//conf.set("yarn.resourcemanager.hostname", "root");
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
