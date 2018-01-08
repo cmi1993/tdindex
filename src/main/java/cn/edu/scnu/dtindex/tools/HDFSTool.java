@@ -74,7 +74,7 @@ public class HDFSTool {
 		//CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
 		//constants.setQueryEnd("chen_meng_jia");
 		CONSTANTS cos = CONSTANTS.getInstance();
-		hdfs.objectStreamToHdfs(cos,HDFS+"/timeData/constants.dat");
+		hdfs.objectStreamToHdfs(cos, HDFS + "/timeData/constants.dat");
 		System.out.println("success");
 		/*long fileLength = hdfs.getFileLength("/timeData/1000w/data.txt");
 		System.out.println(fileLength/1024/1024);
@@ -230,16 +230,19 @@ public class HDFSTool {
 	public void append(String filePath, String content) throws IOException {
 		Path targetFile = new Path(filePath);
 		conf.setBoolean("dfs.support.append", true);
+		if (isExits(filePath)) {
+			FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+			FSDataOutputStream out = fs.append(targetFile);
 
-		FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
-		FSDataOutputStream out = fs.append(targetFile);
+			int readLen = content.toString().getBytes().length;
 
-		int readLen = content.toString().getBytes().length;
+			out.write(content.toString().getBytes(), out.size(), readLen);
 
-		out.write(content.toString().getBytes(), out.size(), readLen);
-
-		out.close();
-		fs.close();
+			out.close();
+			fs.close();
+		}else {
+			createFile(filePath,content);
+		}
 	}
 
 	public Object objectFromHdfs(String filePath) throws IOException, ClassNotFoundException {

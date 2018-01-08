@@ -29,13 +29,13 @@ public class DFSIOTools {
 	 * @param path--写出的路径
 	 * @throws IOException
 	 */
-	public static void toWrite(Configuration conf, String str, String path,int flag) throws IOException {
-		if (flag==0) {
+	public static void toWrite(Configuration conf, String str, String path, int flag) throws IOException {
+		if (flag == 0) {
 			HDFSTool tool = new HDFSTool(conf);
 			tool.createFile(path, str);
-		}else {
-			HDFSTool tool =new HDFSTool(conf);
-			tool.append(path,str);
+		} else {
+			HDFSTool tool = new HDFSTool(conf);
+			tool.append(path, str);
 
 		}
 
@@ -107,7 +107,7 @@ public class DFSIOTools {
 	}
 
 
-	public static String toReadWithSpecialSplitSignal(Configuration conf , String path) throws IOException {
+	public static String toReadWithSpecialSplitSignal(Configuration conf, String path) throws IOException {
 		StringBuffer buffer = new StringBuffer();
 		FSDataInputStream fsr = null;
 		BufferedReader bufferedReader = null;
