@@ -8,7 +8,7 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String clusterAdd = "hdfs://192.168.69.204:8020";
-	private static String dataScalaDir = "1000w";
+	private static String dataScalaDir = "4000w";
 	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量

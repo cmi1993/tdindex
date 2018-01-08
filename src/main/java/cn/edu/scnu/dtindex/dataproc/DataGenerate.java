@@ -17,6 +17,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 
@@ -24,6 +25,12 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 数据生成器
  */
 public class DataGenerate {
+	static class NoneOpMapper extends Mapper<NullWritable,NullWritable,NullWritable,NullWritable>{
+		@Override
+		protected void map(NullWritable key, NullWritable value, Context context) throws IOException, InterruptedException {
+			super.map(key, value, context);
+		}
+	}
 	private int dataCount = 10000;//元组总数
 	private int singlePMCIDCount = 2;//单个PM（Person Message）对应的最大CID数
 	private int singleNoTimeCount = 20;//非时态元组重复最大个数
@@ -290,11 +297,11 @@ public class DataGenerate {
 	 * @param path--路径
 	 * @throws IOException
 	 */
-	public static void Generate100w(String path) throws IOException {
+	public static void Generate50w(String path) throws IOException {
 		DataGenerate pd = new DataGenerate();
 		ArrayList<Tuple> allTuple;
 		allTuple = new ArrayList<Tuple>();
-		pd.setDataCount(1000000);
+		pd.setDataCount(500000);
 		allTuple = pd.getAllTuple();
 		StringBuilder str = new StringBuilder();
 		for (Tuple t : allTuple) {
@@ -315,8 +322,12 @@ public class DataGenerate {
 	public static String startJob() throws IOException, ClassNotFoundException, InterruptedException {
 		Job job = Job.getInstance();
 		job.setJobName("data generate");
-
+		job.setMapperClass(NoneOpMapper.class);
+		job.setOutputKeyClass(NullWritable.class);
+		job.setOutputValueClass(NullWritable.class);
+		job.setNumReduceTasks(0);
 		/***************************
+		 *
 		 *......
 		 *在这里，和普通的MapReduce一样，设置各种需要的东西
 		 *......
@@ -326,25 +337,14 @@ public class DataGenerate {
 		Configuration conf = job.getConfiguration();
 		conf.set("mapreduce.framework.name", "yarn");
 		conf.set("fs.default", "hdfs://master:8020");
-		conf.set("yarn.resourcemanager.resource-tracker.address", "MASTER:8031");
-		conf.set("yarn.resourcemanager.address", "MASTER:8032");
-		conf.set("yarn.resourcemanager.scheduler.address", "MASTER:8030");
-		conf.set("yarn.resourcemanager.admin.address", "MASTER:8033");
-		conf.set("yarn.application.classpath", "$HADOOP_CONF_DIR,"
-				+ "$HADOOP_COMMON_HOME/*,$HADOOP_COMMON_HOME/lib/*,"
-				+ "$HADOOP_HDFS_HOME/*,$HADOOP_HDFS_HOME/lib/*,"
-				+ "$HADOOP_MAPRED_HOME/*,$HADOOP_MAPRED_HOME/lib/*,"
-				+ "$YARN_HOME/*,$YARN_HOME/lib/*,"
-				+ "$HBASE_HOME/*,$HBASE_HOME/lib/*,$HBASE_HOME/conf/*");
-		conf.set("mapreduce.jobhistory.address", "MASTER:10020");
-		conf.set("mapreduce.jobhistory.webapp.address", "MASTER:19888");
-		conf.set("yarn.resourcemanager.hostname", "root");
 		conf.set("mapred.child.java.opts", "-Xmx1024m");
-		for (int i = 0; i < 30; i++) {
-			Generate100w("/timeData/3000w/data.txt");
-			System.out.println((i + 1) * 100 + "w");
+		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		for (int i = 0; i < 100; i++) {
+			Generate50w("/timeData/5000w/data.txt");
+			System.out.println((i + 1) * 50 + "w");
 		}
 
+		FileInputFormat.setInputPaths(job,"/null");
 		Path outPath = new Path("/generateData_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

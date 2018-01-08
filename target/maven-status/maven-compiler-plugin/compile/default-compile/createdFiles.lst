@@ -13,6 +13,7 @@ cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice$ClassifiedReducer.class
 cn/edu/scnu/dtindex/tools/IOTools.class
 cn/edu/scnu/dtindex/tools/CONSTANTS.class
 cn/edu/scnu/dtindex/tools/UUIDGenerator.class
+cn/edu/scnu/dtindex/dataproc/DataGenerate$NoneOpMapper.class
 cn/edu/scnu/dtindex/dataproc/DataGenerate.class
 cn/edu/scnu/dtindex/dataproc/ReadingIndex$ReadingIndexReducer.class
 cn/edu/scnu/dtindex/model/NoTime.class
@@ -31,6 +32,7 @@ cn/edu/scnu/dtindex/model/Tuple.class
 cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountReducer.class
 cn/edu/scnu/dtindex/entrance/Main.class
 cn/edu/scnu/dtindex/dataproc/BuildIndex.class
+cn/edu/scnu/dtindex/dataproc/SamplerSort$NoneOpMapper.class
 cn/edu/scnu/dtindex/tools/DataToLongPaser.class
 cn/edu/scnu/dtindex/dataproc/SamplerSort.class
 cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.class

@@ -23,14 +23,7 @@ public class Sampler {
 	static CONSTANTS cos;
 
 	static {
-		try {
-			cos = CONSTANTS.getInstance().readPersistenceData();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+			cos = CONSTANTS.getInstance();
 	}
     private static long RecordCount;
     static class SRSMapper extends Mapper<Object,Text,NullWritable,Text>{
@@ -57,7 +50,7 @@ public class Sampler {
         @Override
         public RecordWriter<NullWritable, Text> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
             FileSystem fs =FileSystem.get(context.getConfiguration());
-            Path sampleOutPath = new Path("hdfs://192.168.69.204:8020/timeData/1000w/sampleData/sampler.txt");
+            Path sampleOutPath = new Path(cos.getSamplerFilePath());
             FSDataOutputStream samplerOut = fs.create(sampleOutPath);
             return new MyRecordWriter(samplerOut);
         }
@@ -105,8 +98,8 @@ public class Sampler {
 		job.setMapOutputKeyClass(NullWritable.class);
 		job.setMapOutputValueClass(Text.class);
 		job.setOutputFormatClass(SamplerOutPutFormat.class);
-		FileInputFormat.setInputPaths(job,"hdfs://192.168.69.204:8020/timeData/1000w/data.txt");
-		Path outPath = new Path("hdfs://192.168.69.204:8020/timeData/1000w/sampleData");
+		FileInputFormat.setInputPaths(job,cos.getDataFilePath());
+		Path outPath = new Path(cos.getSamplerFileDir());
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);

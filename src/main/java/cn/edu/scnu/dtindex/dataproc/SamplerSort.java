@@ -4,11 +4,16 @@ import cn.edu.scnu.dtindex.model.Tuple;
 import cn.edu.scnu.dtindex.tools.CONSTANTS;
 import cn.edu.scnu.dtindex.tools.DFSIOTools;
 import cn.edu.scnu.dtindex.tools.HDFSTool;
-import cn.edu.scnu.dtindex.tools.IOTools;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,8 +25,15 @@ public class SamplerSort {
 	static List<String> xClassifiedPath;
 	static List<String> yClassifiedPath;
 
+	static class NoneOpMapper extends Mapper<NullWritable, NullWritable, NullWritable, NullWritable> {
+		@Override
+		protected void map(NullWritable key, NullWritable value, Context context) throws IOException, InterruptedException {
+			super.map(key, value, context);
+		}
+	}
+
 	public static void sortX(String Rpath) throws IOException {
-		String str = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(),Rpath);
+		String str = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(), Rpath);
 		String[] records = str.split("#");
 		List<Tuple> tuplesList = new ArrayList<Tuple>();
 		long record_count = 0;
@@ -35,7 +47,7 @@ public class SamplerSort {
 		//3.计算分区数量
 		cos.setRecord_nums(record_count);
 		HDFSTool hdfs = new HDFSTool(new Configuration());
-		long length = hdfs.getFileLength(cos.getDataFilePath())/1024/1024;
+		long length = hdfs.getFileLength(cos.getDataFilePath()) / 1024 / 1024;
 		double numOfPartition = length * (1 + cos.getApha()) / cos.getHADOOP_BLOCK_SIZE();//分区数量
 		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
 		cos.setNumOfPartition(numOfPartition);
@@ -56,7 +68,7 @@ public class SamplerSort {
 		cos.setNumOfXDimention((int) numOfEachdimention);
 		cos.setNumOfYDimention((int) numOfEachdimention);
 
-		cos.setNumOfPartition(cos.getNumOfYDimention()*cos.getNumOfXDimention());
+		cos.setNumOfPartition(cos.getNumOfYDimention() * cos.getNumOfXDimention());
 		//不拉伸分区实验----------------------------------------
 		long perXpartNum = cos.getRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
 
@@ -88,12 +100,12 @@ public class SamplerSort {
 					long next = tuplesList.get(i + 1).getVt().getStart();//下一个分区的开始
 					xparts[k++] = MidValue(prior, next);
 				}
-				DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), xClassifiedPath.get(j++), 0);
+				DFSIOTools.toWrite(new Configuration(), stringBuilder.toString(), xClassifiedPath.get(j++), 0);
 				stringBuilder = new StringBuilder();
 			}
 		}
 
-		DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfXDimention() - 1), 1);
+		DFSIOTools.toWrite(new Configuration(), stringBuilder.toString(), xClassifiedPath.get(cos.getNumOfXDimention() - 1), 1);
 		cos.setxPatitionsData(xparts);
 	}
 
@@ -104,7 +116,7 @@ public class SamplerSort {
 		long[][] yparts = new long[cos.getNumOfXDimention()][cos.getNumOfYDimention() + 1];//保存y分界点
 		for (FileStatus file : fileStatuses) {
 			int xpartNum = Integer.parseInt(file.getPath().toString().substring(file.getPath().toString().length() - 1, file.getPath().toString().length()));
-			String strs = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(),file.getPath().toString());
+			String strs = DFSIOTools.toReadWithSpecialSplitSignal(new Configuration(), file.getPath().toString());
 			String[] records = strs.split("#");
 			List<Tuple> tupleList = new ArrayList<Tuple>();
 			long record_count = 0;
@@ -139,13 +151,13 @@ public class SamplerSort {
 						long next = tupleList.get(i + 1).getVt().getEnd();
 						yparts[xpartNum][k++] = MidValue(prior, next);
 					}
-					DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
+					DFSIOTools.toWrite(new Configuration(), stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + j), 0);
 					stringBuilder = new StringBuilder();
 					j++;
 				}
 			}
 
-			DFSIOTools.toWrite(new Configuration(),stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + cos.getNumOfYDimention() - 1), 1);
+			DFSIOTools.toWrite(new Configuration(), stringBuilder.toString(), yClassifiedPath.get(xpartNum * cos.getNumOfYDimention() + cos.getNumOfYDimention() - 1), 1);
 		}
 		cos.setyPatitionsData(yparts);
 	}
@@ -154,7 +166,30 @@ public class SamplerSort {
 		return (num1 + num2) / 2;
 	}
 
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
+		startJob();
+	}
+	public static String startJob() throws IOException, ClassNotFoundException, InterruptedException {
+		Job job = Job.getInstance();
+		job.setJobName("data generate");
+		job.setMapperClass(NoneOpMapper.class);
+		job.setOutputKeyClass(NullWritable.class);
+		job.setOutputValueClass(NullWritable.class);
+		job.setNumReduceTasks(0);
+		/***************************
+		 *
+		 *......
+		 *在这里，和普通的MapReduce一样，设置各种需要的东西
+		 *......
+		 ***************************/
+
+		//下面为了远程提交添加设置：
+		Configuration conf = job.getConfiguration();
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("fs.default", "hdfs://master:8020");
+		conf.set("mapred.child.java.opts", "-Xmx1024m");
+		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 
 		cos = CONSTANTS.getInstance();
 		String pathToRead = cos.getSamplerFilePath();
@@ -170,5 +205,18 @@ public class SamplerSort {
 
 		cos.persistenceData(cos);
 		cos.showConstantsInfo();
+		FileInputFormat.setInputPaths(job,"/null");
+		Path outPath = new Path("/generateData_info/");//用于mr输出success信息的路径
+		FileSystem fs = FileSystem.get(conf);
+		if (fs.exists(outPath)) {
+			fs.delete(outPath, true);
+		}
+		FileOutputFormat.setOutputPath(job, outPath);
+
+		boolean res = job.waitForCompletion(true);
+		System.exit(res ? 0 : 1);
+		job.submit();
+		//提交以后，可以拿到JobID。根据这个JobID可以打开网页查看执行进度。
+		return job.getJobID().toString();
 	}
 }
