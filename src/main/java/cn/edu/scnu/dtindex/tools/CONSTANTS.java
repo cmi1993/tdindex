@@ -26,6 +26,7 @@ public class CONSTANTS implements Serializable {
 	private String classifiedFilePath = dataFileDir + "/classifiedData";//数据切片存放路径
 	private String XsortedDataDir = dataFileDir + "/SampleSort/XSortTmp";//x排序路径
 	private String YsortedDataDir = dataFileDir + "/SampleSort/YSortTmp";//y排序路径
+	private String queryInfoDir = dataFileDir+"/queryInfo";
 	private long[] xPatitionsData = new long[numOfXDimention + 1];//保存x分界点
 	private long[][] yPatitionsData = new long[numOfXDimention][numOfYDimention + 1];//保存y分界点
 	private Double percentage = Double.parseDouble("10") / 100.00;//采样率
@@ -141,6 +142,14 @@ public class CONSTANTS implements Serializable {
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
+
+	public String getQueryInfoDir() {
+		return queryInfoDir;
+	}
+
+	public void setQueryInfoDir(String queryInfoDir) {
+		this.queryInfoDir = queryInfoDir;
+	}
 
 	public String getClusterAdd() {
 		return clusterAdd;

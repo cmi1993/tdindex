@@ -237,8 +237,6 @@ public class BuildIndex {
 		//conf.set("yarn.resourcemanager.hostname", "root");
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
-
-
 		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
 

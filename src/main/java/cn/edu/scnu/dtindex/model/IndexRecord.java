@@ -22,6 +22,7 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
 		this.maxNode = maxNode;
 		this.minNode = minNode;
 		this.lob_offset = lob_offset;
+		this.diskFileName = "";
 	}
 
 	@Override
@@ -35,6 +36,7 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
         maxNode.write(out);
         minNode.write(out);
         out.writeLong(lob_offset);
+        out.writeUTF(diskFileName);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class IndexRecord implements WritableComparable<IndexRecord> {
         min.readFields(in);
         this.minNode = min;
         this.lob_offset = in.readLong();
+        this.diskFileName = in.readUTF();
     }
 
     @Override
