@@ -157,24 +157,32 @@ public class ValidTime implements WritableComparable<ValidTime> {
 		return R;
 	}
 
+public static ValidTime union(Object[] o) {
+		Arrays.sort(o);// 按开始时间由小到大排
+		ValidTime result = new ValidTime();
+		result.start = ((ValidTime)o[0]).getStart();
+		result.end =((ValidTime)o[0]).getEnd();
+		for (int i = 1; i < o.length; i++) {
+			if (((ValidTime)o[1]).end>result.end){
+				result.setEnd(((ValidTime)o[1]).getEnd());
+			}
+		}
+		return result;
+	}
 	// 并集
 	// 当Rie<R(i+1)s时，将Ri放入已排数组Q中，i++转Step3。
 	// 否则，令R(i+1)s=Ris，i++转Step3。直到i=R.size()，转Step4。
-	public static ValidTime[] union(ValidTime[] o) {
+	public static ValidTime union(ValidTime[] o) {
 		Arrays.sort(o);// 按开始时间由小到大排
-		List<ValidTime> R = new ArrayList<ValidTime>();
-		ValidTime T = o[0];
+		ValidTime result = new ValidTime();
+		result.start = o[0].getStart();
+		result.end = o[0].getEnd();
 		for (int i = 1; i < o.length; i++) {
-			if (T.end < o[i].start) {
-				R.add(T);
-				T = o[i];
-			} else {
-				T.start = T.start < o[i].start ? T.start : o[i].start;
-				T.end = T.end > o[i].end ? T.end : o[i].end;
+			if (o[1].end>result.end){
+				result.setEnd(o[1].getEnd());
 			}
 		}
-		R.add(T);
-		return (ValidTime[]) R.toArray(new ValidTime[R.size()]);
+		return result;
 	}
 
 	public boolean isMisPlace(ValidTime o) {

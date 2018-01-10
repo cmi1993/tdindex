@@ -1,6 +1,7 @@
 cn/edu/scnu/dtindex/model/ValidTime.class
 cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice$DataPatitioner.class
 cn/edu/scnu/dtindex/model/ScopeInfo.class
+cn/edu/scnu/dtindex/dataproc/Projection$ProjectionReducer.class
 cn/edu/scnu/dtindex/tools/CONSTANTS$1.class
 cn/edu/scnu/dtindex/dataproc/BuildIndex$WholeFileInputFormat.class
 cn/edu/scnu/dtindex/dataproc/Sampler$SRSMapper.class
@@ -15,6 +16,7 @@ cn/edu/scnu/dtindex/tools/CONSTANTS.class
 cn/edu/scnu/dtindex/tools/UUIDGenerator.class
 cn/edu/scnu/dtindex/dataproc/DataGenerate$NoneOpMapper.class
 cn/edu/scnu/dtindex/dataproc/DataGenerate.class
+cn/edu/scnu/dtindex/dataproc/Projection$ProjectionMapper.class
 cn/edu/scnu/dtindex/dataproc/ReadingIndex$ReadingIndexReducer.class
 cn/edu/scnu/dtindex/model/NoTime.class
 cn/edu/scnu/dtindex/bigdata/seqfile/MapSerialization.class
@@ -36,6 +38,7 @@ cn/edu/scnu/dtindex/dataproc/SamplerSort$NoneOpMapper.class
 cn/edu/scnu/dtindex/tools/DataToLongPaser.class
 cn/edu/scnu/dtindex/dataproc/SamplerSort.class
 cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.class
+cn/edu/scnu/dtindex/dataproc/Projection.class
 cn/edu/scnu/dtindex/dataproc/Sampler$SamplePatitioner.class
 cn/edu/scnu/dtindex/dataproc/BuildIndex$WholeFileRecordReader.class
 cn/edu/scnu/dtindex/model/PatitionsInfo.class

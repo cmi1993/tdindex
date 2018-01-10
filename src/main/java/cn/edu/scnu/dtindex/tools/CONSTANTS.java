@@ -8,7 +8,7 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String clusterAdd = "hdfs://192.168.69.204:8020";
-	private static String dataScalaDir = "4000w";
+	private static String dataScalaDir = "1000w";
 	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
@@ -33,6 +33,8 @@ public class CONSTANTS implements Serializable {
 	private String DiskFilePath = dataFileDir+"/DiskSliceFile";//磁盘块序列化路径
 	private String indexFileDir = DiskFilePath + "/index";//索引文件存放路径，查询时候会首先加载索引
 	private String diskSliceFileDir = DiskFilePath + "/disk";//索引文件存放路径，查询时候会首先加载索引
+	private String projectionResultPath = dataFileDir+"/projection/";
+	private String[] projectionFields={"uuid","name"};
 	private String queryStart;
 	private String queryEnd;
 
@@ -142,6 +144,22 @@ public class CONSTANTS implements Serializable {
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
+
+	public String getProjectionResultPath() {
+		return projectionResultPath;
+	}
+
+	public void setProjectionResultPath(String projectionResultPath) {
+		this.projectionResultPath = projectionResultPath;
+	}
+
+	public String[] getProjectionFields() {
+		return projectionFields;
+	}
+
+	public void setProjectionFields(String[] projectionFields) {
+		this.projectionFields = projectionFields;
+	}
 
 	public String getQueryInfoDir() {
 		return queryInfoDir;
