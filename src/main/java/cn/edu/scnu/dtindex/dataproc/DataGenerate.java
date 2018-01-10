@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import cn.edu.scnu.dtindex.model.Course;
 import cn.edu.scnu.dtindex.model.Tuple;
 import cn.edu.scnu.dtindex.tools.DFSIOTools;
 import cn.edu.scnu.dtindex.tools.IOTools;
@@ -25,12 +27,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 数据生成器
  */
 public class DataGenerate {
-	static class NoneOpMapper extends Mapper<NullWritable,NullWritable,NullWritable,NullWritable>{
+	static class NoneOpMapper extends Mapper<NullWritable, NullWritable, NullWritable, NullWritable> {
 		@Override
 		protected void map(NullWritable key, NullWritable value, Context context) throws IOException, InterruptedException {
 			super.map(key, value, context);
 		}
 	}
+
 	private int dataCount = 10000;//元组总数
 	private int singlePMCIDCount = 2;//单个PM（Person Message）对应的最大CID数
 	private int singleNoTimeCount = 20;//非时态元组重复最大个数
@@ -56,6 +59,37 @@ public class DataGenerate {
 	public int getNoTimeCount() {
 		return noTimeCount;
 	}
+
+	public static final String[] COURSE_TITLE={
+		"Archaeology and Anthropology", "Biochemistry (Molecular and Cellular)", "Biological Sciences",
+				"Biomedical Sciences", "Chemistry", "Classical Archaeology and Ancient History", "Classics",
+				"Classics and English", "Classics and Modern Languages", "Classics and Oriental Studies",
+				"Computer Science", "Computer Science and Philosophy", "Earth Sciences (Geology)",
+				"Economics and Management", "Engineering Science", "English Language and Literature",
+				"English and Modern Languages", "European and Middle Eastern Languages", "Fine Art",
+				"Geography", "History", "History (Ancient and Modern)", "History and Economics",
+				"History and English", "History and Modern", "Languages", "History and Politics",
+				"History of Art", "Human Sciences", "Law (Jurisprudence)", "Modern Languages",
+				"Modern Languages and Linguistics", "Music", "Oriental Studies", "Philosophy and Modern Languages",
+				"Philosophy", " Politics and Economics (PPE)", "Philosophy and Theology", "Physics",
+				"Physics and Philosophy", "Psychology (Experimental)", "Psychology", " Philosophy and Linguistics",
+				"Religion and Oriental Studies", "Theology and Religion", "Classical Archaeology and Ancient History",
+				"Classics", "Classics and Oriental Studies", "History (Ancient and Modern)", "Oriental Studies",
+				"Philosophy and Theology", "Religion and Oriental Studies", "Theology and Religion",
+				"Economics and Management", "History and Economics", "Philosophy", " Politics and Economics",
+				"Modern Languages (only in combination with another language)", "Classics and Modern Languages",
+				"English and Modern Languages", "European and Middle Eastern Languages", "History and Modern Languages",
+				"Philosophy and Modern Languages", "Classics", "Classics and English", "Classics and Modern Languages",
+				"Classics and Oriental Studies", "Classical Archaeology and Ancient History", "History (Ancient and Modern)",
+				"Modern Languages (only in combination with another language)", "Classics and Modern Languages",
+				"English and Modern Languages", "European and Middle Eastern Languages", "History and Modern Languages",
+				"Philosophy and Modern Languages", "Modern Languages", "Classics and Modern Languages",
+				"Classics and Oriental Studies", "English and Modern Languages", "European and Middle Eastern Languages",
+				"History and Modern Languages", "Oriental Studies", "Philosophy and Modern Languages",
+				"Classics and Oriental Studies", "European and Middle Eastern Languages", "Oriental Studies",
+				"Religion and Oriental Studies", "Theology and Religion", "Philosophy and Theology",
+				"Religion and Oriental Studies", "Archaeology and Anthropology", "Human Sciences", "Philosophy",
+				" Politics and Economics", "c++", "java", "hadoop", "hbase", "mapreduce","c"};
 
 
 	public static final String[] FEMALE_FIRST_NAMES = {
@@ -172,6 +206,8 @@ public class DataGenerate {
 	}
 
 
+
+
 	/**
 	 * ---------------
 	 * 产生多个课程id
@@ -249,6 +285,34 @@ public class DataGenerate {
 		return obj;
 	}
 
+
+	public ArrayList<Course> getAllCourse(int dataCount){
+		ArrayList<Course> allCourse = new ArrayList<Course>(dataCount);
+		int l =0;
+		for (int i = 0; i < dataCount; i++) {
+			Object[] objPM = getRandomPersonMessage();
+			int randomCidCount = (int) (1 + (Math.random() * singlePMCIDCount));//个人信息的Cid个数
+
+			//2.个人信息+CID
+			ArrayList<Object> alCid = getCouresID(randomCidCount);//产生randomCidCount个CouresID
+			for (int j = 0; j < alCid.size(); j++) {
+				Integer cid = (Integer)(alCid.get(j));
+				String teacher_name = (String) objPM[1];
+				ArrayList<long[]> valueTime = getValueTime(1);
+				long start_time = valueTime.get(0)[0];
+				long end_time = valueTime.get(0)[1];
+				Course course = new Course(cid,teacher_name,start_time,end_time);
+				allCourse.add(course);
+				l++;
+				if (l>=dataCount)break;
+			}
+			if (l>=dataCount)
+				break;
+
+		}
+		return allCourse;
+	}
+
 	//产生所有的元组
 	public ArrayList<Tuple> getAllTuple() {
 		int l = 0;
@@ -308,18 +372,33 @@ public class DataGenerate {
 			str.append(t.toString());
 			str.append("\n");
 		}
-		DFSIOTools.toWrite(new Configuration(),str.toString(), path, 1);
+		DFSIOTools.toWrite(new Configuration(), str.toString(), path, 1);
 		str = null;
 		allTuple.clear();
 
 
 	}
 
-	public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
-		startJob();
+
+	public static void GenerateCourseTable(int count,String dfsPath) throws IOException {
+		DataGenerate pd = new DataGenerate();
+		ArrayList<Course> allCourse = pd.getAllCourse(count);
+		StringBuilder str = new StringBuilder();
+		for (Course c : allCourse) {
+		    str.append(c.toString()).append("\n");
+		}
+
+		DFSIOTools.toWrite(new Configuration(), str.toString(), dfsPath, 1);
+		str = null;
+		allCourse.clear();
 	}
 
-	public static String startJob() throws IOException, ClassNotFoundException, InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
+
+		startCourseJob();
+	}
+
+	private static String startCourseJob() throws IOException, ClassNotFoundException, InterruptedException {
 		Job job = Job.getInstance();
 		job.setJobName("data generate");
 		job.setMapperClass(NoneOpMapper.class);
@@ -338,13 +417,51 @@ public class DataGenerate {
 		conf.set("mapreduce.framework.name", "yarn");
 		conf.set("fs.default", "hdfs://master:8020");
 		conf.set("mapred.child.java.opts", "-Xmx1024m");
-		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		GenerateCourseTable(10000,"/timeData/1000w/course.txt");
+
+		FileInputFormat.setInputPaths(job, "/null");
+		Path outPath = new Path("/generateData_info/");//用于mr输出success信息的路径
+		FileSystem fs = FileSystem.get(conf);
+		if (fs.exists(outPath)) {
+			fs.delete(outPath, true);
+		}
+		FileOutputFormat.setOutputPath(job, outPath);
+
+		boolean res = job.waitForCompletion(true);
+		System.exit(res ? 0 : 1);
+		job.submit();
+		//提交以后，可以拿到JobID。根据这个JobID可以打开网页查看执行进度。
+		return job.getJobID().toString();
+
+	}
+
+	public static String startStudentJob() throws IOException, ClassNotFoundException, InterruptedException {
+		Job job = Job.getInstance();
+		job.setJobName("data generate");
+		job.setMapperClass(NoneOpMapper.class);
+		job.setOutputKeyClass(NullWritable.class);
+		job.setOutputValueClass(NullWritable.class);
+		job.setNumReduceTasks(0);
+		/***************************
+		 *
+		 *......
+		 *在这里，和普通的MapReduce一样，设置各种需要的东西
+		 *......
+		 ***************************/
+
+		//下面为了远程提交添加设置：
+		Configuration conf = job.getConfiguration();
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("fs.default", "hdfs://master:8020");
+		conf.set("mapred.child.java.opts", "-Xmx1024m");
+		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		for (int i = 0; i < 100; i++) {
 			Generate50w("/timeData/5000w/data.txt");
 			System.out.println((i + 1) * 50 + "w");
 		}
 
-		FileInputFormat.setInputPaths(job,"/null");
+		FileInputFormat.setInputPaths(job, "/null");
 		Path outPath = new Path("/generateData_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

@@ -22,6 +22,7 @@ cn/edu/scnu/dtindex/model/NoTime.class
 cn/edu/scnu/dtindex/bigdata/seqfile/MapSerialization.class
 cn/edu/scnu/dtindex/dataproc/Sampler$MyRecordWriter.class
 cn/edu/scnu/dtindex/bigdata/seqfile/SeqFileMapper.class
+cn/edu/scnu/dtindex/model/Course.class
 cn/edu/scnu/dtindex/dataproc/BuildIndex$BuildIndexMapper.class
 cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice$ClassifiedMapper.class
 cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice$ClassifiedOutputFormat.class
