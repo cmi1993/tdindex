@@ -157,6 +157,22 @@ public class ValidTime implements WritableComparable<ValidTime> {
 		return R;
 	}
 
+
+	public static ValidTime intersect(Object[] o){
+		Arrays.sort(o);// 按开始时间由小到大排
+		ValidTime R = (ValidTime) o[0];
+		for (int i = 1; i < o.length; i++) {
+			if (R.end < ((ValidTime)o[i]).start)
+				R = null;
+			else {
+				R.start = R.start > ((ValidTime)o[i]).start ? R.start : ((ValidTime)o[i]).start;
+				R.end = R.end < ((ValidTime)o[i]).end ? R.end : ((ValidTime)o[i]).end;
+			}
+		}
+		return R;
+
+	}
+
 public static ValidTime union(Object[] o) {
 		Arrays.sort(o);// 按开始时间由小到大排
 		ValidTime result = new ValidTime();

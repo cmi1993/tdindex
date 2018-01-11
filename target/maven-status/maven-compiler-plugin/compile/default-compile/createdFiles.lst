@@ -38,9 +38,11 @@ cn/edu/scnu/dtindex/dataproc/BuildIndex.class
 cn/edu/scnu/dtindex/dataproc/SamplerSort$NoneOpMapper.class
 cn/edu/scnu/dtindex/tools/DataToLongPaser.class
 cn/edu/scnu/dtindex/dataproc/SamplerSort.class
+cn/edu/scnu/dtindex/dataproc/Connection.class
 cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.class
 cn/edu/scnu/dtindex/dataproc/Projection.class
 cn/edu/scnu/dtindex/dataproc/Sampler$SamplePatitioner.class
+cn/edu/scnu/dtindex/dataproc/Connection$ConnectionMapper.class
 cn/edu/scnu/dtindex/dataproc/BuildIndex$WholeFileRecordReader.class
 cn/edu/scnu/dtindex/model/PatitionsInfo.class
 cn/edu/scnu/dtindex/model/IndexFile.class

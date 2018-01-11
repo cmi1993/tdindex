@@ -16,6 +16,13 @@ public class Course {
 	public Course() {
 	}
 
+	public Course(String cid, String teacherName, String start_time, String end_time) {
+		this.cid = Integer.parseInt(cid);
+		this.teacherName = teacherName;
+		this.start_time = Long.parseLong(start_time);
+		this.end_time = Long.parseLong(end_time);
+	}
+
 
 	public int getCid() {
 		return cid;

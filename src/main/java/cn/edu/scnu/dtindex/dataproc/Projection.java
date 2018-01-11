@@ -73,7 +73,7 @@ public class Projection {
 
 		Job job = Job.getInstance(conf, "distributionProject_cluster_runung");
 		job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
-		job.setJarByClass(Sampler.class);
+		job.setJarByClass(Projection.class);
 		job.setMapperClass(ProjectionMapper.class);
 		job.setReducerClass(ProjectionReducer.class);
 		job.setMapOutputKeyClass(NoTime.class);

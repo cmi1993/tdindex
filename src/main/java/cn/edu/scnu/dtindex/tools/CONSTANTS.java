@@ -20,6 +20,7 @@ public class CONSTANTS implements Serializable {
 	//-----------------------------------------------------------------------------------------
 	private String dataFileDir = clusterAdd + "/timeData/" + dataScalaDir;//数据路径
 	//-----------------------------------------------------------------------------------------
+	private String courseTablePath = dataFileDir+"/course.txt";//课程表的路径
 	private String dataFilePath = dataFileDir + "/data.txt";//数据文件
 	private String samplerFileDir = clusterAdd + "/timeData/" + dataScalaDir + "/sampleData";//采样后样本存放路径
 	private String samplerFilePath = samplerFileDir + "/sampler.txt";//采样样文件路径
@@ -33,7 +34,8 @@ public class CONSTANTS implements Serializable {
 	private String DiskFilePath = dataFileDir+"/DiskSliceFile";//磁盘块序列化路径
 	private String indexFileDir = DiskFilePath + "/index";//索引文件存放路径，查询时候会首先加载索引
 	private String diskSliceFileDir = DiskFilePath + "/disk";//索引文件存放路径，查询时候会首先加载索引
-	private String projectionResultPath = dataFileDir+"/projection/";
+	private String projectionResultPath = dataFileDir+"/projection/";//时态投影结果路径
+	private String connectionResultPath = dataFileDir+"/connection/";//时态连接结果路径
 	private String[] projectionFields={"uuid","name"};
 	private String queryStart;
 	private String queryEnd;
@@ -124,14 +126,6 @@ public class CONSTANTS implements Serializable {
 	}
 
 
-	public  String getDiskSliceFileDir() {
-		return diskSliceFileDir;
-	}
-
-	public  void setDiskSliceFileDir(String diskSliceFileDir) {
-
-		this.diskSliceFileDir = diskSliceFileDir;
-	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
@@ -144,6 +138,30 @@ public class CONSTANTS implements Serializable {
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
+
+	public  String getDiskSliceFileDir() {
+		return diskSliceFileDir;
+	}
+
+	public  void setDiskSliceFileDir(String diskSliceFileDir) {
+
+		this.diskSliceFileDir = diskSliceFileDir;
+	}
+	public String getCourseTablePath() {
+		return courseTablePath;
+	}
+
+	public void setCourseTablePath(String courseTablePath) {
+		this.courseTablePath = courseTablePath;
+	}
+
+	public String getConnectionResultPath() {
+		return connectionResultPath;
+	}
+
+	public void setConnectionResultPath(String connectionResultPath) {
+		this.connectionResultPath = connectionResultPath;
+	}
 
 	public String getProjectionResultPath() {
 		return projectionResultPath;
