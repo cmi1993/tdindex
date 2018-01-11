@@ -45,7 +45,7 @@ public class SamplerSort {
 		}
 		Collections.sort(tuplesList);
 		//3.计算分区数量
-		cos.setRecord_nums(record_count);
+		cos.setSampleRecord_nums(record_count);
 		HDFSTool hdfs = new HDFSTool(new Configuration());
 		long length = hdfs.getFileLength(cos.getDataFilePath()) / 1024 / 1024;
 		double numOfPartition = length * (1 + cos.getApha()) / cos.getHADOOP_BLOCK_SIZE();//分区数量
@@ -70,7 +70,7 @@ public class SamplerSort {
 
 		cos.setNumOfPartition(cos.getNumOfYDimention() * cos.getNumOfXDimention());
 		//不拉伸分区实验----------------------------------------
-		long perXpartNum = cos.getRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
+		long perXpartNum = cos.getSampleRecord_nums() / cos.getNumOfXDimention();//x维度每部分的切割数量
 
 		long[] xparts = new long[cos.getNumOfXDimention() + 1];//保存x分界点
 		//生成x排序临时文件分区路径
@@ -188,7 +188,6 @@ public class SamplerSort {
 		Configuration conf = job.getConfiguration();
 		conf.set("mapreduce.framework.name", "yarn");
 		conf.set("fs.default", "hdfs://master:8020");
-		conf.set("mapred.child.java.opts", "-Xmx1024m");
 		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 
 		cos = CONSTANTS.getInstance();

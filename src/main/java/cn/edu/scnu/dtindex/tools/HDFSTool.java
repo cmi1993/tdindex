@@ -175,7 +175,7 @@ public class HDFSTool {
 			if (os != null)
 				os.close();
 		}
-		fs.close();
+
 	}
 
 	public void copyFileToHdfs(String local, String remote) throws IOException {
@@ -284,6 +284,10 @@ public class HDFSTool {
 			fs.close();
 		}
 	}
+
+
+
+
 
 	public boolean isExits(String filePath) throws IOException {
 		Path path = new Path(filePath);

@@ -16,9 +16,10 @@ public class DFSIOTools {
 		System.out.println("success");
 		*/
 
-		String s = toReadWithCharReturn(new Configuration(), "hdfs://master:8020/timeData/1000w/classifiedData/small.txt");
-		String[] split = s.split("\n");
-		System.out.println();
+		//String s = toReadWithCharReturn(new Configuration(), "hdfs://master:8020/timeData/1000w/classifiedData/small.txt");
+		//String[] split = s.split("\n");
+		//System.out.println();
+		XSplitNparts(new Configuration(),"hdfs://192.168.69.204:8020/timeData/1000w/sampleData/sampler.txt");
 		//System.out.println(toRead(new Configuration(), "hdfs://192.168.69.204:8020/test/1.txt"));
 	}
 
@@ -75,6 +76,51 @@ public class DFSIOTools {
 
 		return buffer.toString();
 
+	}
+
+
+	public static void XSplitNparts(Configuration conf,String filePath) throws IOException {
+		CONSTANTS cos = CONSTANTS.getInstance();
+		cos.CalcPartitions();
+		StringBuffer buffer = new StringBuffer();
+		FSDataInputStream fsr = null;
+		BufferedReader bufferedReader = null;
+		String lineTxt = null;
+		int Xcount=0;
+		try {
+			FileSystem fs = FileSystem.get(URI.create(filePath), conf);
+			fsr = fs.open(new Path(filePath));
+			bufferedReader = new BufferedReader(new InputStreamReader(fsr));
+			int count=1;
+			while ((lineTxt = bufferedReader.readLine()) != null) {
+				buffer.append(lineTxt).append("\n");
+
+				if (count%(333333)==0){
+					DFSIOTools.toWrite(conf,buffer.toString(),cos.getXsortedDataDir()+"/xsort_"+Xcount+".txt",0);
+					count++;
+					Xcount++;
+					buffer=null;
+					buffer=new StringBuffer();
+				}else {
+					count++;
+				}
+
+			}
+
+			if (buffer.toString().length()>0){
+				DFSIOTools.toWrite(conf,buffer.toString(),cos.getXsortedDataDir()+"/xsort_"+Xcount+".txt",0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public static String toReadWithCharReturn(Configuration conf, String path) throws IOException {

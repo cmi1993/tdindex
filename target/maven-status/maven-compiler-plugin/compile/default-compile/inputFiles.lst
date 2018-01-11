@@ -1,6 +1,7 @@
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/bigdata/seqfile/SeqFileMapper.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/MRSamplerSort.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/IndexRecord.java
@@ -10,11 +11,13 @@
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/NoTime.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/PatitionsInfo.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/Lob.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/DiskSliceFile.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/Course.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountReducer.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/ScopeInfo.java
@@ -23,5 +26,6 @@
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/IndexFile.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/bigdata/seqfile/MapSerialization.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/model/ValidTime.java
+/home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.java
 /home/think/idea project/dtindex/src/main/java/cn/edu/scnu/dtindex/tools/DataToLongPaser.java

@@ -8,7 +8,8 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String clusterAdd = "hdfs://192.168.69.204:8020";
-	private static String dataScalaDir = "1000w";
+	private static long datanum = 5000;
+	private static String dataScalaDir = datanum+"w";
 	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private double apha = 0.0;//索引所需空间的膨胀系数
 	private double numOfPartition;//分区数量
@@ -16,7 +17,7 @@ public class CONSTANTS implements Serializable {
 	private int numOfXDimention;//切分后，x轴方向的分区数
 	private int numOfYDimention;//切分后，y轴方向的分区数
 	private final String constants_persistence_path = clusterAdd+"/timeData/"+dataScalaDir+"/contants.dat";//常量数据持久化路径
-	private long record_nums;//总记录数
+	private long sampleRecord_nums;//样本总记录数
 	//-----------------------------------------------------------------------------------------
 	private String dataFileDir = clusterAdd + "/timeData/" + dataScalaDir;//数据路径
 	//-----------------------------------------------------------------------------------------
@@ -54,6 +55,40 @@ public class CONSTANTS implements Serializable {
 	}
 	//-----------------------------------单例模式--------------------------------------------
 
+	
+	public void CalcPartitions() throws IOException {
+		//3.计算分区数量
+		long sampleRecordCount = CONSTANTS.getDatanum() / 10;
+		this.setSampleRecord_nums(sampleRecordCount);
+		HDFSTool hdfs = new HDFSTool(new Configuration());
+		long length = hdfs.getFileLength(this.getDataFilePath()) / 1024 / 1024;
+		double numOfPartition = length * (1 + this.getApha()) / this.getHADOOP_BLOCK_SIZE();//分区数量
+		long numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
+		this.setNumOfPartition(numOfPartition);
+
+		/*if(numOfEachdimention*numOfEachdimention<numOfPartition){//如果需要拉伸分区
+			this.setApha(0);//拉伸分区就不需要进行膨胀系数的考虑
+			numOfPartition = length * (1 + this.getApha()) / this.getHadoopBlockSize();//分区数量
+			numOfEachdimention = Math.round(Math.sqrt(numOfPartition));//每个维度的分割数两
+			this.setNumOfPartition(((int)numOfEachdimention+1)*((int)numOfEachdimention));
+			this.setNumOfXDimention((int)numOfEachdimention+1);
+			this.setNumOfYDimention((int)numOfEachdimention);
+
+		}else {
+			this.setNumOfXDimention((int)numOfEachdimention);
+			this.setNumOfYDimention((int)numOfEachdimention);
+		}*/
+		//不拉伸分区实验----------------------------------------
+		this.setNumOfXDimention((int) numOfEachdimention);
+		this.setNumOfYDimention((int) numOfEachdimention);
+
+		this.setNumOfPartition(this.getNumOfYDimention() * this.getNumOfXDimention());
+
+	}
+
+	
+	
+	
 	/**
 	 * 对象模型序列化到磁盘
 	 *
@@ -91,7 +126,7 @@ public class CONSTANTS implements Serializable {
 		System.out.println("|numOfXDimention   		    |X维度的切分数	    |" + numOfXDimention);
 		System.out.println("|numOfYDimention   		    |Y维度的切分数	    |" + numOfYDimention);
 		System.out.println("|constants_persistence_path |常量数据持久化路径    |" + constants_persistence_path);
-		System.out.println("|record_nums          		|总记录数				|" + record_nums);
+		System.out.println("|sampleRecord_nums          		|总记录数				|" + sampleRecord_nums);
 		System.out.println("|dataFilePath       		|数据文件				|" + dataFilePath);
 		System.out.println("|dataFileDir         		|数据路径				|" + dataFileDir);
 		System.out.println("|samplerFilePath            |采样样文件路径		|" + samplerFilePath);
@@ -138,6 +173,14 @@ public class CONSTANTS implements Serializable {
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
+
+	public static long getDatanum() {
+		return datanum*10000;
+	}
+
+	public static void setDatanum(long datanum) {
+		CONSTANTS.datanum = datanum;
+	}
 
 	public  String getDiskSliceFileDir() {
 		return diskSliceFileDir;
@@ -243,12 +286,12 @@ public class CONSTANTS implements Serializable {
 		return constants_persistence_path;
 	}
 
-	public long getRecord_nums() {
-		return record_nums;
+	public long getSampleRecord_nums() {
+		return sampleRecord_nums;
 	}
 
-	public void setRecord_nums(long record_nums) {
-		this.record_nums = record_nums;
+	public void setSampleRecord_nums(long sampleRecord_nums) {
+		this.sampleRecord_nums = sampleRecord_nums;
 	}
 
 	public String getDataFileDir() {

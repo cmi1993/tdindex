@@ -32,7 +32,7 @@ public class Sampler {
 
         @Override
         protected void setup(Context context) throws IOException, InterruptedException {
-            String strPercentage = "10";
+            String strPercentage = "5";
             percetage = Double.parseDouble(strPercentage)/100.00;
         }
 
@@ -108,6 +108,7 @@ public class Sampler {
 
 		// 向yarn集群提交这个job
 		boolean res = job.waitForCompletion(true);
+		CONSTANTS.persistenceData(cos);
 		System.exit(res ? 0 : 1);
 
 	}
