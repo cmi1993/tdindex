@@ -37,8 +37,8 @@ public class RTree {
 			}
 			return;
 		}else {
-			List<TreeNode> nodeList = node.getNodeList();
-			for ( TreeNode n:nodeList ){
+			List<RTreeNode> nodeList = node.getNodeList();
+			for ( RTreeNode n:nodeList ){
 				TraverseRTree((RTreeNode) n);
 			}
 		}

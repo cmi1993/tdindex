@@ -67,7 +67,7 @@ public class BuildRtreeIndex {
 					splitStack = tmpStack;
 				}
 				//---------------------------------开始填充节点
-				List<TreeNode> nodeList = new ArrayList<TreeNode>();
+				List<RTreeNode> nodeList = new ArrayList<RTreeNode>();
 				while (!splitStack.empty()) {
 					RTreeSplitContainer pop = splitStack.pop();
 					RTreeNode node1 = new RTreeNode(0, pop.getPart1MBR(), pop.getPart1());
@@ -79,12 +79,12 @@ public class BuildRtreeIndex {
 
 
 				//---------------------------------每个节点递归地进行分裂
-				for (TreeNode n : current.getNodeList()) {
+				for (RTreeNode n : current.getNodeList()) {
 					BuildRtree(((RTreeNode) n).getLeafData(), tree, buildTimes++, ((RTreeNode) n), maxSubTree / tree.getMaxNodeCapcity());
 
 				}
 
-				for (TreeNode n : current.getNodeList()) {
+				for (RTreeNode n : current.getNodeList()) {
 					if (!((RTreeNode) n).isLeaf())
 						((RTreeNode) n).clearTmpList();
 				}
@@ -257,7 +257,7 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-		FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+	FileInputFormat.setInputPaths(job, "/test/1/1.txt");
 		//FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
 		Path outPath = new Path("/test/1/rtree/");
 		FileSystem fs = FileSystem.get(conf);

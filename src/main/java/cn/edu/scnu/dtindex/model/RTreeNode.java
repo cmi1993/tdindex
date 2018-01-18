@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * R树的内部节点
  */
-public class RTreeNode extends TreeNode{
+public class RTreeNode{
 	private boolean isLeaf=false;
 	private int treeLevel;
-	private List<TreeNode> nodeList;//内部节点可以指向叶子节点或者内部节点
+	private List<RTreeNode> nodeList;//内部节点可以指向叶子节点或者内部节点
 	private List<Tuple> leafData;
 	private int nodeSize;
 	private MBR mbr;
@@ -20,7 +20,7 @@ public class RTreeNode extends TreeNode{
 		this.leafData = tmpList;
 	}
 
-	public RTreeNode(List<TreeNode> nodeList, MBR mbr, int treeLevel) {
+	public RTreeNode(List<RTreeNode> nodeList, MBR mbr, int treeLevel) {
 		this.treeLevel = treeLevel;
 		this.nodeList = nodeList;
 		this.mbr = mbr;
@@ -63,11 +63,11 @@ public class RTreeNode extends TreeNode{
 		this.treeLevel = treeLevel;
 	}
 
-	public List<TreeNode> getNodeList() {
+	public List<RTreeNode> getNodeList() {
 		return nodeList;
 	}
 
-	public void setNodeList(List<TreeNode> nodeList) {
+	public void setNodeList(List<RTreeNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 

@@ -48,10 +48,10 @@ public class MBR implements WritableComparable<MBR> {
 			return false;
 	}
 
-	public static MBR getInterNodeMBR(List<TreeNode> interNodeList) {
+	public static MBR getInterNodeMBR(List<RTreeNode> interNodeList) {
 		ValidTime bL = interNodeList.get(0).getMbr().getBottomLeft();
 		ValidTime tR = interNodeList.get(0).getMbr().getTopRight();
-		for (TreeNode node : interNodeList) {
+		for (RTreeNode node : interNodeList) {
 			ValidTime vt = node.getMbr().getBottomLeft();
 			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
 				bL = vt;
@@ -70,10 +70,10 @@ public class MBR implements WritableComparable<MBR> {
 		return new MBR(bL, tR);
 	}
 
-	public static MBR getLeafNodeMBR(List<TreeNode> leafNodeList) {
+	public static MBR getLeafNodeMBR(List<RTreeNode> leafNodeList) {
 		ValidTime bL = leafNodeList.get(0).getMbr().getBottomLeft();
 		ValidTime tR = leafNodeList.get(0).getMbr().getTopRight();
-		for (TreeNode node : leafNodeList) {
+		for (RTreeNode node : leafNodeList) {
 			ValidTime vt = node.getMbr().getBottomLeft();
 			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
 				bL = vt;
