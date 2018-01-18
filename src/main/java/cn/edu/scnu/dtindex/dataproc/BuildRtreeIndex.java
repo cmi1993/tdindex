@@ -301,9 +301,23 @@ public class BuildRtreeIndex {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
-		conf.set("mapreduce.framework.name", "local");
-		Job job = Job.getInstance(conf, "build_local");
+		conf.set("fs.default", "hdfs://192.168.69.204:8020");
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("yarn.scheduler.minimum-allocation-mb","1024");
+		conf.set("yarn.scheduler.maximum-allocation-mb","16384");
+		conf.set("yarn.nodemanager.resource.memory-mb","200000");
+		conf.set("mapreduce.map.memory.mb","4096");
+		conf.set("yarn.scheduler.minimum-allocation-vcore","10");
+		conf.set("yarn.scheduler.maximum-allocation-vcore","20");
+		//conf.set("mapreduce.map.java.opts","-Xmx2048");
+		//conf.set("mapreduce.reduce.memory.mb","4096");
+		conf.set("mapreduce.map.cpu.vcore","10");
+		//conf.set("yarn.node-manager.resource.vcore","20");
+		//conf.set("yarn.resourcemanager.hostname", "root");
+		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
+		System.setProperty("HADOOP_USER_NAME", "root");
+		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
 
 
 		job.setJarByClass(BuildRtreeIndex.class);
@@ -315,8 +329,8 @@ public class BuildRtreeIndex {
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
 	//FileInputFormat.setInputPaths(job, "/test/1/1.txt");
-		FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
-		Path outPath = new Path("/test/1/rtree/");
+		FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
+		Path outPath = new Path(cos.getDiskFilePath()+"/building_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);

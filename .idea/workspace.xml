@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c94d32f-4f73-438e-a401-e84b99e5a0a9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeDiskSliceFile.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeIndexFile.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeNode.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeNode.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,8 +43,8 @@
       <file leaf-file-name="BuildRtreeIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+            <state relative-caret-position="-47">
+              <caret line="313" column="24" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1475#1482#0" expanded="true" />
@@ -69,10 +63,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CONSTANTS.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BuildIndex.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2164">
+              <caret line="254" column="20" lean-forward="false" selection-start-line="254" selection-start-column="20" selection-end-line="254" selection-end-column="20" />
+              <folding>
+                <element signature="class#WholeFileInputFormat#0;class#BuildIndex#0" expanded="false" />
+                <element signature="class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+                <element signature="method#getCurrentKey#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+                <element signature="method#getCurrentValue#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CONSTANTS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
+            <state relative-caret-position="-2699">
               <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding>
                 <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
@@ -559,7 +568,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BuildRtreeIndex">
+  <component name="RunManager" selected="Application.BuildIndex">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -852,12 +861,12 @@
       <workItem from="1516000240483" duration="16293000" />
       <workItem from="1516152798543" duration="10620000" />
       <workItem from="1516243293736" duration="7678000" />
-      <workItem from="1516263286145" duration="16763000" />
+      <workItem from="1516263286145" duration="17722000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="393397000" />
+    <option name="totallyTimeSpent" value="394356000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -880,7 +889,7 @@
       <window_info id="Java Enterprise" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29489166" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15997131" sideWeight="0.5144291" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14783281" sideWeight="0.48557088" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14756447" sideWeight="0.48557088" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40644363" sideWeight="0.64860684" order="7" side_tool="true" content_ui="tabs" x="90" y="199" width="1194" height="420" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -894,7 +903,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18468146" sideWeight="0.5244755" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="103" y="763" width="1094" height="524" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="103" y="763" width="1094" height="524" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1563,19 +1572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="178" column="13" lean-forward="false" selection-start-line="178" selection-start-column="13" selection-end-line="178" selection-end-column="13" />
-          <folding>
-            <element signature="class#WholeFileInputFormat#0;class#BuildIndex#0" expanded="false" />
-            <element signature="class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-            <element signature="method#getCurrentKey#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-            <element signature="method#getCurrentValue#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeIndexFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -1739,10 +1735,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2699">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="method#setDiskSliceFileDir#0;class#CONSTANTS#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        <state relative-caret-position="-47">
+          <caret line="313" column="24" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1475#1482#0" expanded="true" />
@@ -1760,15 +1769,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="2164">
+          <caret line="254" column="20" lean-forward="false" selection-start-line="254" selection-start-column="20" selection-end-line="254" selection-end-column="20" />
           <folding>
-            <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
-            <element signature="method#setDiskSliceFileDir#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="class#WholeFileInputFormat#0;class#BuildIndex#0" expanded="false" />
+            <element signature="class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+            <element signature="method#getCurrentKey#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+            <element signature="method#getCurrentValue#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
           </folding>
         </state>
       </provider>
