@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 建立索引的类
+ */
 public class BuildIndex {
 	private static Log log = LogFactory.getLog(BuildIndex.class);
 	static CONSTANTS cos;

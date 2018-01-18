@@ -37,7 +37,8 @@ public class ValidTime implements WritableComparable<ValidTime> {
 
 	/**
 	 * 字符串时间解析成long型
-	 *
+	 *out.writeLong(bottomLeft);
+		out.writeLong(topRight);
 	 * @param strTime
 	 * @return
 	 */
