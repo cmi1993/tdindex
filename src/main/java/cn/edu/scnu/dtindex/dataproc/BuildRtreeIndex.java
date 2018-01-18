@@ -1,13 +1,12 @@
 package cn.edu.scnu.dtindex.dataproc;
 
 import cn.edu.scnu.dtindex.model.*;
+import cn.edu.scnu.dtindex.tools.CONSTANTS;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.ByteWritable;
-import org.apache.hadoop.io.BytesWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
@@ -16,11 +15,23 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
 
 public class BuildRtreeIndex {
+	static CONSTANTS cos;
 
+	static {
+		try {
+			cos = CONSTANTS.readPersistenceData();
+			cos.showConstantsInfo();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	static class BuildRtreeIndexMapper extends Mapper<Text, Text, Text, BytesWritable> {
 		public static BigInteger bestSplitArea;
 		public static int bestSplitPos;
@@ -36,11 +47,57 @@ public class BuildRtreeIndex {
 				Tuple t = new Tuple(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5]);
 				tupleList.add(t);
 			}
+			System.out.println("[2]构建rTree索引-----------------------------------------------");
 			RTreeNode root = new RTreeNode(0);
+			root.setIsroot(true);
 			RTree rtree = new RTree(root, tupleList.size() / 4, 4, tupleList.size());
 			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree());
-			rtree.TraverseRTree(root);
+
+			System.out.println("[3]准备序列化数据-----------------------------------------------");
+			InputSplit inputSplit = context.getInputSplit();
+			String filename = ((FileSplit) inputSplit).getPath().getName();
+			Text DiskKey = new Text();
+			RTreeDiskSliceFile DiskValue = new RTreeDiskSliceFile();
+			Configuration conf = new Configuration();
+			SequenceFile.Writer writer =
+					SequenceFile.createWriter(conf,
+							SequenceFile.Writer.file(new Path(cos.getDiskFilePath() + "/RTree_disk/disk_" + filename + ".seq")),
+							SequenceFile.Writer.keyClass(DiskKey.getClass()),
+							SequenceFile.Writer.valueClass(DiskValue.getClass()),
+							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
+			Serialization(root,writer,DiskKey,DiskValue);
+			long indexBegin = writer.getLength();
+			rtree.setIndexBeginOffset(indexBegin);
+
+			writer.append(new Text(""),new RTreeDiskSliceFile(rtree));
+
+			System.out.println("[4]开始序列化数据-----------------------------------------------");
+			IOUtils.closeStream(writer);
+			System.out.println("[5]序列化数据成功-----------------------------------------------");
+			writer =
+					SequenceFile.createWriter(conf,
+							SequenceFile.Writer.file(new Path(cos.getDiskFilePath() + "/RTreeIndex/RTreeindex_" + filename +"_"+indexBegin +".seq")),
+							SequenceFile.Writer.keyClass(DiskKey.getClass()),
+							SequenceFile.Writer.valueClass(DiskValue.getClass()),
+							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
+			writer.append(new Text("index"),new RTreeDiskSliceFile(rtree));
+			System.out.println("[6]序列化索引成功-----------------------------------------------");
 			System.out.println("success!!");
+		}
+
+		public void Serialization(RTreeNode node,SequenceFile.Writer writer,Text DiskKey,RTreeDiskSliceFile DiskValue) throws IOException {
+			if (node.isLeaf()){
+				writer.append(new Text(""),new RTreeDiskSliceFile(node));
+				long offset = writer.getLength();
+				node.setOffset(offset);
+				node.setIndex(true);
+				node.clearLeafDataList();
+			}else {
+				List<RTreeNode> nodeList = node.getNodeList();
+				for (RTreeNode n : nodeList) {
+					Serialization(n,writer,DiskKey,DiskValue);
+				}
+			}
 		}
 
 		static int splitcount = 0;
@@ -86,7 +143,7 @@ public class BuildRtreeIndex {
 
 				for (RTreeNode n : current.getNodeList()) {
 					if (!((RTreeNode) n).isLeaf())
-						((RTreeNode) n).clearTmpList();
+						((RTreeNode) n).clearLeafDataList();
 				}
 			}
 
@@ -257,8 +314,8 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-	FileInputFormat.setInputPaths(job, "/test/1/1.txt");
-		//FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
+	//FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+		FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
 		Path outPath = new Path("/test/1/rtree/");
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {

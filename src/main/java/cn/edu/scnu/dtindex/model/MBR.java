@@ -21,6 +21,10 @@ public class MBR implements WritableComparable<MBR> {
 		this.topRight = topRight;
 	}
 
+	public MBR() {
+
+	}
+
 
 	/**
 	 * 获取MBR面积
