@@ -30,17 +30,6 @@ public class RTreeNode extends TreeNode{
 		this.treeLevel = rootLevel;
 	}
 
-	public RTreeNode(List<TreeNode> nodeList, int treeLevel) {
-		this.nodeList = nodeList;
-		this.nodeSize = nodeList.size();
-		if (nodeList.get(0) instanceof RTreeLeafNode){
-			this.mbr = MBR.getLeafNodeMBR(nodeList);
-		}else {
-			this.mbr = MBR.getInterNodeMBR(nodeList);
-		}
-		this.treeLevel = treeLevel;
-	}
-
 
 	public void clearTmpList(){
 		leafData =null;

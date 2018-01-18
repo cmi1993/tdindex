@@ -1,5 +1,7 @@
 package cn.edu.scnu.dtindex.model;
 
+import java.util.List;
+
 public class RTree {
 	private RTreeNode root;
 	private int maxSubtree;//该层每个子树的最大MBR个数
@@ -25,6 +27,22 @@ public class RTree {
 				", treeHight=" + treeHight +
 				", numOfNodes=" + numOfNodes +
 				'}';
+	}
+
+	public void TraverseRTree(RTreeNode node){
+		if (node.isLeaf()){
+			List<Tuple> leafData = node.getLeafData();
+			for (Tuple t : leafData) {
+				System.out.println(t.toString());
+			}
+			return;
+		}else {
+			List<TreeNode> nodeList = node.getNodeList();
+			for ( TreeNode n:nodeList ){
+				TraverseRTree((RTreeNode) n);
+			}
+		}
+
 	}
 
 

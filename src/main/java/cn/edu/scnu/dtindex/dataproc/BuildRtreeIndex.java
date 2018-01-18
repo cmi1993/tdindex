@@ -39,6 +39,7 @@ public class BuildRtreeIndex {
 			RTreeNode root = new RTreeNode(0);
 			RTree rtree = new RTree(root, tupleList.size() / 4, 4, tupleList.size());
 			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree());
+			rtree.TraverseRTree(root);
 			System.out.println("success!!");
 		}
 
@@ -256,8 +257,8 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-		//FileInputFormat.setInputPaths(job, "/test/1/1.txt");
-		FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
+		FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+		//FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
 		Path outPath = new Path("/test/1/rtree/");
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
