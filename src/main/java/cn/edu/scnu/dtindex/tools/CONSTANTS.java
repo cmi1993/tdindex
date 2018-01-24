@@ -8,7 +8,7 @@ import java.io.*;
 public class CONSTANTS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String clusterAdd = "hdfs://192.168.69.204:8020";
-	private static long datanum = 5000;
+	private static long datanum = 1000;
 	private static String dataScalaDir = datanum+"w";
 	private double HADOOP_BLOCK_SIZE = 128;//hadoop磁盘块大小
 	private double apha = 0.0;//索引所需空间的膨胀系数
@@ -34,7 +34,9 @@ public class CONSTANTS implements Serializable {
 	private Double percentage = Double.parseDouble("10") / 100.00;//采样率
 	private String DiskFilePath = dataFileDir+"/DiskSliceFile";//磁盘块序列化路径
 	private String indexFileDir = DiskFilePath + "/index";//索引文件存放路径，查询时候会首先加载索引
+	private String RTreeIndexFileDir = DiskFilePath +"/RTreeIndex";//存放RTRee索引文件的路径
 	private String diskSliceFileDir = DiskFilePath + "/disk";//索引文件存放路径，查询时候会首先加载索引
+	private String RtreeDiskSliceFileDir = DiskFilePath +"/RTree_disk";//存放rtree磁盘块的路径
 	private String projectionResultPath = dataFileDir+"/projection/";//时态投影结果路径
 	private String connectionResultPath = dataFileDir+"/connection/";//时态连接结果路径
 	private String[] projectionFields={"uuid","name"};
@@ -121,24 +123,34 @@ public class CONSTANTS implements Serializable {
 	public void showConstantsInfo() {
 		System.out.println("------------------------------------------【常量信息】------------------------------------------");
 		System.out.println("|HADOOP_BLOCK_SIZE    		|hadoop磁盘块大小		|" + HADOOP_BLOCK_SIZE);
+		System.out.println("|clusterAdd    				|集群地址      		|" + clusterAdd);
+		System.out.println("|datanum    				|数据集数量      		|" + datanum);
+		System.out.println("|dataScalaDir    			|数据规模      		|" + dataScalaDir);
 		System.out.println("|apha                 		|索引所需空间的膨胀系数	|" + apha);
 		System.out.println("|numOfPartition       		|分区数量				|" + numOfPartition);
-		System.out.println("|numOfXDimention   		    |X维度的切分数	    |" + numOfXDimention);
-		System.out.println("|numOfYDimention   		    |Y维度的切分数	    |" + numOfYDimention);
+		System.out.println("|numOfXDimention   		    |X维度的切分数	    	|" + numOfXDimention);
+		System.out.println("|numOfYDimention   		    |Y维度的切分数	    	|" + numOfYDimention);
 		System.out.println("|constants_persistence_path |常量数据持久化路径    |" + constants_persistence_path);
-		System.out.println("|sampleRecord_nums          		|总记录数				|" + sampleRecord_nums);
+		System.out.println("|sampleRecord_nums          |样本总记录数			|" + sampleRecord_nums);
+		System.out.println("|percentage                 |采样率		        |" + percentage);
+		System.out.println("|queryStart                 |查询窗口的开始时间    |" + queryStart);
+		System.out.println("|queryEnd                   |查询窗口的结束时间    |" + queryEnd);
+		System.out.println("----------------------------------------------------------------------------------------------");
 		System.out.println("|dataFilePath       		|数据文件				|" + dataFilePath);
 		System.out.println("|dataFileDir         		|数据路径				|" + dataFileDir);
+		System.out.println("|courseTablePath    		|课表路径      		|" + courseTablePath);
 		System.out.println("|samplerFilePath            |采样样文件路径		|" + samplerFilePath);
+		System.out.println("|classifiedFilePath         |分区切片存放路径		|" + classifiedFilePath);
 		System.out.println("|samplerFileDir             |采样样文件路径		|" + samplerFileDir);
 		System.out.println("|XsortedDataDir         	|x排序路径			|" + XsortedDataDir);
 		System.out.println("|YsortedDataDir             |y排序路径		    |" + YsortedDataDir);
-		System.out.println("|percentage                 |采样率		        |" + percentage);
+		System.out.println("|queryInfoDir               |查询信息输出路		|" + queryInfoDir);
 		System.out.println("|DiskFilePath               |磁盘块序列化路径	    |" + DiskFilePath);
 		System.out.println("|indexFileDir               |索引块序列化路径	    |" + indexFileDir);
-		System.out.println("|diskSliceFileDir           |磁盘切片序列化路径    |" + diskSliceFileDir);
-		System.out.println("|queryStart                 |查询窗口的开始时间    |" + queryStart);
-		System.out.println("|queryEnd                   |查询窗口的结束时间    |" + queryEnd);
+		System.out.println("|RtreeDiskSliceFileDir      |RTree磁盘块序列化路径	|" + RtreeDiskSliceFileDir);
+		System.out.println("|RTreeIndexFileDir          |RTree索引块序列化路径	|" + RTreeIndexFileDir);
+		System.out.println("|projectionResultPath       |时态投影结果路径		|" + projectionResultPath);
+		System.out.println("|connectionResultPath       |时态连接结果路径		|" + connectionResultPath);
 		System.out.println("----------------------------------------------------------------------------------------------");
 		System.out.print("|x分区采样点\t|");
 		for (long x : xPatitionsData) {
@@ -163,11 +175,14 @@ public class CONSTANTS implements Serializable {
 
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
+		/*CONSTANTS constants = CONSTANTS.getInstance().readPersistenceData();
 		constants.setQueryStart("123");
-		persistenceData(constants);
+		persistenceData(constants);*/
 		/*CONSTANTS cos = CONSTANTS.getInstance().readPersistenceData();
 		cos.showConstantsInfo();*/
+		CONSTANTS instance = CONSTANTS.getInstance();
+		instance.showConstantsInfo();
+
 	}
 
 
@@ -405,4 +420,21 @@ public class CONSTANTS implements Serializable {
 	public void setQueryEnd(String queryEnd) {
 		this.queryEnd = queryEnd;
 	}
+
+	public String getRTreeIndexFileDir() {
+		return RTreeIndexFileDir;
+	}
+
+	public void setRTreeIndexFileDir(String RTreeIndexFileDir) {
+		this.RTreeIndexFileDir = RTreeIndexFileDir;
+	}
+
+	public String getRtreeDiskSliceFileDir() {
+		return RtreeDiskSliceFileDir;
+	}
+
+	public void setRtreeDiskSliceFileDir(String rtreeDiskSliceFileDir) {
+		RtreeDiskSliceFileDir = rtreeDiskSliceFileDir;
+	}
 }
+

@@ -34,8 +34,8 @@ public class BuildIndex {
 
 	static {
 		try {
-			 cos = CONSTANTS.readPersistenceData();
-			 cos.showConstantsInfo();
+			cos = CONSTANTS.readPersistenceData();
+			cos.showConstantsInfo();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -240,7 +240,9 @@ public class BuildIndex {
 		//conf.set("yarn.resourcemanager.hostname", "root");
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
-		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+
+		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+
 		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
 
 

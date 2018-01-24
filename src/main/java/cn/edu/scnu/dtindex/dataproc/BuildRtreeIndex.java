@@ -32,6 +32,7 @@ public class BuildRtreeIndex {
 			e.printStackTrace();
 		}
 	}
+
 	static class BuildRtreeIndexMapper extends Mapper<Text, Text, Text, BytesWritable> {
 		public static BigInteger bestSplitArea;
 		public static int bestSplitPos;
@@ -52,6 +53,8 @@ public class BuildRtreeIndex {
 			root.setIsroot(true);
 			RTree rtree = new RTree(root, tupleList.size() / 4, 4, tupleList.size());
 			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree());
+			MBR rootMBR = MBR.getInterNodeMBR(root.getNodeList());
+			root.setMbr(rootMBR);
 
 			System.out.println("[3]准备序列化数据-----------------------------------------------");
 			InputSplit inputSplit = context.getInputSplit();
@@ -65,37 +68,39 @@ public class BuildRtreeIndex {
 							SequenceFile.Writer.keyClass(DiskKey.getClass()),
 							SequenceFile.Writer.valueClass(DiskValue.getClass()),
 							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
-			Serialization(root,writer,DiskKey,DiskValue);
+			Serialization(root, writer, DiskKey, DiskValue);
 			long indexBegin = writer.getLength();
 			rtree.setIndexBeginOffset(indexBegin);
 
-			writer.append(new Text(""),new RTreeDiskSliceFile(rtree));
+			writer.append(new Text(""), new RTreeDiskSliceFile(rtree));
 
 			System.out.println("[4]开始序列化数据-----------------------------------------------");
 			IOUtils.closeStream(writer);
 			System.out.println("[5]序列化数据成功-----------------------------------------------");
 			writer =
 					SequenceFile.createWriter(conf,
-							SequenceFile.Writer.file(new Path(cos.getDiskFilePath() + "/RTreeIndex/RTreeindex_" + filename +"_"+indexBegin +".seq")),
+							SequenceFile.Writer.file(new Path(cos.getDiskFilePath() + "/RTreeIndex/RTreeindex_" + filename + "_" + indexBegin + ".seq")),
 							SequenceFile.Writer.keyClass(DiskKey.getClass()),
 							SequenceFile.Writer.valueClass(DiskValue.getClass()),
 							SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
-			writer.append(new Text("index"),new RTreeDiskSliceFile(rtree));
+			RTreeDiskSliceFile indexFile = new RTreeDiskSliceFile(rtree);
+			writer.append(new Text("index"), indexFile);
+			IOUtils.closeStream(writer);
 			System.out.println("[6]序列化索引成功-----------------------------------------------");
 			System.out.println("success!!");
 		}
 
-		public void Serialization(RTreeNode node,SequenceFile.Writer writer,Text DiskKey,RTreeDiskSliceFile DiskValue) throws IOException {
-			if (node.isLeaf()){
-				writer.append(new Text(""),new RTreeDiskSliceFile(node));
+		public void Serialization(RTreeNode node, SequenceFile.Writer writer, Text DiskKey, RTreeDiskSliceFile DiskValue) throws IOException {
+			if (node.isLeaf()) {
+				writer.append(new Text(""), new RTreeDiskSliceFile(node));
 				long offset = writer.getLength();
 				node.setOffset(offset);
 				node.setIndex(true);
 				node.clearLeafDataList();
-			}else {
+			} else {
 				List<RTreeNode> nodeList = node.getNodeList();
 				for (RTreeNode n : nodeList) {
-					Serialization(n,writer,DiskKey,DiskValue);
+					Serialization(n, writer, DiskKey, DiskValue);
 				}
 			}
 		}
@@ -107,6 +112,7 @@ public class BuildRtreeIndex {
 		public void BuildRtree(List<Tuple> tupleList, RTree tree, int buildTimes, RTreeNode current, int maxSubTree) {
 			if (tupleList.size() <= tree.getMaxNodeCapcity()) {
 				current.setLeaf(true);
+				current.setLeafDataSize(tupleList.size());
 				return;
 			} else {
 				tmpStack = new Stack<RTreeSplitContainer>();
@@ -133,6 +139,7 @@ public class BuildRtreeIndex {
 					nodeList.add(node2);
 				}
 				current.setNodeList(nodeList);
+				current.setNodeSize(nodeList.size());
 
 
 				//---------------------------------每个节点递归地进行分裂
@@ -209,11 +216,11 @@ public class BuildRtreeIndex {
 				//bestSplitPos = i * perSubTreeNodeNum;
 				isBestToSplitInX = true;
 				bestSplitArea = minArea;
-				List<Tuple> fisrt= new ArrayList<Tuple>();
+				List<Tuple> fisrt = new ArrayList<Tuple>();
 				fisrt.addAll(firstPart);
 				List<Tuple> sec = new ArrayList<Tuple>();
 				sec.addAll(secondPart);
-				split = new RTreeSplitContainer(fisrt,sec, part1, part2);
+				split = new RTreeSplitContainer(fisrt, sec, part1, part2);
 			}
 			return split;
 		}
@@ -300,24 +307,16 @@ public class BuildRtreeIndex {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+		//local_running();
+		cluster_running();
+	}
+
+	public static void local_running() throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.set("fs.default", "hdfs://192.168.69.204:8020");
-		conf.set("mapreduce.framework.name", "yarn");
-		conf.set("yarn.scheduler.minimum-allocation-mb","1024");
-		conf.set("yarn.scheduler.maximum-allocation-mb","16384");
-		conf.set("yarn.nodemanager.resource.memory-mb","200000");
-		conf.set("mapreduce.map.memory.mb","4096");
-		conf.set("yarn.scheduler.minimum-allocation-vcore","10");
-		conf.set("yarn.scheduler.maximum-allocation-vcore","20");
-		//conf.set("mapreduce.map.java.opts","-Xmx2048");
-		//conf.set("mapreduce.reduce.memory.mb","4096");
-		conf.set("mapreduce.map.cpu.vcore","10");
-		//conf.set("yarn.node-manager.resource.vcore","20");
-		//conf.set("yarn.resourcemanager.hostname", "root");
-		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
+		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
+		conf.set("mapreduce.framework.name", "local");
 		System.setProperty("HADOOP_USER_NAME", "root");
-		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
-		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
+		Job job = Job.getInstance(conf, "buildRTreeIndex_local_runung");
 
 
 		job.setJarByClass(BuildRtreeIndex.class);
@@ -328,9 +327,9 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-	//FileInputFormat.setInputPaths(job, "/test/1/1.txt");
-		FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
-		Path outPath = new Path(cos.getDiskFilePath()+"/building_info/");//用于mr输出success信息的路径
+		FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+		//FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
+		Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);
@@ -339,8 +338,51 @@ public class BuildRtreeIndex {
 
 		// 向yarn集群提交这个job
 		boolean res = job.waitForCompletion(true);
+		CONSTANTS.persistenceData(cos);
 		System.exit(res ? 0 : 1);
 	}
 
+	public static void cluster_running() throws IOException, ClassNotFoundException, InterruptedException {
+		Configuration conf = new Configuration();
+		conf.set("fs.default", "hdfs://192.168.69.204:8020");
+		conf.set("mapreduce.framework.name", "yarn");
+		conf.set("yarn.scheduler.minimum-allocation-mb", "1024");
+		conf.set("yarn.scheduler.maximum-allocation-mb", "16384");
+		conf.set("yarn.nodemanager.resource.memory-mb", "200000");
+		conf.set("mapreduce.map.memory.mb", "4096");
+		conf.set("yarn.scheduler.minimum-allocation-vcore", "10");
+		conf.set("yarn.scheduler.maximum-allocation-vcore", "20");
+		//conf.set("mapreduce.map.java.opts","-Xmx2048");
+		//conf.set("mapreduce.reduce.memory.mb","4096");
+		conf.set("mapreduce.map.cpu.vcore", "10");
+		//conf.set("yarn.node-manager.resource.vcore","20");
+		//conf.set("yarn.resourcemanager.hostname", "root");
+		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
+		System.setProperty("HADOOP_USER_NAME", "root");
+		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		Job job = Job.getInstance(conf, "buildRTreeIndex_cluster_runung");
 
+
+		job.setJarByClass(BuildRtreeIndex.class);
+		job.setMapperClass(BuildRtreeIndexMapper.class);
+		job.setNumReduceTasks(0);
+		job.setInputFormatClass(WholeFileInputFormat.class);
+
+		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(ByteWritable.class);
+		//FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+		FileInputFormat.setInputPaths(job, cos.getClassifiedFilePath());
+		Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径
+		FileSystem fs = FileSystem.get(conf);
+		if (fs.exists(outPath)) {
+			fs.delete(outPath, true);
+		}
+		FileOutputFormat.setOutputPath(job, outPath);
+
+		// 向yarn集群提交这个job
+		boolean res = job.waitForCompletion(true);
+		CONSTANTS.persistenceData(cos);
+		System.exit(res ? 0 : 1);
+	}
 }

@@ -137,7 +137,9 @@ public class ClassifiedDataIntoSlice {
 		conf.set("yarn.resourcemanager.hostname", "root");
 		conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
-		conf.set("mapreduce.job.jar","/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+
+		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+
 		Job job = Job.getInstance(conf, "classified_cluster_runung");
 		//job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		//job.setJar("/root/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");

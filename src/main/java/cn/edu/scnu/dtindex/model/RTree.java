@@ -14,6 +14,7 @@ public class RTree implements WritableComparable<RTree> {
 	private int treeHight;//树的高度
 	private long numOfNodes;
 	private long indexBeginOffset;
+	private String diskFileName="";
 
 	public RTree(RTreeNode root, int maxSubtree, int maxNodeCapcity, long numOfNodes) {
 		this.root = root;
@@ -23,9 +24,21 @@ public class RTree implements WritableComparable<RTree> {
 		double hight = Math.ceil(Math.log(numOfNodes) / Math.log(maxNodeCapcity));
 		this.treeHight = (int) Math.ceil(hight);
 	}
-
 	public RTree() {
 
+	}
+
+	@Override
+	public String toString() {
+		return "RTree{" +
+				"root=" + root +
+				", maxSubtree=" + maxSubtree +
+				", maxNodeCapcity=" + maxNodeCapcity +
+				", treeHight=" + treeHight +
+				", numOfNodes=" + numOfNodes +
+				", indexBeginOffset=" + indexBeginOffset +
+				", diskFileName='" + diskFileName + '\'' +
+				'}';
 	}
 
 	@Override
@@ -41,27 +54,20 @@ public class RTree implements WritableComparable<RTree> {
 		out.writeInt(treeHight);
 		out.writeLong(numOfNodes);
 		out.writeLong(indexBeginOffset);
+		out.writeUTF(diskFileName);
 	}
 
 	@Override
 	public void readFields(DataInput in) throws IOException {
 		RTreeNode root = new RTreeNode();
 		root.readFields(in);
+		this.root =root;
 		this.maxSubtree = in.readInt();
 		this.maxNodeCapcity = in.readInt();
+		this.treeHight = in.readInt();
 		this.numOfNodes = in.readLong();
 		this.indexBeginOffset = in.readLong();
-	}
-
-	@Override
-	public String toString() {
-		return "RTree{" +
-				"root=" + root +
-				", maxSubtree=" + maxSubtree +
-				", maxNodeCapcity=" + maxNodeCapcity +
-				", treeHight=" + treeHight +
-				", numOfNodes=" + numOfNodes +
-				'}';
+		this.diskFileName = in.readUTF();
 	}
 
 	public void TraverseRTree(RTreeNode node) {
@@ -141,5 +147,11 @@ public class RTree implements WritableComparable<RTree> {
 		this.numOfNodes = numOfNodes;
 	}
 
+	public String getDiskFileName() {
+		return diskFileName;
+	}
 
+	public void setDiskFileName(String diskFileName) {
+		this.diskFileName = diskFileName;
+	}
 }

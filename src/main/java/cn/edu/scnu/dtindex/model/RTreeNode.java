@@ -51,15 +51,13 @@ public class RTreeNode implements WritableComparable<RTreeNode> {
 
 	@Override
 	public void write(DataOutput out) throws IOException {
+		out.writeBoolean(isLeaf);
+		out.writeBoolean(isIndex);
 		if (isIndex) {//如果是索引节点
-			out.writeBoolean(isLeaf);
-			out.writeBoolean(isIndex);
 			out.writeInt(treeLevel);
 			out.writeLong(offset);
 			mbr.write(out);
 		} else if (isLeaf) {//如果是叶子节点
-			out.writeBoolean(isLeaf);
-			out.writeBoolean(isLeaf);
 			out.writeInt(treeLevel);
 			out.writeInt(leafData.size());
 			out.writeLong(offset);
@@ -67,18 +65,7 @@ public class RTreeNode implements WritableComparable<RTreeNode> {
 				t.write(out);
 			}
 			mbr.write(out);
-		} else if (isroot) {//如果是根节点
-
-			out.writeBoolean(isLeaf);
-			out.writeBoolean(isLeaf);
-			out.writeInt(treeLevel);
-			out.writeInt(nodeSize);
-			for (RTreeNode r : nodeList) {
-				r.write(out);
-			}
 		} else {//如果是内部节点
-			out.writeBoolean(isLeaf);
-			out.writeBoolean(isLeaf);
 			out.writeInt(treeLevel);
 			out.writeInt(nodeSize);
 			for (RTreeNode r : nodeList) {
@@ -112,16 +99,6 @@ public class RTreeNode implements WritableComparable<RTreeNode> {
 			MBR mbr = new MBR();
 			mbr.readFields(in);
 			this.mbr = mbr;
-		} else if (isroot) {
-			this.treeLevel = in.readInt();
-			this.nodeSize = in.readInt();
-			List<RTreeNode> nodelist = new ArrayList<RTreeNode>(nodeSize);
-			for (int i = 0; i < nodeSize; i++) {
-				RTreeNode node = new RTreeNode();
-				node.readFields(in);
-				nodelist.add(node);
-			}
-			this.nodeList = nodelist;
 		} else {
 			this.treeLevel = in.readInt();
 			this.nodeSize = in.readInt();
@@ -227,5 +204,19 @@ public class RTreeNode implements WritableComparable<RTreeNode> {
 		this.mbr = mbr;
 	}
 
-
+	@Override
+	public String toString() {
+		return "RTreeNode{" +
+				"isroot=" + isroot +
+				", isLeaf=" + isLeaf +
+				", isIndex=" + isIndex +
+				", treeLevel=" + treeLevel +
+				", nodeSize=" + nodeSize +
+				", nodeList=" + nodeList +
+				", leafDataSize=" + leafDataSize +
+				", leafData=" + leafData +
+				", mbr=" + mbr +
+				", offset=" + offset +
+				'}';
+	}
 }

@@ -54,4 +54,29 @@ public class RTreeDiskSliceFile implements WritableComparable<RTreeDiskSliceFile
 			this.leafData = node;
 		}
 	}
+
+
+	public RTree getIndex() {
+		return index;
+	}
+
+	public void setIndex(RTree index) {
+		this.index = index;
+	}
+
+	public RTreeNode getLeafData() {
+		return leafData;
+	}
+
+	public void setLeafData(RTreeNode leafData) {
+		this.leafData = leafData;
+	}
+
+	public boolean isIndexFile() {
+		return isIndexFile;
+	}
+
+	public void setIndexFile(boolean indexFile) {
+		isIndexFile = indexFile;
+	}
 }

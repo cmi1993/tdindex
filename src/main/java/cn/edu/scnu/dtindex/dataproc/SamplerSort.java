@@ -188,7 +188,7 @@ public class SamplerSort {
 		Configuration conf = job.getConfiguration();
 		conf.set("mapreduce.framework.name", "yarn");
 		conf.set("fs.default", "hdfs://master:8020");
-		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 
 		cos = CONSTANTS.getInstance();
 		String pathToRead = cos.getSamplerFilePath();
