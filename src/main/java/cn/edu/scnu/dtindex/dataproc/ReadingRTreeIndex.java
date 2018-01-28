@@ -25,7 +25,7 @@ public class ReadingRTreeIndex {
 		try {
 			cos = CONSTANTS.getInstance().readPersistenceData();
 			cos.setQueryStart("1979-12-30 00:00:04");
-			cos.setQueryEnd("1997-04-17 13:54:40");
+			cos.setQueryEnd("2000-04-17 13:54:40");
 			//cos.showConstantsInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,6 +38,7 @@ public class ReadingRTreeIndex {
 			System.out.println("********************************************************************");
 			System.out.println("*                               Mapper阶段                          *");
 			System.out.println("********************************************************************");
+			System.out.println("获取分区编号和文件名称");
 			InputSplit split = context.getInputSplit();
 			Path path = ((FileSplit) split).getPath();
 			String filename = path.getName();
@@ -45,6 +46,7 @@ public class ReadingRTreeIndex {
 			String[] splits = filename.split("_");
 			int partitionId = Integer.parseInt(splits[2]);
 			System.out.println("【partitionId】：" + partitionId);
+
 			ValidTime queryWindow = new ValidTime(cos.getQueryStart(), cos.getQueryEnd());
 			System.out.println("【queryWindow】:" + queryWindow.toString());
 			RTree index = value.getIndex();
@@ -120,8 +122,8 @@ public class ReadingRTreeIndex {
 		}
 
 		public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-			//cluster_running();
-			local_running();
+			cluster_running();
+			//local_running();
 		}
 
 		public static void cluster_running() throws InterruptedException, IOException, ClassNotFoundException {
@@ -131,7 +133,7 @@ public class ReadingRTreeIndex {
 			conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 			//System.setProperty("HADOOP_USER_NAME", "root");
 
-			conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+			conf.set("mapreduce.job.jar",CONSTANTS.getMapReduceJobJarPath());
 
 			Job job = Job.getInstance(conf, "readRTreeIndex_cluster");
 

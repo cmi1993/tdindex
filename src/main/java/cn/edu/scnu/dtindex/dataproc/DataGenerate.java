@@ -455,7 +455,7 @@ public class DataGenerate {
 		conf.set("mapreduce.framework.name", "yarn");
 		conf.set("fs.default", "hdfs://master:8020");
 		conf.set("mapred.child.java.opts", "-Xmx1024m");
-		conf.set("mapreduce.job.jar", "/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", "/Users/think/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		for (int i = 0; i < 100; i++) {
 			Generate50w("/timeData/5000w/data.txt");
 			System.out.println((i + 1) * 50 + "w");

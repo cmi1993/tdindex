@@ -28,11 +28,12 @@ public class MBR implements WritableComparable<MBR> {
 
 	/**
 	 * 获取MBR面积
+	 *
 	 * @return
 	 */
-	public BigInteger mbrArea(){
-		long x_span = topRight.getStart()-bottomLeft.getStart();
-		long y_span = topRight.getEnd()-bottomLeft.getEnd();
+	public BigInteger mbrArea() {
+		long x_span = topRight.getStart() - bottomLeft.getStart();
+		long y_span = topRight.getEnd() - bottomLeft.getEnd();
 		BigInteger x = new BigInteger(String.valueOf(x_span));
 		BigInteger y = new BigInteger(String.valueOf(y_span));
 		return x.multiply(y);
@@ -40,6 +41,7 @@ public class MBR implements WritableComparable<MBR> {
 
 	/**
 	 * 判断和查询窗口是否相交
+	 *
 	 * @param query
 	 * @return
 	 */
@@ -53,62 +55,62 @@ public class MBR implements WritableComparable<MBR> {
 	}
 
 	public static MBR getInterNodeMBR(List<RTreeNode> interNodeList) {
-		ValidTime bL = interNodeList.get(0).getMbr().getBottomLeft();
-		ValidTime tR = interNodeList.get(0).getMbr().getTopRight();
+
+		long bottomLeft_start = Long.MAX_VALUE;
+		long bottomLeft_end = Long.MAX_VALUE;
+		long topRight_start = Long.MIN_VALUE;
+		long topRight_end = Long.MIN_VALUE;
+
 		for (RTreeNode node : interNodeList) {
 			ValidTime vt = node.getMbr().getBottomLeft();
-			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
-				bL = vt;
-			}
-			if (vt.getStart() >= tR.getStart() && vt.getEnd() >= tR.getEnd()) {
-				tR = vt;
-			}
-			vt = node.getMbr().getTopRight();
-			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
-				bL = vt;
-			}
-			if (vt.getStart() >= tR.getStart() && vt.getEnd() >= tR.getEnd()) {
-				tR = vt;
-			}
+			if (bottomLeft_start >= vt.getStart()) bottomLeft_start = vt.getStart();
+			if (bottomLeft_end >= vt.getEnd()) bottomLeft_end = vt.getEnd();
+			if (topRight_start <= vt.getStart()) topRight_start = vt.getStart();
+			if (topRight_end <= vt.getEnd()) topRight_end = vt.getEnd();
 		}
-		return new MBR(bL, tR);
+
+		return new MBR(new ValidTime(bottomLeft_start, bottomLeft_end), new ValidTime(topRight_start, topRight_end));
+
 	}
 
 	public static MBR getLeafNodeMBR(List<RTreeNode> leafNodeList) {
-		ValidTime bL = leafNodeList.get(0).getMbr().getBottomLeft();
-		ValidTime tR = leafNodeList.get(0).getMbr().getTopRight();
+
+		long bottomLeft_start = Long.MAX_VALUE;
+		long bottomLeft_end = Long.MAX_VALUE;
+		long topRight_start = Long.MIN_VALUE;
+		long topRight_end = Long.MIN_VALUE;
 		for (RTreeNode node : leafNodeList) {
 			ValidTime vt = node.getMbr().getBottomLeft();
-			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
-				bL = vt;
-			}
-			if (vt.getStart() >= tR.getStart() && vt.getEnd() >= tR.getEnd()) {
-				tR = vt;
-			}
-			vt = node.getMbr().getTopRight();
-			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
-				bL = vt;
-			}
-			if (vt.getStart() >= tR.getStart() && vt.getEnd() >= tR.getEnd()) {
-				tR = vt;
-			}
+			if (bottomLeft_start >= vt.getStart()) bottomLeft_start = vt.getStart();
+			if (bottomLeft_end >= vt.getEnd()) bottomLeft_end = vt.getEnd();
+			if (topRight_start <= vt.getStart()) topRight_start = vt.getStart();
+			if (topRight_end <= vt.getEnd()) topRight_end = vt.getEnd();
+
 		}
-		return new MBR(bL, tR);
+
+		return new MBR(new ValidTime(bottomLeft_start, bottomLeft_end), new ValidTime(topRight_start, topRight_end));
+
 	}
 
+	/**
+	 * 计算叶子节点的mbr，修正
+	 *
+	 * @param tupleList
+	 * @return
+	 */
 	public static MBR getTupleListMBR(List<Tuple> tupleList) {
-		ValidTime bL = tupleList.get(0).getVt();
-		ValidTime tR = tupleList.get(0).getVt();
+		long bottomLeft_start = Long.MAX_VALUE;
+		long bottomLeft_end = Long.MAX_VALUE;
+		long topRight_start = Long.MIN_VALUE;
+		long topRight_end = Long.MIN_VALUE;
 		for (Tuple tuple : tupleList) {
 			ValidTime vt = tuple.getVt();
-			if (vt.getStart() <= bL.getStart() && vt.getEnd() <= bL.getEnd()) {
-				bL = vt;
-			}
-			if (vt.getStart() >= tR.getStart() && vt.getEnd() >= tR.getEnd()) {
-				tR = vt;
-			}
+			if (bottomLeft_start >= vt.getStart()) bottomLeft_start = vt.getStart();
+			if (bottomLeft_end >= vt.getEnd()) bottomLeft_end = vt.getEnd();
+			if (topRight_start <= vt.getStart()) topRight_start = vt.getStart();
+			if (topRight_end <= vt.getEnd()) topRight_end = vt.getEnd();
 		}
-		return new MBR(bL, tR);
+		return new MBR(new ValidTime(bottomLeft_start, bottomLeft_end), new ValidTime(topRight_start, topRight_end));
 	}
 
 	@Override

@@ -41,24 +41,31 @@ public class RTreeVirtualization extends JFrame {
 	class MyJPanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private double bili = 0;
+		private double bili_x = 600 / (1577922954000.0/1000000);
+		private double bili_y = 500 / (1577498200000.0/1000000)*10;
 
 		protected void paintComponent(Graphics g) {
 			Text key = new Text();
 			RTreeDiskSliceFile value = new RTreeDiskSliceFile();
-
+//File Path: hdfs://192.168.69.204:8020/timeData/1000w/DiskSliceFile/RTreeIndex/RTreeindex_partitioner_1_10300211.seq
 			Configuration conf = new Configuration();
 			try {
-				SequenceFile.Reader reader = new SequenceFile.Reader(conf, SequenceFile.Reader.file(new Path("hdfs://192.168.69.204:8020/timeData/1000w/DiskSliceFile/RTreeIndex/RTreeindex_partitioner_0_150326136.seq")));
+				SequenceFile.Reader reader =
+						new SequenceFile.Reader(conf,
+								SequenceFile.Reader.file(
+										new Path("hdfs://192.168.69.204:8020/timeData/1000w/DiskSliceFile/RTreeIndex/RTreeindex_partitioner_1_10300211.seq")));
 				reader.next(key, value);
 				RTree index = value.getIndex();
 				RTreeNode root = index.getRoot();
 				CalcBili(root.getMbr());
 				DrawMBR(g, root.getMbr(), 0);
-				for ( RTreeNode node: root.getNodeList()) {
+				int i=4;
+				for (RTreeNode node : root.getNodeList()) {
 					for (RTreeNode level3 : node.getNodeList()) {
-					    DrawMBR(g,level3.getMbr(),3);
+						//DrawMBR(g, level3.getMbr(), i--);
 					}
-				    DrawMBR(g,node.getMbr(),1);
+					if (i==-1)i=4;
+					DrawMBR(g, node.getMbr(), i--);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -66,14 +73,15 @@ public class RTreeVirtualization extends JFrame {
 
 
 		}
-		private void CalcBili(MBR Rootmbr){
+
+		private void CalcBili(MBR Rootmbr) {
 			long max = 0;
-			max=max<Rootmbr.getBottomLeft().getStart()?Rootmbr.getBottomLeft().getStart():max;
-			max=max<Rootmbr.getBottomLeft().getEnd()?Rootmbr.getBottomLeft().getEnd():max;
-			max=max<Rootmbr.getTopRight().getStart()?Rootmbr.getTopRight().getStart():max;
-			max=max<Rootmbr.getTopRight().getEnd()?Rootmbr.getTopRight().getEnd():max;
-			max=max/1000000;
-			bili = 550/(double)max;
+			max = max < Rootmbr.getBottomLeft().getStart() ? Rootmbr.getBottomLeft().getStart() : max;
+			max = max < Rootmbr.getBottomLeft().getEnd() ? Rootmbr.getBottomLeft().getEnd() : max;
+			max = max < Rootmbr.getTopRight().getStart() ? Rootmbr.getTopRight().getStart() : max;
+			max = max < Rootmbr.getTopRight().getEnd() ? Rootmbr.getTopRight().getEnd() : max;
+			max = max / 1000000;
+			bili = 400 / (double) max;
 		}
 
 		private void DrawMBR(Graphics g, MBR mbr, int level) {
@@ -112,15 +120,18 @@ public class RTreeVirtualization extends JFrame {
 				default:
 					break;
 			}
-			double bls = mbr.getBottomLeft().getStart()/1000000*bili;
-			double ble = mbr.getBottomLeft().getEnd()/1000000*bili;
-			double trs = mbr.getTopRight().getStart()/1000000*bili;
-			double tre = mbr.getTopRight().getEnd()/1000000*bili;
+			double bls = mbr.getBottomLeft().getStart()/1000000 * bili_x;
+			double ble = mbr.getBottomLeft().getEnd()/1000000 * bili_y;
+			//ble = 500 - ble;
+			double trs = mbr.getTopRight().getStart()/1000000  * bili_x;
+			double tre = mbr.getTopRight().getEnd()/1000000  * bili_y;
+			//tre = 500 - tre;
+			((Graphics2D) g).drawRect((int)bls,(int)ble,(int)(trs-bls),(int)(tre-ble));
 
-			g.drawLine((int)bls,(int)ble,(int)trs,(int)ble);
-			g.drawLine((int)bls,(int)tre,(int)trs,(int)tre);
-			g.drawLine((int)bls,(int)tre,(int)bls,(int)ble);
-			g.drawLine((int)trs,(int)tre,(int)trs,(int)ble);
+			//g.drawLine((int) bls, (int) ble, (int) trs, (int) ble);
+			//g.drawLine((int) bls, (int) tre, (int) trs, (int) tre);
+			//g.drawLine((int) bls, (int) tre, (int) bls, (int) ble);
+			//g.drawLine((int) trs, (int) tre, (int) trs, (int) ble);
 
 		}
 
@@ -130,7 +141,7 @@ public class RTreeVirtualization extends JFrame {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setStroke(new BasicStroke(2F));
 			g.setColor(Color.blue);
-            /*switch (level) {
+            switch (level) {
                 case 0:
                     g2.setStroke(new BasicStroke(2F));
                     g.setColor(Color.blue);
@@ -162,7 +173,7 @@ public class RTreeVirtualization extends JFrame {
                     break;
                 default:
                     break;
-            }*/
+            }
 
 
 			/*for (int i = 1; i < pos.length; i++) {

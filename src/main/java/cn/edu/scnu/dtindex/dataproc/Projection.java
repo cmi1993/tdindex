@@ -71,8 +71,8 @@ public class Projection {
 		conf.set("fs.default.name", "hdfs://192.168.69.204:8020");
 		conf.set("mapreduce.framework.name", "yarn");
 
+		conf.set("mapreduce.job.jar", "/Users/think/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		Job job = Job.getInstance(conf, "distributionProject_cluster_runung");
-		job.setJar("/home/think/idea project/dtindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		job.setJarByClass(Projection.class);
 		job.setMapperClass(ProjectionMapper.class);
 		job.setReducerClass(ProjectionReducer.class);

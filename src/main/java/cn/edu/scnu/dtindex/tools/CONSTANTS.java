@@ -40,6 +40,7 @@ public class CONSTANTS implements Serializable {
 	private String projectionResultPath = dataFileDir+"/projection/";//时态投影结果路径
 	private String connectionResultPath = dataFileDir+"/connection/";//时态连接结果路径
 	private String[] projectionFields={"uuid","name"};
+	private static String mapReduceJobJarPath = "/home/think/git_resource/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar";
 	private String queryStart;
 	private String queryEnd;
 
@@ -188,6 +189,14 @@ public class CONSTANTS implements Serializable {
 
 	//-----------------------------------getter and setter----------------------------------------------------
 
+
+	public static String getMapReduceJobJarPath() {
+		return mapReduceJobJarPath;
+	}
+
+	public static void setMapReduceJobJarPath(String mapReduceJobJarPath) {
+		CONSTANTS.mapReduceJobJarPath = mapReduceJobJarPath;
+	}
 
 	public static long getDatanum() {
 		return datanum*10000;

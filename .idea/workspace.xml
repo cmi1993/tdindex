@@ -7,7 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c94d32f-4f73-438e-a401-e84b99e5a0a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeSplitSlice.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CalcScale.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" afterPath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dtindex.iml" afterPath="$PROJECT_DIR$/dtindex.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,7 +49,6 @@
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
     <option name="GROUP_SCHEMA" value="true" />
     <option name="GROUP_CONTENTS" value="false" />
     <option name="SORT_POSITIONED" value="false" />
@@ -40,209 +63,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BuildRtreeIndex.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BuildRtreeIndex.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-47">
-              <caret line="313" column="24" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
+            <state relative-caret-position="325">
+              <caret line="55" column="44" lean-forward="true" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1475#1482#0" expanded="true" />
-                <element signature="e#4233#4254#0" expanded="true" />
-                <element signature="e#5202#5213#0" expanded="true" />
-                <element signature="e#6501#6772#0" expanded="true" />
-                <element signature="e#6771#6772#0" expanded="true" />
-                <element signature="e#8302#8309#0" expanded="true" />
-                <element signature="e#8377#8384#0" expanded="true" />
+                <element signature="e#1562#1569#0" expanded="true" />
+                <element signature="docComment;method#Serialization#0;class#BuildRtreeIndexMapper#0;class#BuildRtreeIndex#0" expanded="false" />
+                <element signature="e#5200#5217#0" expanded="true" />
+                <element signature="e#5289#5300#0" expanded="true" />
+                <element signature="e#7908#7915#0" expanded="true" />
+                <element signature="e#8969#9240#0" expanded="true" />
+                <element signature="e#9239#9240#0" expanded="true" />
+                <element signature="e#9283#9290#0" expanded="true" />
                 <element signature="class#WholeFileInputFormat#0;class#BuildRtreeIndex#0" expanded="false" />
-                <element signature="e#8660#8661#0" expanded="true" />
-                <element signature="e#8681#8682#0" expanded="true" />
                 <element signature="class#WholeFileRecordReader#0;class#BuildRtreeIndex#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildIndex.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2164">
-              <caret line="254" column="20" lean-forward="false" selection-start-line="254" selection-start-column="20" selection-end-line="254" selection-end-column="20" />
-              <folding>
-                <element signature="class#WholeFileInputFormat#0;class#BuildIndex#0" expanded="false" />
-                <element signature="class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-                <element signature="method#getCurrentKey#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-                <element signature="method#getCurrentValue#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CONSTANTS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2699">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding>
-                <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
-                <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
-                <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
-                <element signature="method#setDiskSliceFileDir#0;class#CONSTANTS#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SequenceFile.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/SequenceFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="1296" column="0" lean-forward="false" selection-start-line="1296" selection-start-column="0" selection-end-line="1296" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Text.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/Text.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-              <folding>
-                <element signature="e#3149#3150#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BinaryComparable.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/BinaryComparable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexFile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/IndexFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RTreeDiskSliceFile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeDiskSliceFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#628#629#0" expanded="true" />
-                <element signature="e#643#644#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RTreeNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#965#966#0" expanded="true" />
-                <element signature="e#1041#1042#0" expanded="true" />
-                <element signature="e#1056#1057#0" expanded="true" />
-                <element signature="e#2410#2417#0" expanded="true" />
-                <element signature="e#2788#2799#0" expanded="true" />
-                <element signature="e#3093#3104#0" expanded="true" />
-                <element signature="e#3384#3385#0" expanded="true" />
-                <element signature="e#3406#3407#0" expanded="true" />
-                <element signature="e#3508#3509#0" expanded="true" />
-                <element signature="e#3528#3529#0" expanded="true" />
-                <element signature="e#3570#3571#0" expanded="true" />
-                <element signature="e#3597#3598#0" expanded="true" />
-                <element signature="e#3626#3627#0" expanded="true" />
-                <element signature="e#3647#3648#0" expanded="true" />
-                <element signature="e#3687#3688#0" expanded="true" />
-                <element signature="e#3709#3710#0" expanded="true" />
-                <element signature="e#3742#3743#0" expanded="true" />
-                <element signature="e#3768#3769#0" expanded="true" />
-                <element signature="e#3818#3819#0" expanded="true" />
-                <element signature="e#3857#3858#0" expanded="true" />
-                <element signature="e#3885#3886#0" expanded="true" />
-                <element signature="e#3905#3906#0" expanded="true" />
-                <element signature="e#3944#3945#0" expanded="true" />
-                <element signature="e#3971#3972#0" expanded="true" />
-                <element signature="e#3999#4000#0" expanded="true" />
-                <element signature="e#4019#4020#0" expanded="true" />
-                <element signature="e#4059#4060#0" expanded="true" />
-                <element signature="e#4086#4087#0" expanded="true" />
-                <element signature="e#4123#4124#0" expanded="true" />
-                <element signature="e#4145#4146#0" expanded="true" />
-                <element signature="e#4195#4196#0" expanded="true" />
-                <element signature="e#4226#4227#0" expanded="true" />
-                <element signature="e#4256#4257#0" expanded="true" />
-                <element signature="e#4279#4280#0" expanded="true" />
-                <element signature="e#4323#4324#0" expanded="true" />
-                <element signature="e#4356#4357#0" expanded="true" />
-                <element signature="e#4397#4398#0" expanded="true" />
-                <element signature="e#4419#4420#0" expanded="true" />
-                <element signature="e#4473#4474#0" expanded="true" />
-                <element signature="e#4504#4505#0" expanded="true" />
-                <element signature="e#4534#4535#0" expanded="true" />
-                <element signature="e#4556#4557#0" expanded="true" />
-                <element signature="e#4598#4599#0" expanded="true" />
-                <element signature="e#4629#4630#0" expanded="true" />
-                <element signature="e#4653#4654#0" expanded="true" />
-                <element signature="e#4670#4671#0" expanded="true" />
-                <element signature="e#4702#4703#0" expanded="true" />
-                <element signature="e#4723#4724#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RTree.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#838#839#0" expanded="true" />
-                <element signature="e#853#854#0" expanded="true" />
-                <element signature="e#2387#2388#0" expanded="true" />
-                <element signature="e#2417#2418#0" expanded="true" />
-                <element signature="e#2476#2477#0" expanded="true" />
-                <element signature="e#2523#2524#0" expanded="true" />
-                <element signature="e#2554#2555#0" expanded="true" />
-                <element signature="e#2572#2573#0" expanded="true" />
-                <element signature="e#2612#2613#0" expanded="true" />
-                <element signature="e#2635#2636#0" expanded="true" />
-                <element signature="e#2666#2667#0" expanded="true" />
-                <element signature="e#2690#2691#0" expanded="true" />
-                <element signature="e#2736#2737#0" expanded="true" />
-                <element signature="e#2771#2772#0" expanded="true" />
-                <element signature="e#2806#2807#0" expanded="true" />
-                <element signature="e#2834#2835#0" expanded="true" />
-                <element signature="e#2888#2889#0" expanded="true" />
-                <element signature="e#2931#2932#0" expanded="true" />
-                <element signature="e#2961#2962#0" expanded="true" />
-                <element signature="e#2984#2985#0" expanded="true" />
-                <element signature="e#3028#3029#0" expanded="true" />
-                <element signature="e#3061#3062#0" expanded="true" />
-                <element signature="e#3093#3094#0" expanded="true" />
-                <element signature="e#3117#3118#0" expanded="true" />
-                <element signature="e#3164#3165#0" expanded="true" />
-                <element signature="e#3199#3200#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -266,6 +103,7 @@
       <find>mini</find>
       <find>cos</find>
       <find>TreeNode</find>
+      <find>conf.set(&quot;mapreduce.job.jar&quot;, &quot;/Users/think/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar&quot;);</find>
     </findStrings>
     <replaceStrings>
       <replace>cos.getyPatitionsData()</replace>
@@ -295,35 +133,40 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/IndexFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/Lob.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/hdfs-site.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapred-site.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" />
         <option value="$PROJECT_DIR$/src/main/resources/yarn-site.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/IndexRecord.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/Course.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/MRSamplerSort.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/HDFSTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DFSIOTools.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/ValidTime.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeLeafNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/TreeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeSplitContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeInterNode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeIndexFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeDiskSliceFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeNode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeSplitSlice.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CalcScale.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java" />
+        <option value="$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-mapreduce-client-core/2.5.1/hadoop-mapreduce-client-core-2.5.1.jar!/org/apache/hadoop/mapreduce/Mapper.class" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" />
       </list>
     </option>
@@ -338,8 +181,8 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="$USER_HOME$/maven_repository" />
-        <option name="mavenHome" value="$USER_HOME$/app/apache-maven-3.5.2" />
-        <option name="userSettingsFile" value="$USER_HOME$/app/apache-maven-3.5.2/conf/settings.xml" />
+        <option name="mavenHome" value="$USER_HOME$/apps/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="$USER_HOME$/apps/apache-maven-3.5.2/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -360,32 +203,14 @@
           <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
-          <item name="assembly" type="36feed69:MavenProjectsStructure$PluginNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
-          <item name="jar" type="36feed69:MavenProjectsStructure$PluginNode" />
-        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1700" />
-    <option name="y" value="24" />
-    <option name="width" value="880" />
-    <option name="height" value="482" />
+    <option name="x" value="1472" />
+    <option name="width" value="1221" />
+    <option name="height" value="712" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -472,44 +297,42 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dtindex" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -517,28 +340,39 @@
               <item name="dataproc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="dtindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dtindex" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="tdindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tdindex" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dtindex" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="trin&#9;PSI&#9;JAVA://cn.edu.scnu.dtindex.model.ValidTime#setStartString" />
@@ -568,14 +402,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BuildIndex">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
+  <component name="RunManager" selected="Application.BuildRtreeIndex">
     <configuration name="BuildIndex" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -614,14 +441,14 @@
       <module name="dtindex" />
       <envs />
     </configuration>
-    <configuration name="ClassifiedDataIntoSlice" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="CalcScale" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="cn.edu.scnu.dtindex.dataproc.*" />
+          <option name="PATTERN" value="cn.edu.scnu.dtindex.tools.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.dataproc.ClassifiedDataIntoSlice" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.tools.CalcScale" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -652,14 +479,14 @@
       <module name="dtindex" />
       <envs />
     </configuration>
-    <configuration name="Sampler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="RTreeVirtualization" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="cn.edu.scnu.dtindex.dataproc.*" />
+          <option name="PATTERN" value="cn.edu.scnu.dtindex.tools.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.dataproc.Sampler" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.tools.RTreeVirtualization" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -671,14 +498,14 @@
       <module name="dtindex" />
       <envs />
     </configuration>
-    <configuration name="SamplerSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ReadingRTreeIndex$ReadingRTreeIndexMapper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="cn.edu.scnu.dtindex.dataproc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.dataproc.SamplerSort" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.scnu.dtindex.dataproc.ReadingRTreeIndex$ReadingRTreeIndexMapper" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -689,6 +516,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="dtindex" />
       <envs />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -724,6 +558,12 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -758,27 +598,21 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.BuildIndex" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Sampler" />
-      <item index="2" class="java.lang.String" itemvalue="Application.SamplerSort" />
-      <item index="3" class="java.lang.String" itemvalue="Application.ClassifiedDataIntoSlice" />
-      <item index="4" class="java.lang.String" itemvalue="Application.RTree" />
-      <item index="5" class="java.lang.String" itemvalue="Application.BuildRtreeIndex" />
+      <item index="1" class="java.lang.String" itemvalue="Application.RTree" />
+      <item index="2" class="java.lang.String" itemvalue="Application.BuildRtreeIndex" />
+      <item index="3" class="java.lang.String" itemvalue="Application.RTreeVirtualization" />
+      <item index="4" class="java.lang.String" itemvalue="Application.CalcScale" />
+      <item index="5" class="java.lang.String" itemvalue="Application.ReadingRTreeIndex$ReadingRTreeIndexMapper" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.BuildRtreeIndex" />
-        <item index="1" class="java.lang.String" itemvalue="Application.RTree" />
-        <item index="2" class="java.lang.String" itemvalue="Application.ClassifiedDataIntoSlice" />
-        <item index="3" class="java.lang.String" itemvalue="Application.SamplerSort" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Sampler" />
+        <item index="1" class="java.lang.String" itemvalue="Application.RTreeVirtualization" />
+        <item index="2" class="java.lang.String" itemvalue="Application.ReadingRTreeIndex$ReadingRTreeIndexMapper" />
+        <item index="3" class="java.lang.String" itemvalue="Application.CalcScale" />
+        <item index="4" class="java.lang.String" itemvalue="Application.RTree" />
       </list>
     </recent_temporary>
   </component>
@@ -862,11 +696,16 @@
       <workItem from="1516152798543" duration="10620000" />
       <workItem from="1516243293736" duration="7678000" />
       <workItem from="1516263286145" duration="17722000" />
+      <workItem from="1516790242782" duration="20833000" />
+      <workItem from="1516887916063" duration="1459000" />
+      <workItem from="1516889417564" duration="12261000" />
+      <workItem from="1516948251476" duration="5873000" />
+      <workItem from="1517144666876" duration="680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="394356000" />
+    <option name="totallyTimeSpent" value="435462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -878,40 +717,72 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1366" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="1472" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34696406" sideWeight="0.3513932" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30064425" sideWeight="0.34870994" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29489166" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15997131" sideWeight="0.5144291" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14756447" sideWeight="0.48557088" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24982105" sideWeight="0.5048077" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15819614" sideWeight="0.39590445" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40644363" sideWeight="0.64860684" order="7" side_tool="true" content_ui="tabs" x="90" y="199" width="1194" height="420" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3903941" sideWeight="0.29634932" order="5" side_tool="true" content_ui="tabs" x="-2" y="153" width="1194" height="420" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24856733" sideWeight="0.4755245" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18396564" sideWeight="0.4755245" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32856122" sideWeight="0.49519232" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15423243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24982105" sideWeight="0.49519232" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18468146" sideWeight="0.5244755" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="11" side_tool="false" content_ui="tabs" x="177" y="79" width="1013" height="458" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hadoop FileSystem" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17145015" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3911525" sideWeight="0.70365065" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15891196" sideWeight="0.6040956" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15819614" sideWeight="0.39590445" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15423243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="11" side_tool="false" content_ui="tabs" x="212" y="11" width="1013" height="458" />
+      <window_info id="Hadoop FileSystem" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17145015" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30064425" sideWeight="0.34870994" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29489166" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3911525" sideWeight="0.29634932" order="5" side_tool="true" content_ui="tabs" x="-2" y="153" width="1194" height="420" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18396564" sideWeight="0.4755245" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3911525" sideWeight="0.70365065" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18468146" sideWeight="0.5244755" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="4" side_tool="false" content_ui="tabs" x="103" y="763" width="1094" height="524" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Hadoop FileSystem" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858273" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39118066" sideWeight="0.49458206" order="3" side_tool="false" content_ui="tabs" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -972,7 +843,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java</url>
-          <line>99</line>
+          <line>100</line>
           <properties />
           <option name="timeStamp" value="118" />
         </line-breakpoint>
@@ -1019,10 +890,28 @@
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
-          <line>71</line>
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java</url>
+          <line>122</line>
           <properties />
-          <option name="timeStamp" value="159" />
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DataToLongPaser.java</url>
@@ -1036,7 +925,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="160" />
+      <option name="time" value="181" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1054,359 +943,11 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-hdfs/2.5.1/hadoop-hdfs-2.5.1.jar!/org/apache/hadoop/hdfs/DFSOutputStream.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="1699" column="0" lean-forward="false" selection-start-line="1699" selection-start-column="0" selection-end-line="1699" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/lib/map/MultithreadedMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="277" column="0" lean-forward="false" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/lib/input/SequenceFileRecordReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/FilterInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="180" column="0" lean-forward="false" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/Job.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21386">
-          <caret line="1301" column="0" lean-forward="false" selection-start-line="1301" selection-start-column="0" selection-end-line="1301" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/lib/input/SequenceFileInputFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="46" column="29" lean-forward="false" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-hdfs/2.5.1/hadoop-hdfs-2.5.1.jar!/org/apache/hadoop/hdfs/DFSInputStream.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="716" column="0" lean-forward="false" selection-start-line="716" selection-start-column="0" selection-end-line="716" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-hdfs/2.5.1/hadoop-hdfs-2.5.1.jar!/org/apache/hadoop/hdfs/DFSClient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="837" column="0" lean-forward="false" selection-start-line="837" selection-start-column="0" selection-end-line="837" selection-end-column="0" />
-          <folding>
-            <marker date="1513769592598" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1513769592598" expanded="false" signature="146:6641" ph="..." />
-            <marker date="1513769592598" expanded="false" signature="8233:8244" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="8270:8276" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="8314:8325" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="8342:8348" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="8354:8372" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="8449:8503" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="8592:8645" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="8724:8782" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="8879:8948" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="9096:12623" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="12736:13859" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="13909:14295" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="14333:14344" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="14394:14400" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="14448:14555" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="14602:14719" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="14745:14756" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="14794:14800" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="14858:14869" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="14892:14898" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="14940:15089" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="15152:15232" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="15320:15383" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="15440:15504" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="15570:15840" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="15888:16158" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="16199:16359" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="16390:16401" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="16427:16433" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="16465:16476" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="16505:16511" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="16547:16773" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="16819:17572" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="17610:17621" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="17650:17656" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="17675:18001" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="18061:18928" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="18986:19229" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="19268:19279" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="19322:19328" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="19388:19597" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="19666:19931" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="20006:20017" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="20082:20088" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="20186:20603" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="20609:20627" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="20754:21174" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="21247:21909" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="22003:22276" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="22282:22300" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="22428:22844" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="22920:22974" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="23016:23027" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="23072:23078" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="23165:23255" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="23378:23458" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="23588:23876" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="23934:24251" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="24379:24799" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="24974:27271" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="27360:27455" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="27461:27479" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="27641:27707" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="27836:27943" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="27984:27995" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="28016:28022" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="28105:28252" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="28358:28495" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="28613:28708" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="28849:28967" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="29124:29357" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="29574:29724" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="29963:30121" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="30394:31331" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="31473:32045" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="32321:32841" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="32942:33511" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="33577:33848" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="33980:34580" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="34714:34870" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="34977:35420" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="35506:35889" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="35895:35913" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="35999:36371" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="36442:36744" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="36831:37329" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="37335:37353" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="37427:37508" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="37586:37954" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="38013:38092" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="38182:38244" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="38356:38680" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="38751:39050" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="39115:39415" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="39490:39764" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="39861:40148" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="40204:40335" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="40388:40513" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="40599:41097" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="41359:47777" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="47966:49022" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="49260:50412" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="50500:50869" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="50962:51335" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="51392:51515" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="51576:51627" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="51696:51747" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="51808:51859" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="51959:52032" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="52119:52180" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="52255:52310" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="52404:52472" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="52568:52792" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="52886:53076" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="53196:53432" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="53524:53734" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="53806:54008" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="54083:54288" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="54421:54663" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="54769:54981" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="55090:55298" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="55365:55564" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="55679:55752" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="55822:56015" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="56088:56284" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="56354:56554" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="56634:56694" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="56764:56968" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57034:57241" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57314:57402" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57492:57555" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57607:57652" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57715:57764" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57838:57900" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="57955:58003" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="58091:58151" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="58157:58175" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="58249:58315" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="58421:58667" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="58762:58831" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="58948:59739" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="59809:60087" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="60180:60940" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="61022:61363" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="61445:61641" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="61711:61950" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="61981:62099" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="62159:62170" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="62209:62215" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="62276:62287" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="62327:62333" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="62378:62389" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="62415:62421" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="62511:62932" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="63022:63443" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="63509:63921" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="63980:64385" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="64465:64876" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="64943:65263" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="65376:65803" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="65876:66323" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="66397:66733" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="66827:67183" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="67251:67654" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="67728:68145" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="68223:68859" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="68929:70042" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="69125:69457" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="69260:69443" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="69482:69833" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="69571:69819" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="70075:70086" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="70124:70130" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="70204:70215" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="70262:70268" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="70319:70330" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="70361:70367" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="70404:70511" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="70560:70571" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="70597:70603" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="70609:70627" ph="/**...*/" />
-            <marker date="1513769592598" expanded="true" signature="70715:70829" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="70789:70823" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="70897:73190" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="70924:70935" ph="{}" />
-            <marker date="1513769592598" expanded="false" signature="70981:70996" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="71063:71073" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="71156:71536" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="71620:72091" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="72221:73012" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="73082:73118" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="73135:73184" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="73221:82270" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="75269:80448" ph="{...}" />
-            <marker date="1513769592598" expanded="false" signature="80502:80517" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="80555:80565" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="80610:80625" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="80654:80664" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="80715:80730" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="80765:80775" ph=" }" />
-            <marker date="1513769592598" expanded="false" signature="80827:80842" ph=" { " />
-            <marker date="1513769592598" expanded="false" signature="80878:80888" ph=" }" />
-            <marker date="1513769592598" expanded="true" signature="80947:81312" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="81385:81587" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="81654:81724" ph="{...}" />
-            <marker date="1513769592598" expanded="true" signature="81810:82264" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="378" column="20" lean-forward="false" selection-start-line="378" selection-start-column="20" selection-end-line="378" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="49" lean-forward="false" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/NoTime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271">
-          <caret line="425" column="0" lean-forward="false" selection-start-line="425" selection-start-column="0" selection-end-line="425" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="75" column="36" lean-forward="false" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/MR.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/entrance/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/MRSamplerSort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-380">
-          <caret line="45" column="11" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1421,7 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1429,7 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2820">
           <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1441,110 +980,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="1745" column="25" lean-forward="false" selection-start-line="1745" selection-start-column="25" selection-end-line="1745" selection-end-column="25" />
-          <folding>
-            <element signature="e#66828#66829#0" expanded="false" />
-            <element signature="e#66870#66871#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="707" column="12" lean-forward="false" selection-start-line="707" selection-start-column="12" selection-end-line="707" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Math.java" />
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/Tuple.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeLeafNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="16" column="14" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/lib/input/FileInputFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="320" column="0" lean-forward="false" selection-start-line="320" selection-start-column="0" selection-end-line="320" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-mapreduce-client-common/2.5.1/hadoop-mapreduce-client-common-2.5.1.jar!/org/apache/hadoop/mapred/LocalJobRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="771" column="0" lean-forward="false" selection-start-line="771" selection-start-column="0" selection-end-line="771" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/math/BigInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="3517" column="15" lean-forward="false" selection-start-line="3517" selection-start-column="15" selection-end-line="3517" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapred/MapTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="498" column="0" lean-forward="false" selection-start-line="498" selection-start-column="0" selection-end-line="498" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/Mapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/TreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="116" column="8" lean-forward="false" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeLeafNode.java" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/lib/input/FileInputFormat.java" />
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/math/BigInteger.java" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapred/MapTask.java" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-mapreduce-client-core-2.5.1-sources.jar!/org/apache/hadoop/mapreduce/Mapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/TreeNode.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/IndexRecord.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
           <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1552,23 +1006,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#645#646#0" expanded="false" />
-            <element signature="e#689#690#0" expanded="false" />
-            <element signature="e#714#715#0" expanded="false" />
-            <element signature="e#748#749#0" expanded="false" />
-            <element signature="e#767#768#0" expanded="false" />
-            <element signature="e#811#812#0" expanded="false" />
-            <element signature="e#836#837#0" expanded="false" />
-            <element signature="e#865#866#0" expanded="false" />
-            <element signature="e#887#888#0" expanded="false" />
-            <element signature="e#929#930#0" expanded="false" />
-            <element signature="e#960#961#0" expanded="false" />
-            <element signature="e#989#990#0" expanded="false" />
-            <element signature="e#1011#1012#0" expanded="false" />
-            <element signature="e#1053#1054#0" expanded="false" />
-            <element signature="e#1084#1085#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1576,13 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#318#319#0" expanded="false" />
-            <element signature="e#343#344#0" expanded="false" />
-            <element signature="e#397#398#0" expanded="false" />
-            <element signature="e#412#413#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1590,194 +1020,245 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/BinaryComparable.java" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/Text.java" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/SequenceFile.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeDiskSliceFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/IndexFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="80">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/BinaryComparable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeSplitSlice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/Text.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#3149#3150#0" expanded="true" />
+            <element signature="e#397#398#0" expanded="false" />
+            <element signature="e#417#418#0" expanded="false" />
+            <element signature="e#545#546#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/hadoop-common-2.5.1-sources.jar!/org/apache/hadoop/io/SequenceFile.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="1296" column="0" lean-forward="false" selection-start-line="1296" selection-start-column="0" selection-end-line="1296" selection-end-column="0" />
+        <state relative-caret-position="149">
+          <caret line="140" column="11" lean-forward="false" selection-start-line="140" selection-start-column="11" selection-end-line="140" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#853#854#0" expanded="true" />
-            <element signature="e#2387#2388#0" expanded="true" />
-            <element signature="e#2417#2418#0" expanded="true" />
-            <element signature="e#2476#2477#0" expanded="true" />
-            <element signature="e#2523#2524#0" expanded="true" />
-            <element signature="e#2554#2555#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2612#2613#0" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-            <element signature="e#2666#2667#0" expanded="true" />
-            <element signature="e#2690#2691#0" expanded="true" />
-            <element signature="e#2736#2737#0" expanded="true" />
-            <element signature="e#2771#2772#0" expanded="true" />
-            <element signature="e#2806#2807#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
-            <element signature="e#2888#2889#0" expanded="true" />
-            <element signature="e#2931#2932#0" expanded="true" />
-            <element signature="e#2961#2962#0" expanded="true" />
-            <element signature="e#2984#2985#0" expanded="true" />
-            <element signature="e#3028#3029#0" expanded="true" />
-            <element signature="e#3061#3062#0" expanded="true" />
-            <element signature="e#3093#3094#0" expanded="true" />
-            <element signature="e#3117#3118#0" expanded="true" />
-            <element signature="e#3164#3165#0" expanded="true" />
-            <element signature="e#3199#3200#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="194">
+          <caret line="115" column="15" lean-forward="false" selection-start-line="115" selection-start-column="15" selection-end-line="115" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/MRSamplerSort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-400">
+          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#965#966#0" expanded="true" />
-            <element signature="e#1041#1042#0" expanded="true" />
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#2410#2417#0" expanded="true" />
-            <element signature="e#2788#2799#0" expanded="true" />
-            <element signature="e#3093#3104#0" expanded="true" />
-            <element signature="e#3384#3385#0" expanded="true" />
-            <element signature="e#3406#3407#0" expanded="true" />
-            <element signature="e#3508#3509#0" expanded="true" />
-            <element signature="e#3528#3529#0" expanded="true" />
-            <element signature="e#3570#3571#0" expanded="true" />
-            <element signature="e#3597#3598#0" expanded="true" />
-            <element signature="e#3626#3627#0" expanded="true" />
-            <element signature="e#3647#3648#0" expanded="true" />
-            <element signature="e#3687#3688#0" expanded="true" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3742#3743#0" expanded="true" />
-            <element signature="e#3768#3769#0" expanded="true" />
-            <element signature="e#3818#3819#0" expanded="true" />
-            <element signature="e#3857#3858#0" expanded="true" />
-            <element signature="e#3885#3886#0" expanded="true" />
-            <element signature="e#3905#3906#0" expanded="true" />
-            <element signature="e#3944#3945#0" expanded="true" />
-            <element signature="e#3971#3972#0" expanded="true" />
-            <element signature="e#3999#4000#0" expanded="true" />
-            <element signature="e#4019#4020#0" expanded="true" />
-            <element signature="e#4059#4060#0" expanded="true" />
-            <element signature="e#4086#4087#0" expanded="true" />
-            <element signature="e#4123#4124#0" expanded="true" />
-            <element signature="e#4145#4146#0" expanded="true" />
-            <element signature="e#4195#4196#0" expanded="true" />
-            <element signature="e#4226#4227#0" expanded="true" />
-            <element signature="e#4256#4257#0" expanded="true" />
-            <element signature="e#4279#4280#0" expanded="true" />
-            <element signature="e#4323#4324#0" expanded="true" />
-            <element signature="e#4356#4357#0" expanded="true" />
-            <element signature="e#4397#4398#0" expanded="true" />
-            <element signature="e#4419#4420#0" expanded="true" />
-            <element signature="e#4473#4474#0" expanded="true" />
-            <element signature="e#4504#4505#0" expanded="true" />
-            <element signature="e#4534#4535#0" expanded="true" />
-            <element signature="e#4556#4557#0" expanded="true" />
-            <element signature="e#4598#4599#0" expanded="true" />
-            <element signature="e#4629#4630#0" expanded="true" />
-            <element signature="e#4653#4654#0" expanded="true" />
-            <element signature="e#4670#4671#0" expanded="true" />
-            <element signature="e#4702#4703#0" expanded="true" />
-            <element signature="e#4723#4724#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="229">
+          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeDiskSliceFile.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#628#629#0" expanded="true" />
-            <element signature="e#643#644#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="191">
+          <caret line="90" column="14" lean-forward="false" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="52" column="24" lean-forward="false" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="34" column="98" lean-forward="false" selection-start-line="34" selection-start-column="98" selection-end-line="34" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="173" column="4" lean-forward="false" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/bigdata/wcDemo/WordCountRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CalcScale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="51" column="5" lean-forward="false" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2699">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="2975">
+          <caret line="192" column="51" lean-forward="false" selection-start-line="192" selection-start-column="51" selection-end-line="192" selection-end-column="51" />
           <folding>
             <element signature="docComment;method#persistenceData#0;class#CONSTANTS#0" expanded="false" />
             <element signature="docComment;method#readPersistenceData#0;class#CONSTANTS#0" expanded="false" />
             <element signature="docComment;method#showConstantsInfo#0;class#CONSTANTS#0" expanded="false" />
+            <element signature="e#9093#9094#0" expanded="true" />
             <element signature="method#setDiskSliceFileDir#0;class#CONSTANTS#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-47">
-          <caret line="313" column="24" lean-forward="false" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
+        <state relative-caret-position="7310">
+          <caret line="457" column="67" lean-forward="false" selection-start-line="457" selection-start-column="67" selection-end-line="457" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="121" column="9" lean-forward="false" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="107" column="12" lean-forward="false" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="201" column="8" lean-forward="false" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1475#1482#0" expanded="true" />
-            <element signature="e#4233#4254#0" expanded="true" />
-            <element signature="e#5202#5213#0" expanded="true" />
-            <element signature="e#6501#6772#0" expanded="true" />
-            <element signature="e#6771#6772#0" expanded="true" />
-            <element signature="e#8302#8309#0" expanded="true" />
-            <element signature="e#8377#8384#0" expanded="true" />
-            <element signature="class#WholeFileInputFormat#0;class#BuildRtreeIndex#0" expanded="false" />
-            <element signature="e#8660#8661#0" expanded="true" />
-            <element signature="e#8681#8682#0" expanded="true" />
-            <element signature="class#WholeFileRecordReader#0;class#BuildRtreeIndex#0" expanded="false" />
+            <element signature="e#7373#7374#0" expanded="true" />
+            <element signature="e#7407#7408#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2164">
-          <caret line="254" column="20" lean-forward="false" selection-start-line="254" selection-start-column="20" selection-end-line="254" selection-end-column="20" />
+        <state relative-caret-position="284">
+          <caret line="243" column="23" lean-forward="false" selection-start-line="243" selection-start-column="23" selection-end-line="243" selection-end-column="23" />
           <folding>
             <element signature="class#WholeFileInputFormat#0;class#BuildIndex#0" expanded="false" />
             <element signature="class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
             <element signature="method#getCurrentKey#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
             <element signature="method#getCurrentValue#0;class#WholeFileRecordReader#0;class#BuildIndex#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/apps/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="1236" column="0" lean-forward="false" selection-start-line="1236" selection-start-column="0" selection-end-line="1236" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-mapreduce-client-core/2.5.1/hadoop-mapreduce-client-core-2.5.1.jar!/org/apache/hadoop/mapred/MapTask.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="271" column="0" lean-forward="false" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-mapreduce-client-common/2.5.1/hadoop-mapreduce-client-common-2.5.1.jar!/org/apache/hadoop/mapred/LocalJobRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="775" column="0" lean-forward="false" selection-start-line="775" selection-start-column="0" selection-end-line="775" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/maven_repository/org/apache/hadoop/hadoop-mapreduce-client-core/2.5.1/hadoop-mapreduce-client-core-2.5.1.jar!/org/apache/hadoop/mapreduce/Mapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding>
+            <element signature="e#3078#3079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/apps/jdk1.8.0_151/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="316" column="4" lean-forward="false" selection-start-line="316" selection-start-column="4" selection-end-line="316" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="55" column="44" lean-forward="true" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1562#1569#0" expanded="true" />
+            <element signature="docComment;method#Serialization#0;class#BuildRtreeIndexMapper#0;class#BuildRtreeIndex#0" expanded="false" />
+            <element signature="e#5200#5217#0" expanded="true" />
+            <element signature="e#5289#5300#0" expanded="true" />
+            <element signature="e#7908#7915#0" expanded="true" />
+            <element signature="e#8969#9240#0" expanded="true" />
+            <element signature="e#9239#9240#0" expanded="true" />
+            <element signature="e#9283#9290#0" expanded="true" />
+            <element signature="class#WholeFileInputFormat#0;class#BuildRtreeIndex#0" expanded="false" />
+            <element signature="class#WholeFileRecordReader#0;class#BuildRtreeIndex#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1865,7 +1346,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: asm:asm:3.1</last-edited>
+          <last-edited>Maven: org.apache.hadoop:hadoop-common:2.5.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1887,5 +1368,8 @@
         </settings>
       </state>
     </states>
+  </component>
+  <component name="mavenExecuteGoalHistory">
+    <option value="" />
   </component>
 </project>

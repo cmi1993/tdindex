@@ -88,7 +88,7 @@ public class Sampler {
 		conf.set("fs.default.name", "hdfs://192.168.69.204:8020");
 		conf.set("mapreduce.framework.name","yarn");
 
-		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", "/Users/think/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 		Job job = Job.getInstance(conf, "sampler_cluster_runung");
 		job.setJarByClass(Sampler.class);
 		job.setMapperClass(SRSMapper.class);

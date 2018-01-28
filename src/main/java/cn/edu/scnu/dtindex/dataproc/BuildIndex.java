@@ -241,7 +241,7 @@ public class BuildIndex {
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
 
-		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", "/Users/think/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
 
 		Job job = Job.getInstance(conf, "buildIndex_cluster_runung");
 

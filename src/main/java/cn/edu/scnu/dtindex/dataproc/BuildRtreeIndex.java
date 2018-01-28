@@ -15,9 +15,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BuildRtreeIndex {
 	static CONSTANTS cos;
@@ -42,6 +42,7 @@ public class BuildRtreeIndex {
 		protected void map(Text key, Text value, Context context) throws IOException, InterruptedException {
 			System.out.println("[1]读取单一分区的x有序数据-----------------------------------------------");
 			String[] records = value.toString().split("\n");
+			//List<Tuple> tupleList  = new CopyOnWriteArrayList<Tuple>();
 			List<Tuple> tupleList = new ArrayList<Tuple>();
 			for (String tupleStr : records) {
 				String[] fields = tupleStr.split(",");
@@ -49,12 +50,12 @@ public class BuildRtreeIndex {
 				tupleList.add(t);
 			}
 			System.out.println("[2]构建rTree索引-----------------------------------------------");
-			RTreeNode root = new RTreeNode(0);
-			root.setIsroot(true);
-			RTree rtree = new RTree(root, tupleList.size() / 4, 4, tupleList.size());
-			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree());
-			MBR rootMBR = MBR.getInterNodeMBR(root.getNodeList());
-			root.setMbr(rootMBR);
+			RTreeNode root = new RTreeNode(0);//创建R树的根节点
+			root.setIsroot(true);//标示为根节点
+			RTree rtree = new RTree(root, tupleList.size() / 16, 16, tupleList.size());//初始化空的Rtree
+			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree(),rtree.getMaxNodeCapcity());//TGS构建Rtree
+			MBR rootMBR = MBR.getInterNodeMBR(root.getNodeList());//计算根节点的MBR
+			root.setMbr(rootMBR);//设置根节点的MBR
 
 			System.out.println("[3]准备序列化数据-----------------------------------------------");
 			InputSplit inputSplit = context.getInputSplit();
@@ -90,6 +91,15 @@ public class BuildRtreeIndex {
 			System.out.println("success!!");
 		}
 
+		/**
+		 * 用于将叶节点的数据序列化出去，然后在R树的叶节点处记录一个偏移量来指向所在的数据
+		 *
+		 * @param node      用于序列化的节点，只有改节点是叶子节点的时候才进行序列化操作
+		 * @param writer    用于序列化的写出类
+		 * @param DiskKey   序列化对象的key
+		 * @param DiskValue 序列化对象的value
+		 * @throws IOException
+		 */
 		public void Serialization(RTreeNode node, SequenceFile.Writer writer, Text DiskKey, RTreeDiskSliceFile DiskValue) throws IOException {
 			if (node.isLeaf()) {
 				writer.append(new Text(""), new RTreeDiskSliceFile(node));
@@ -98,78 +108,107 @@ public class BuildRtreeIndex {
 				node.setIndex(true);
 				node.clearLeafDataList();
 			} else {
-				List<RTreeNode> nodeList = node.getNodeList();
-				for (RTreeNode n : nodeList) {
-					Serialization(n, writer, DiskKey, DiskValue);
+				if (node.getNodeList() != null) {
+					List<RTreeNode> nodeList = node.getNodeList();
+					for (RTreeNode n : nodeList) {
+						Serialization(n, writer, DiskKey, DiskValue);
+					}
 				}
 			}
 		}
 
-		static int splitcount = 0;
-		static Stack<RTreeSplitContainer> splitStack = new Stack<RTreeSplitContainer>();
-		static Stack<RTreeSplitContainer> tmpStack;
 
-		public void BuildRtree(List<Tuple> tupleList, RTree tree, int buildTimes, RTreeNode current, int maxSubTree) {
-			if (tupleList.size() <= tree.getMaxNodeCapcity()) {
+		/**
+		 * 构建R树的算法
+		 */
+		public void BuildRtree(List<Tuple> tupleList, RTree tree, int buildTime, RTreeNode current, int maxSubTree,int splitcount) {
+
+			if (tupleList.size() <= 2*tree.getMaxNodeCapcity()-1) {//如果数据条目再次进行分裂之后小于节点的半满，不进行分类，归结为一个叶节点
 				current.setLeaf(true);
 				current.setLeafDataSize(tupleList.size());
 				return;
-			} else {
-				tmpStack = new Stack<RTreeSplitContainer>();
-				RTreeSplitContainer splits = recursiveSplit(tupleList, tree);
-				splitStack.push(splits);
-				splitcount = 0;
-				while (splitcount != tree.getMaxNodeCapcity()) {//不断分裂，直到可以足够填满一层
-					for (RTreeSplitContainer container : splitStack) {
-						RTreeSplitContainer container1 = recursiveSplit(container.getPart1(), tree);
-						RTreeSplitContainer container2 = recursiveSplit(container.getPart2(), tree);
-						tmpStack.push(container1);
-						tmpStack.push(container2);
-					}
-					splitStack.clear();
-					splitStack = tmpStack;
-				}
-				//---------------------------------开始填充节点
-				List<RTreeNode> nodeList = new ArrayList<RTreeNode>();
-				while (!splitStack.empty()) {
-					RTreeSplitContainer pop = splitStack.pop();
-					RTreeNode node1 = new RTreeNode(0, pop.getPart1MBR(), pop.getPart1());
-					nodeList.add(node1);
-					RTreeNode node2 = new RTreeNode(0, pop.getPart2MBR(), pop.getPart2());
-					nodeList.add(node2);
+			} else {//递归进行数据切割算法
+				List<RTreeSplitSlice> sclices = new ArrayList<RTreeSplitSlice>();//用于存储current节点分裂之后的数据容器
+				List<RTreeNode> nodeList = new ArrayList<RTreeNode>();//用于存储current节点的孩子节点数据
+				recursiveSplit(tupleList, tree, maxSubTree, splitcount, sclices);//进行分裂操作
+				//将分裂成的n个切片作为current节点的孩子节点
+				for (RTreeSplitSlice split : sclices) {
+					RTreeNode node = new RTreeNode(buildTime, split.getSliceMBR(), split.getTuples());
+					nodeList.add(node);
 				}
 				current.setNodeList(nodeList);
 				current.setNodeSize(nodeList.size());
-
-
 				//---------------------------------每个节点递归地进行分裂
 				for (RTreeNode n : current.getNodeList()) {
-					BuildRtree(((RTreeNode) n).getLeafData(), tree, buildTimes++, ((RTreeNode) n), maxSubTree / tree.getMaxNodeCapcity());
-
+					BuildRtree(n.getLeafData(), tree, buildTime++, n,
+							(maxSubTree / tree.getMaxNodeCapcity()<tree.getMaxNodeCapcity()?//如果分裂之后导致节点不饱和，最大子树数量设置为阶数
+									tree.getMaxNodeCapcity():(maxSubTree/tree.getMaxNodeCapcity())),
+							(maxSubTree / tree.getMaxNodeCapcity()<tree.getMaxNodeCapcity()?//如果分裂之后导致节点不饱和，最大子树数量设置为阶数
+									(int)(Math.ceil((double) maxSubTree/(double) tree.getMaxNodeCapcity())):tree.getMaxNodeCapcity()));
 				}
-
+				//清空非叶子节点的数据，避免冗余
 				for (RTreeNode n : current.getNodeList()) {
-					if (!((RTreeNode) n).isLeaf())
-						((RTreeNode) n).clearLeafDataList();
+					if (!n.isLeaf())
+						n.clearLeafDataList();
 				}
 			}
 
 		}
 
-		public RTreeSplitContainer recursiveSplit(List<Tuple> tupleList, RTree tree) {
-			splitcount += 2;
-			//x dimention find //x维度寻找最佳扫描线
-			RTreeSplitContainer xSplit = XSplit(tupleList, tree, tupleList.size() / tree.getMaxNodeCapcity());
-			//y dimention find //y维度寻找最佳扫描线
-			RTreeSplitContainer ySplit = YSplit(tupleList, tree, tupleList.size() / tree.getMaxNodeCapcity());
-			if (isBestToSplitInX)
-				return xSplit;
-			else
-				return ySplit;
+		/**
+		 * @param tupleList--节点数量
+		 * @param tree--用于构建的RTree
+		 * @param perSubTreeNodeNum--此次分裂的子樹的节点数量
+		 * @param splitNum--一开始为R树的阶数
+		 * @return
+		 */
+		public void recursiveSplit(List<Tuple> tupleList, RTree tree, int perSubTreeNodeNum, int splitNum, List<RTreeSplitSlice> slices) {
+			RTreeSplitSlice[] xSplit = XSplit(tupleList, tree, perSubTreeNodeNum, splitNum);
+			RTreeSplitSlice[] ySplit = YSplit(tupleList, tree, perSubTreeNodeNum, splitNum);
+			if (isBestToSplitInX) {//如果最佳分裂线在x上
+				if (xSplit[0].getSplitCount() == 1) slices.add(xSplit[0]);
+				else recursiveSplit(xSplit[0].getTuples(), tree, perSubTreeNodeNum, xSplit[0].getSplitCount(), slices);
+				if (xSplit[1].getSplitCount() == 1) slices.add(xSplit[1]);
+				else recursiveSplit(xSplit[1].getTuples(), tree, perSubTreeNodeNum, xSplit[1].getSplitCount(), slices);
+				if ((xSplit[0].getSplitCount() == 1) && (xSplit[1].getSplitCount() == 1)) return;
+			} else {//如果最佳分裂线在y上
+				if (ySplit[0].getSplitCount() == 1) slices.add(ySplit[0]);
+				else recursiveSplit(ySplit[0].getTuples(), tree, perSubTreeNodeNum, ySplit[0].getSplitCount(), slices);
+				if (ySplit[1].getSplitCount() == 1) slices.add(ySplit[1]);
+				else recursiveSplit(ySplit[1].getTuples(), tree, perSubTreeNodeNum, ySplit[1].getSplitCount(), slices);
+				if ((ySplit[0].getSplitCount() == 1) && (ySplit[1].getSplitCount() == 1)) return;
+			}
 		}
 
-		public RTreeSplitContainer YSplit(List<Tuple> tupleList, RTree rTree, int perSubTreeNodeNum) {
-			Collections.sort(tupleList, new Comparator<Tuple>() {//Y排序比较器
+		//x轴上寻找最佳分割线
+		public RTreeSplitSlice[] XSplit(List<Tuple> tupleLists, RTree rTree, int perSubTreeNodeNum, int splitNum) {
+			List<Tuple> tupleList = new ArrayList<Tuple>();
+			tupleList.addAll(tupleLists);
+			BigInteger minArea = null;
+			RTreeSplitSlice[] slices = new RTreeSplitSlice[2];
+			RTreeSplitContainer split = null;
+			for (int i = 1; i < splitNum; i++) {
+				int end = tupleList.size();
+				List<Tuple> firstPart = tupleList.subList(0, i * perSubTreeNodeNum);
+				List<Tuple> secondPart = tupleList.subList(i * perSubTreeNodeNum,end);
+				MBR part1 = MBR.getTupleListMBR(firstPart);
+				MBR part2 = MBR.getTupleListMBR(secondPart);
+				if (i == 1) minArea = part1.mbrArea().add(part2.mbrArea());
+				BigInteger thisArea = part1.mbrArea().add(part2.mbrArea());
+				if (thisArea.compareTo(minArea) <= 0) {
+					minArea = thisArea;
+					isBestToSplitInX = true;
+					bestSplitArea = thisArea;
+					slices[0] = new RTreeSplitSlice(firstPart, i, part1);
+					slices[1] = new RTreeSplitSlice(secondPart, splitNum - i, part2);
+				}
+			}
+			return slices;
+		}
+
+		//y轴上寻找最佳分割线
+		public RTreeSplitSlice[] YSplit(List<Tuple> tupleLists, RTree rTree, int perSubTreeNodeNum, int splitNum) {
+			Collections.sort(tupleLists, new Comparator<Tuple>() {//Y排序比较器
 				@Override
 				public int compare(Tuple o1, Tuple o2) {
 					if (o1.getVt().getEnd() > o2.getVt().getEnd())
@@ -180,50 +219,29 @@ public class BuildRtreeIndex {
 						return 0;
 				}
 			});
+			List<Tuple> tupleList = new ArrayList<Tuple>();
+			tupleList.addAll(tupleLists);
 			BigInteger minArea = bestSplitArea;
-			List<Tuple>[] twopart = new List[2];
+			RTreeSplitSlice[] slices = new RTreeSplitSlice[2];
 			RTreeSplitContainer split = null;
-			//fisrt Part---0-i*S
-			List<Tuple> firstPart = tupleList.subList(0, tupleList.size() / 2);
-			//the other Part
-			List<Tuple> secondPart = tupleList.subList(tupleList.size() / 2, tupleList.size());
-			MBR part1 = MBR.getTupleListMBR(firstPart);
-			MBR part2 = MBR.getTupleListMBR(secondPart);
-			BigInteger thisArea = part1.mbrArea().add(part2.mbrArea());
-			if (thisArea.compareTo(minArea) <= 0) {
-				minArea = thisArea;
-				isBestToSplitInX = false;
-				bestSplitArea = minArea;
-				split = new RTreeSplitContainer(firstPart, secondPart, part1, part2);
+			for (int i = 1; i < splitNum; i++) {
+				int end = tupleList.size();
+				List<Tuple> firstPart = tupleList.subList(0, i * perSubTreeNodeNum);
+				List<Tuple> secondPart = tupleList.subList(i * perSubTreeNodeNum, end);
+				MBR part1 = MBR.getTupleListMBR(firstPart);
+				MBR part2 = MBR.getTupleListMBR(secondPart);
+				BigInteger thisArea = part1.mbrArea().add(part2.mbrArea());
+				if (thisArea.compareTo(minArea) <= 0) {
+					minArea = thisArea;
+					isBestToSplitInX = false;
+					slices[0] = new RTreeSplitSlice(firstPart, i, part1);
+					slices[1] = new RTreeSplitSlice(secondPart, splitNum - i, part2);
+				}
 			}
-			return split;
+			return slices;
 		}
 
-		public RTreeSplitContainer XSplit(List<Tuple> tupleList, RTree rTree, int perSubTreeNodeNum) {
-			BigInteger minArea = null;
-			List<Tuple>[] twopart = new List[2];
-			RTreeSplitContainer split = null;
-			//fisrt Part---0-i*S
-			List<Tuple> firstPart = tupleList.subList(0, tupleList.size() / 2);
-			//the other Part
-			List<Tuple> secondPart = tupleList.subList(tupleList.size() / 2, tupleList.size());
-			MBR part1 = MBR.getTupleListMBR(firstPart);
-			MBR part2 = MBR.getTupleListMBR(secondPart);
-			BigInteger thisArea = part1.mbrArea().add(part2.mbrArea());
-			minArea = new BigInteger(String.valueOf(thisArea));
-			if (thisArea.compareTo(minArea) <= 0) {
-				minArea = thisArea;
-				//bestSplitPos = i * perSubTreeNodeNum;
-				isBestToSplitInX = true;
-				bestSplitArea = minArea;
-				List<Tuple> fisrt = new ArrayList<Tuple>();
-				fisrt.addAll(firstPart);
-				List<Tuple> sec = new ArrayList<Tuple>();
-				sec.addAll(secondPart);
-				split = new RTreeSplitContainer(fisrt, sec, part1, part2);
-			}
-			return split;
-		}
+
 	}
 
 	static class WholeFileInputFormat extends FileInputFormat<Text, Text> {
@@ -307,15 +325,14 @@ public class BuildRtreeIndex {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		//local_running();
-		cluster_running();
+		local_running();
+		//cluster_running();
 	}
 
 	public static void local_running() throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
 		System.setProperty("hadoop.home.dir", "/home/think/app/hadoop-2.6.0");
 		conf.set("mapreduce.framework.name", "local");
-		System.setProperty("HADOOP_USER_NAME", "root");
 		Job job = Job.getInstance(conf, "buildRTreeIndex_local_runung");
 
 
@@ -327,9 +344,10 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-		FileInputFormat.setInputPaths(job, "/test/1/1.txt");
+		FileInputFormat.setInputPaths(job, "/test/partitioner_123");
 		//FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
-		Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径
+		Path outPath = new Path("/Users/think/Desktop/building_info/");//用于mr输出success信息的路径
+		//Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径
 		FileSystem fs = FileSystem.get(conf);
 		if (fs.exists(outPath)) {
 			fs.delete(outPath, true);
@@ -359,7 +377,7 @@ public class BuildRtreeIndex {
 		//conf.set("yarn.resourcemanager.hostname", "root");
 		//conf.setBoolean("fs.hdfs.impl.disable.cache", true);
 		System.setProperty("HADOOP_USER_NAME", "root");
-		conf.set("mapreduce.job.jar", "/Users/think/Library/Mobile Documents/com~apple~CloudDocs/tdindex/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar");
+		conf.set("mapreduce.job.jar", CONSTANTS.getMapReduceJobJarPath());
 		Job job = Job.getInstance(conf, "buildRTreeIndex_cluster_runung");
 
 
