@@ -7,31 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c94d32f-4f73-438e-a401-e84b99e5a0a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTreeSplitSlice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CalcScale.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" afterPath="$PROJECT_DIR$/out/artifacts/dtindex_jar/dtindex.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT-jar-with-dependencies.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/target/dtindex-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dtindex.iml" afterPath="$PROJECT_DIR$/dtindex.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildIndex.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ClassifiedDataIntoSlice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Connection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/DataGenerate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Projection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingIndex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/ReadingRTreeIndex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/Sampler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/SamplerSort.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/MBR.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/CONSTANTS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/RTreeVirtualization.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -66,20 +42,34 @@
       <file leaf-file-name="BuildRtreeIndex.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="55" column="44" lean-forward="true" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+            <state relative-caret-position="206">
+              <caret line="262" column="0" lean-forward="true" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1562#1569#0" expanded="true" />
                 <element signature="docComment;method#Serialization#0;class#BuildRtreeIndexMapper#0;class#BuildRtreeIndex#0" expanded="false" />
-                <element signature="e#5200#5217#0" expanded="true" />
-                <element signature="e#5289#5300#0" expanded="true" />
-                <element signature="e#7908#7915#0" expanded="true" />
-                <element signature="e#8969#9240#0" expanded="true" />
-                <element signature="e#9239#9240#0" expanded="true" />
-                <element signature="e#9283#9290#0" expanded="true" />
+                <element signature="e#5225#5242#0" expanded="true" />
+                <element signature="e#5314#5325#0" expanded="true" />
+                <element signature="e#8117#8124#0" expanded="true" />
+                <element signature="e#9178#9449#0" expanded="true" />
+                <element signature="e#9448#9449#0" expanded="true" />
+                <element signature="e#9492#9499#0" expanded="true" />
                 <element signature="class#WholeFileInputFormat#0;class#BuildRtreeIndex#0" expanded="false" />
                 <element signature="class#WholeFileRecordReader#0;class#BuildRtreeIndex#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RTree.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+              <folding>
+                <element signature="e#2910#2911#0" expanded="true" />
+                <element signature="e#2934#2935#0" expanded="true" />
+                <element signature="e#3078#3079#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,6 +193,17 @@
           <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="dtindex" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="assembly" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
       </expand>
       <select />
     </treeState>
@@ -297,6 +298,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -361,10 +366,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -700,12 +701,12 @@
       <workItem from="1516887916063" duration="1459000" />
       <workItem from="1516889417564" duration="12261000" />
       <workItem from="1516948251476" duration="5873000" />
-      <workItem from="1517144666876" duration="680000" />
+      <workItem from="1517144666876" duration="5727000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="435462000" />
+    <option name="totallyTimeSpent" value="440509000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -718,7 +719,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1472" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -728,20 +728,20 @@
       <window_info id="Java Enterprise" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29489166" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24982105" sideWeight="0.5048077" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15819614" sideWeight="0.39590445" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15819614" sideWeight="0.39590445" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49722883" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3903941" sideWeight="0.29634932" order="5" side_tool="true" content_ui="tabs" x="-2" y="153" width="1194" height="420" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3903941" sideWeight="0.29634932" order="5" side_tool="true" content_ui="tabs" x="-2" y="153" width="1194" height="420" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18396564" sideWeight="0.4755245" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18396564" sideWeight="0.4755245" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32856122" sideWeight="0.49519232" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15423243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24982105" sideWeight="0.49519232" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18468146" sideWeight="0.5244755" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="11" side_tool="false" content_ui="tabs" x="177" y="79" width="1013" height="458" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.37391305" sideWeight="0.51907253" order="11" side_tool="false" content_ui="tabs" x="160" y="71" width="1013" height="458" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -903,15 +903,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
-          <line>51</line>
+          <line>42</line>
           <properties />
-          <option name="timeStamp" value="174" />
+          <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
-          <line>57</line>
+          <line>51</line>
           <properties />
-          <option name="timeStamp" value="180" />
+          <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java</url>
+          <line>56</line>
+          <properties />
+          <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/tools/DataToLongPaser.java</url>
@@ -925,7 +931,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="181" />
+      <option name="time" value="191" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1030,6 +1036,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#628#629#0" expanded="false" />
+            <element signature="e#643#644#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1132,6 +1143,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1225,16 +1237,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <element signature="e#3078#3079#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/apps/jdk1.8.0_151/src.zip!/java/lang/Math.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1243,20 +1245,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/model/RTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding>
+            <element signature="e#2910#2911#0" expanded="true" />
+            <element signature="e#2934#2935#0" expanded="true" />
+            <element signature="e#3078#3079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/scnu/dtindex/dataproc/BuildRtreeIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="55" column="44" lean-forward="true" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+        <state relative-caret-position="206">
+          <caret line="262" column="0" lean-forward="true" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1562#1569#0" expanded="true" />
             <element signature="docComment;method#Serialization#0;class#BuildRtreeIndexMapper#0;class#BuildRtreeIndex#0" expanded="false" />
-            <element signature="e#5200#5217#0" expanded="true" />
-            <element signature="e#5289#5300#0" expanded="true" />
-            <element signature="e#7908#7915#0" expanded="true" />
-            <element signature="e#8969#9240#0" expanded="true" />
-            <element signature="e#9239#9240#0" expanded="true" />
-            <element signature="e#9283#9290#0" expanded="true" />
+            <element signature="e#5225#5242#0" expanded="true" />
+            <element signature="e#5314#5325#0" expanded="true" />
+            <element signature="e#8117#8124#0" expanded="true" />
+            <element signature="e#9178#9449#0" expanded="true" />
+            <element signature="e#9448#9449#0" expanded="true" />
+            <element signature="e#9492#9499#0" expanded="true" />
             <element signature="class#WholeFileInputFormat#0;class#BuildRtreeIndex#0" expanded="false" />
             <element signature="class#WholeFileRecordReader#0;class#BuildRtreeIndex#0" expanded="false" />
           </folding>

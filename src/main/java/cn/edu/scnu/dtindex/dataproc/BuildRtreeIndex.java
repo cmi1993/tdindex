@@ -123,7 +123,7 @@ public class BuildRtreeIndex {
 		 */
 		public void BuildRtree(List<Tuple> tupleList, RTree tree, int buildTime, RTreeNode current, int maxSubTree,int splitcount) {
 
-			if (tupleList.size() <= 2*tree.getMaxNodeCapcity()-1) {//如果数据条目再次进行分裂之后小于节点的半满，不进行分类，归结为一个叶节点
+			if (tupleList.size() <= tree.getMaxNodeCapcity()*tree.getMaxNodeCapcity()/2-1) {//如果数据条目再次进行分裂之后小于节点的半满，不进行分类，归结为一个叶节点
 				current.setLeaf(true);
 				current.setLeafDataSize(tupleList.size());
 				return;
@@ -140,6 +140,10 @@ public class BuildRtreeIndex {
 				current.setNodeSize(nodeList.size());
 				//---------------------------------每个节点递归地进行分裂
 				for (RTreeNode n : current.getNodeList()) {
+					System.out.println(buildTime+","+maxSubTree+","+tupleList.size());
+					if (buildTime==53&&maxSubTree==16&&tupleList.size()==168){
+						System.out.println("break point");
+					}
 					BuildRtree(n.getLeafData(), tree, buildTime++, n,
 							(maxSubTree / tree.getMaxNodeCapcity()<tree.getMaxNodeCapcity()?//如果分裂之后导致节点不饱和，最大子树数量设置为阶数
 									tree.getMaxNodeCapcity():(maxSubTree/tree.getMaxNodeCapcity())),
@@ -325,8 +329,8 @@ public class BuildRtreeIndex {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		local_running();
-		//cluster_running();
+		//local_running();
+		cluster_running();
 	}
 
 	public static void local_running() throws IOException, ClassNotFoundException, InterruptedException {
@@ -344,7 +348,8 @@ public class BuildRtreeIndex {
 		// 【设置我们的业务逻辑Mapper类输出的key和value的数据类型】
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
-		FileInputFormat.setInputPaths(job, "/test/partitioner_123");
+		//FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
+		FileInputFormat.setInputPaths(job, "/test/5.txt");
 		//FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
 		Path outPath = new Path("/Users/think/Desktop/building_info/");//用于mr输出success信息的路径
 		//Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径
