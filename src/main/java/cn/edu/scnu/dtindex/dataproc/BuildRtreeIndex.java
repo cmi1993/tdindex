@@ -54,7 +54,7 @@ public class BuildRtreeIndex {
 			root.setIsroot(true);//标示为根节点
 			RTree rtree = new RTree(root, tupleList.size() / 16, 16, tupleList.size());//初始化空的Rtree
 			BuildRtree(tupleList, rtree, 0, root, rtree.getMaxSubtree(),rtree.getMaxNodeCapcity());//TGS构建Rtree
-			MBR rootMBR = MBR.getInterNodeMBR(root.getNodeList());//计算根节点的MBR
+g			MBR rootMBR = MBR.getInterNodeMBR(root.getNodeList());//计算根节点的MBR
 			root.setMbr(rootMBR);//设置根节点的MBR
 
 			System.out.println("[3]准备序列化数据-----------------------------------------------");
@@ -124,9 +124,25 @@ public class BuildRtreeIndex {
 		public void BuildRtree(List<Tuple> tupleList, RTree tree, int buildTime, RTreeNode current, int maxSubTree,int splitcount) {
 
 			if (tupleList.size() <= tree.getMaxNodeCapcity()*tree.getMaxNodeCapcity()/2-1) {//如果数据条目再次进行分裂之后小于节点的半满，不进行分类，归结为一个叶节点
-				current.setLeaf(true);
-				current.setLeafDataSize(tupleList.size());
-				return;
+				if(current.isIsroot()){
+					List<RTreeSplitSlice> sclices = new ArrayList<RTreeSplitSlice>();//用于存储current节点分裂之后的数据容器
+					List<RTreeNode> nodeList = new ArrayList<RTreeNode>();//用于存储current节点的孩子节点数据
+					splitcount=(int)Math.ceil(tupleList.size()*1.0/tree.getMaxNodeCapcity());
+					recursiveSplit(tupleList, tree, tree.getMaxNodeCapcity(), splitcount, sclices);//进行分裂操作
+
+					for (RTreeSplitSlice split : sclices) {
+						RTreeNode node = new RTreeNode(buildTime, split.getSliceMBR(), split.getTuples());
+						nodeList.add(node);
+						node.setLeaf(true);
+					}
+					current.setNodeList(nodeList);
+					current.setNodeSize(nodeList.size());
+					return;
+				}else {
+					current.setLeaf(true);
+					current.setLeafDataSize(tupleList.size());
+					return;
+				}
 			} else {//递归进行数据切割算法
 				List<RTreeSplitSlice> sclices = new ArrayList<RTreeSplitSlice>();//用于存储current节点分裂之后的数据容器
 				List<RTreeNode> nodeList = new ArrayList<RTreeNode>();//用于存储current节点的孩子节点数据
@@ -329,8 +345,8 @@ public class BuildRtreeIndex {
 	}
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		//local_running();
-		cluster_running();
+		local_running();
+		//cluster_running();
 	}
 
 	public static void local_running() throws IOException, ClassNotFoundException, InterruptedException {
@@ -349,7 +365,7 @@ public class BuildRtreeIndex {
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(ByteWritable.class);
 		//FileInputFormat.setInputPaths(job, "/timeData/1000w/classifiedData/partitioner_0");
-		FileInputFormat.setInputPaths(job, "/test/5.txt");
+		FileInputFormat.setInputPaths(job, "/test/1/1.txt");
 		//FileInputFormat.setInputPaths(job,cos.getClassifiedFilePath());
 		Path outPath = new Path("/Users/think/Desktop/building_info/");//用于mr输出success信息的路径
 		//Path outPath = new Path(cos.getDiskFilePath() + "/building_info/");//用于mr输出success信息的路径

@@ -41,10 +41,10 @@ public class ReadingRTreeIndex {
 			System.out.println("获取分区编号和文件名称");
 			InputSplit split = context.getInputSplit();
 			Path path = ((FileSplit) split).getPath();
-			String filename = path.getName();
+			String filename = path.getName();//获取分区磁盘块名称
 			System.out.println("【filename】:" + filename);
 			String[] splits = filename.split("_");
-			int partitionId = Integer.parseInt(splits[2]);
+			int partitionId = Integer.parseInt(splits[2]);//获取分区id
 			System.out.println("【partitionId】：" + partitionId);
 
 			ValidTime queryWindow = new ValidTime(cos.getQueryStart(), cos.getQueryEnd());
